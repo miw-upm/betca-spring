@@ -1,0 +1,76 @@
+styleList:
+   - &infantil
+     name: Infantil
+     description: Lectura sencilla
+   - &especializado
+     name: Especializado
+     description: Expertos de la temática
+     
+contactList:
+   - &cJesus
+     email: j@gmail.com
+     phone: 666666661
+   - &cCris
+     email: c@gmail.com
+     phone: 666666662
+   - &cAna
+     email: a@gmail.com
+     phone: 666666663
+   - &cAna2
+     email: a2@gmail.com
+     phone: 666666663
+     
+autorList:
+   - &jesus
+     name: Jesús
+     surname: Ber
+     contact: *cJesus
+     style: *infantil
+   - &cris
+     name: Cris
+     surname: Ber
+     contact: *cCris
+     style: *infantil
+   - &ana
+     name: Ana
+     surname: Ber
+     contact: *cAna
+     style: *especializado
+   - &ana2
+     name: Ana
+     surname: Reb
+     contact: *cAna2
+     style: *especializado
+
+themeList:
+   - &accion
+     name: Acción
+   - &suspense
+     name: suspense
+   - &drama
+     name: Drama
+     
+bookList:
+  - isbn: isbn1
+    title: El calabacín
+    authorList:
+      - *jesus
+    themeList:
+      - *accion
+      - *drama
+  - isbn: isbn2
+    title: La mazorca
+    authorList:
+      - *cris
+      - *ana
+    themeList:
+      - *suspense
+  - isbn: isbn1
+    title: El pepino
+    authorList:
+      - *ana2
+    themeList:
+      - *accion
+
+     
+     

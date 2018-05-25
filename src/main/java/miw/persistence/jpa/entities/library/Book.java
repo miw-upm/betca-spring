@@ -1,0 +1,82 @@
+package miw.persistence.jpa.entities.library;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+public class Book {
+
+    @Id
+    @GeneratedValue
+    private int id;
+
+    private String isbn;
+
+    private String title;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Theme> themeList;
+
+    @ManyToMany
+    private List<Author> authorList;
+
+    public Book() {
+    }
+
+    public Book(String isbn, String title, List<Theme> themeList, List<Author> authorList) {
+        super();
+        this.isbn = isbn;
+        this.title = title;
+        this.themeList = themeList;
+        this.authorList = authorList;
+    }
+
+    @Override
+    public String toString() {
+        return "\nBook [id=" + id + ", isbn=" + isbn + ", title=" + title + ",\n    themeList=" + themeList + ",\n    authorList="
+                + authorList + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Book)) {
+            return false;
+        }
+
+        return id == ((Book) obj).id;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public List<Theme> getThemeList() {
+        return themeList;
+    }
+
+    public List<Author> getAuthorList() {
+        return authorList;
+    }
+
+}
