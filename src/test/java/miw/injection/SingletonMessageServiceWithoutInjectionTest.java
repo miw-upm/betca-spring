@@ -1,5 +1,6 @@
 package miw.injection;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class SingletonMessageServiceWithoutInjectionTest {
     @Test
     public void testGetMessage() {
         assertTrue(this.singletonMessageService.getMessage().length() > 0);
-        System.out.println(">>> NOTE, without injection");
-        System.out.println(">>> message: " + this.singletonMessageService.getMessage());
+        LogManager.getLogger(this.getClass()).info(">>> NOTE, without injection");
+        LogManager.getLogger(this.getClass()).info(">>> message: " + this.singletonMessageService.getMessage());
     }
 }

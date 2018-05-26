@@ -35,7 +35,7 @@ public class OneToOneEmbeddedDocument {
 
     @Override
     public boolean equals(Object obj) {
-        return !(obj instanceof OneToOneEmbeddedDocument) ? false : Objects.equals(id, ((OneToOneEmbeddedDocument) obj).id);
+        return obj instanceof OneToOneEmbeddedDocument && Objects.equals(id, ((OneToOneEmbeddedDocument) obj).id);
     }
 
     public String getId() {

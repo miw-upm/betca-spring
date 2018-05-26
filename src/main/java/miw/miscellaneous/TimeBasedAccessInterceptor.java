@@ -10,7 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class TimeBasedAccessInterceptor extends HandlerInterceptorAdapter {
 
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         LogManager.getLogger(this.getClass().getName()).debug(">>>>>> Interceptor... Open: 4:00 to 4:59");
         Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);

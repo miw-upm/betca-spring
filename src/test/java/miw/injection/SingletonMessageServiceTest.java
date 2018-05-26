@@ -1,6 +1,7 @@
 package miw.injection;
 
 import miw.TestConfig;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,11 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestConfig
 public class SingletonMessageServiceTest {
 
-    @Autowired
-    private SingletonMessageService singletonMessageService;
-
     @Test
-    public void testGetMessage() {
-        assertTrue(this.singletonMessageService.getMessage().length() > 0);
+    public void testGetMessage(@Autowired SingletonMessageService singletonMessageService) {
+        assertTrue(singletonMessageService.getMessage().length() > 0);
+        LogManager.getLogger(this.getClass()).info(">>> message: " + singletonMessageService.getMessage());
     }
 }

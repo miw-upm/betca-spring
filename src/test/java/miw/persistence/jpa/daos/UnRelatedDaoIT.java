@@ -71,7 +71,7 @@ public class UnRelatedDaoIT {
 
     @Test
     public void testFindByNickIn() {
-        assertEquals(2, unRelatedDao.findByNickIn(Arrays.asList(new String[]{"nick1", "nick2"})).size());
+        assertEquals(2, unRelatedDao.findByNickIn(Arrays.asList("nick1", "nick2")).size());
     }
 
     // JPQL

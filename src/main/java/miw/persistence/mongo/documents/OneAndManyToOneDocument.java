@@ -35,7 +35,7 @@ public class OneAndManyToOneDocument {
 
     @Override
     public boolean equals(Object obj) {
-        return !(obj instanceof OneAndManyToOneDocument) ? false : id.equals(((OneAndManyToOneDocument) obj).id);
+        return obj instanceof OneAndManyToOneDocument && id.equals(((OneAndManyToOneDocument) obj).id);
     }
 
     public String getId() {

@@ -71,7 +71,7 @@ public class UnRelatedDocument {
 
     @Override
     public boolean equals(Object obj) {
-        return !(obj instanceof UnRelatedDocument) ? false : nick.equals(((UnRelatedDocument) obj).nick);
+        return obj instanceof UnRelatedDocument && nick.equals(((UnRelatedDocument) obj).nick);
     }
 
     public String getId() {

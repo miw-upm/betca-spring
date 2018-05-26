@@ -30,7 +30,7 @@ public class AnyDocument {
 
     @Override
     public boolean equals(Object obj) {
-        return !(obj instanceof AnyDocument) ? false : id.equals(((AnyDocument) obj).id);
+        return obj instanceof AnyDocument && id.equals(((AnyDocument) obj).id);
     }
 
     public String getId() {

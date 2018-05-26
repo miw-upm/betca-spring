@@ -57,7 +57,7 @@ public class UnRelatedRepositoryIT {
 
     @Test
     public void testFindByNickIn() {
-        assertEquals(2, unRelatedRepository.findByNickIn(Arrays.asList(new String[]{"nick1", "nick2"})).size());
+        assertEquals(2, unRelatedRepository.findByNickIn(Arrays.asList("nick1", "nick2")).size());
     }
 
     // BORRADO

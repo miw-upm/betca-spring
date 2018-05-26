@@ -23,7 +23,7 @@ public class SingletonMessageService {
     }
 
     public String getMessage() {
-        return "(" + this.hashCode() + "): SingletonMessageService!!! " + "miw.name: " + this.name;
+        return "(" + this.hashCode() + ") SingletonMessageService!!!, miw.name: " + this.name;
     }
 
     @PreDestroy
