@@ -19,7 +19,8 @@ public class SingletonMessageService {
 
     @PostConstruct
     public void constructor() {
-        LogManager.getLogger(this.getClass()).info(">>> create Bean: SingletonMessageService");
+        LogManager.getLogger(this.getClass()).warn(">>> create Bean: SingletonMessageService");
+        LogManager.getLogger(this.getClass()).warn(">>> miw.name: " + this.name);
     }
 
     public String getMessage() {

@@ -3,6 +3,7 @@ package miw.persistence.jpa.daos;
 import miw.TestConfig;
 import miw.persistence.jpa.entities.Gender;
 import miw.persistence.jpa.entities.UnRelatedEntity;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class UnRelatedDaoIT {
     @Test
     public void testCount() {
         assertEquals(4, unRelatedDao.count());
-    }
+        LogManager.getLogger(this.getClass()).info("===>>> message: " +unRelatedDao.findAll());    }
 
     @Test
     public void testFindOne() {

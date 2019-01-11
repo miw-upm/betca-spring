@@ -1,6 +1,7 @@
 package miw.injection;
 
 import miw.TestConfig;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +16,6 @@ public class InjectionMainIT {
     @Test
     public void testGetMessage() {
         assertTrue(this.injectionMain.getMessage().length() > 0);
-        System.out.println(">>> message: " + this.injectionMain.getMessage());
+        LogManager.getLogger(this.getClass()).info("===>>> message: " + this.injectionMain.getMessage());
     }
 }

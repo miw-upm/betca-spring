@@ -18,7 +18,7 @@ public class SingletonMessageServiceWithoutInjectionTest {
     @Test
     public void testGetMessage() {
         assertTrue(this.singletonMessageService.getMessage().length() > 0);
-        LogManager.getLogger(this.getClass()).info(">>> NOTE, without injection");
-        LogManager.getLogger(this.getClass()).info(">>> message: " + this.singletonMessageService.getMessage());
+        LogManager.getLogger(this.getClass()).info("===>>> NOTE, without injection");
+        LogManager.getLogger(this.getClass()).info("===>>> message: " + this.singletonMessageService.getMessage());
     }
 }

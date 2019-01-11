@@ -20,7 +20,7 @@
 
 	<properties>
 		<!-- Version ====================================== -->
-		<java.version>1.8</java.version>
+		<jdk.version>1.8</jdk.version>
 		<swagger.version>2.7.0</swagger.version>
 		<encoding>UTF-8</encoding>
 
@@ -28,6 +28,10 @@
 		<project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
 		<project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+		<!-- Maven. Test de Integración -->
+		<maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
+		<junit.platform.version>1.2.0</junit.platform.version>
 	</properties>
 
 	<dependencies>
@@ -58,14 +62,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+        <!-- SQL embedded -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
+		<!-- MySQL external
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+        </dependency> -->
 		<!-- Database mongodb external -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -126,18 +132,45 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- ================ TEST extensions================== -->
-			<!-- Unit Test: **/*Test -->
-			<!-- Integration Test: **/*IT -->
-			<!-- Functional Test: **/*FunctionalTesting -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<includes>
-						<include>**/*FunctionalTesting</include>
-					</includes>
-				</configuration>
+				<version>${maven-surefire-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit.platform.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven-failsafe-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit.platform.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
