@@ -1,10 +1,9 @@
 package miw.persistence.mongo.repositories;
 
-import java.util.List;
-
+import miw.persistence.mongo.documents.OneToOneEmbeddedDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import miw.persistence.mongo.documents.OneToOneEmbeddedDocument;
+import java.util.List;
 
 public interface OneToOneEmbeddedRepository extends MongoRepository<OneToOneEmbeddedDocument, String> {
 

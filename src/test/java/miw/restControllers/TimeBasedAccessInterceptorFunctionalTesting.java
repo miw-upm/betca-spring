@@ -16,7 +16,7 @@ public class TimeBasedAccessInterceptorFunctionalTesting {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
     @Value("${local.server.port}")
     private int port;
 
@@ -28,5 +28,5 @@ public class TimeBasedAccessInterceptorFunctionalTesting {
         );
         assertEquals(HttpStatus.FORBIDDEN, exception.getStatusCode());
     }
-    
+
 }

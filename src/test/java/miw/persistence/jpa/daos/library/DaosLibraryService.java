@@ -1,19 +1,14 @@
 package miw.persistence.jpa.daos.library;
 
-import java.util.Arrays;
-
+import miw.persistence.jpa.entities.library.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import miw.persistence.jpa.entities.library.Author;
-import miw.persistence.jpa.entities.library.Book;
-import miw.persistence.jpa.entities.library.Contact;
-import miw.persistence.jpa.entities.library.Style;
-import miw.persistence.jpa.entities.library.Theme;
+import java.util.Arrays;
 
 @Service
 public class DaosLibraryService {
-    
+
     @Autowired
     private AuthorDao authorDao;
 
@@ -26,7 +21,7 @@ public class DaosLibraryService {
     @Autowired
     private ThemeDao themeDao;
 
-    public void seedDb(){
+    public void seedDb() {
         Theme[] themeArray = {new Theme("Acción"), new Theme("Suspense"), new Theme("Drama")};
         themeDao.saveAll(Arrays.asList(themeArray));
 
@@ -44,8 +39,8 @@ public class DaosLibraryService {
                 new Book("isbn3", "El pepino", Arrays.asList(themeArray[0]), Arrays.asList(authorArray[2]))};
         bookDao.saveAll(Arrays.asList(bookArray));
     }
-    
-    public void deleteDb(){
+
+    public void deleteDb() {
         bookDao.deleteAll();
         themeDao.deleteAll();
         authorDao.deleteAll();

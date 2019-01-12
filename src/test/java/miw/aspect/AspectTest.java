@@ -1,11 +1,10 @@
 package miw.aspect;
 
 import miw.TestConfig;
+import miw.aspectTarget.ServiceOne;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.logging.log4j.LogManager;
-
-import miw.aspectTarget.ServiceOne;
 
 @TestConfig
 public class AspectTest {

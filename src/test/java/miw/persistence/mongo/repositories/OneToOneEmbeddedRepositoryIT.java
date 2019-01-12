@@ -1,13 +1,11 @@
 package miw.persistence.mongo.repositories;
 
 import miw.TestConfig;
-
+import miw.persistence.mongo.documents.EmbeddableDocument;
+import miw.persistence.mongo.documents.OneToOneEmbeddedDocument;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import miw.persistence.mongo.documents.EmbeddableDocument;
-import miw.persistence.mongo.documents.OneToOneEmbeddedDocument;
 
 import static org.junit.jupiter.api.Assertions.*;
 

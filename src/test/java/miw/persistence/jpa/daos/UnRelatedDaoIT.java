@@ -34,7 +34,8 @@ public class UnRelatedDaoIT {
     @Test
     public void testCount() {
         assertEquals(4, unRelatedDao.count());
-        LogManager.getLogger(this.getClass()).info("===>>> message: " +unRelatedDao.findAll());    }
+        LogManager.getLogger(this.getClass()).info("===>>> message: " + unRelatedDao.findAll());
+    }
 
     @Test
     public void testFindOne() {

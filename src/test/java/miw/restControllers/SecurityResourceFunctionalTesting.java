@@ -67,7 +67,7 @@ public class SecurityResourceFunctionalTesting {
     @Test
     public void testManagerUnauthorizedUser() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class,
-                () ->  new RestBuilder<>(port).path(SecurityResource.SECURITY).path(SecurityResource.MANAGER)
+                () -> new RestBuilder<>(port).path(SecurityResource.SECURITY).path(SecurityResource.MANAGER)
                         .basicAuth("user", "123456").get().build()
         );
         assertEquals(HttpStatus.FORBIDDEN, exception.getStatusCode());

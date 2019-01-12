@@ -1,10 +1,9 @@
 package miw.aspectTarget;
 
-import org.apache.logging.log4j.LogManager;
-import org.springframework.stereotype.Service;
-
 import miw.aspect.MyClassAnnotation;
 import miw.aspect.MyMethodAnnotation;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.stereotype.Service;
 
 @Service
 @MyClassAnnotation

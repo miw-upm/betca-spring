@@ -1,12 +1,11 @@
 package miw.persistence.jpa.daos.library;
 
-import java.util.List;
-
+import miw.persistence.jpa.entities.library.Author;
+import miw.persistence.jpa.entities.library.Style;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import miw.persistence.jpa.entities.library.Author;
-import miw.persistence.jpa.entities.library.Style;
+import java.util.List;
 
 public interface AuthorDao extends JpaRepository<Author, Integer> {
 

@@ -1,14 +1,11 @@
 package miw.persistence.mongo.repositories;
 
 import miw.TestConfig;
+import miw.persistence.mongo.documents.AnyDocument;
+import miw.persistence.mongo.documents.OneAndManyToOneDocument;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import miw.persistence.mongo.documents.AnyDocument;
-import miw.persistence.mongo.documents.OneAndManyToOneDocument;
-import miw.persistence.mongo.repositories.AnyRepository;
-import miw.persistence.mongo.repositories.OneAndManyToOneRepository;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,13 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestConfig
 public class OneAndManyToOneRepositoryIT {
 
+    AnyDocument anyDocument3;
     @Autowired
     private OneAndManyToOneRepository unidirectionalOneToOneRepository;
-
     @Autowired
     private AnyRepository anyRepository;
-
-    AnyDocument anyDocument3;
 
     @BeforeEach
     public void populate() {

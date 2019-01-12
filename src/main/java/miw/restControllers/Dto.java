@@ -1,9 +1,9 @@
 package miw.restControllers;
 
+import miw.persistence.jpa.entities.Gender;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import miw.persistence.jpa.entities.Gender;
 
 public class Dto {
 

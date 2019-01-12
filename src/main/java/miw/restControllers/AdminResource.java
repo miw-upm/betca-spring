@@ -1,19 +1,11 @@
 package miw.restControllers;
 
+import miw.persistence.jpa.entities.Gender;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import miw.persistence.jpa.entities.Gender;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -21,7 +13,7 @@ import miw.persistence.jpa.entities.Gender;
 public class AdminResource {
 
     public static final String ADMINS = "/admins";
-    
+
 
     public static final String STATE = "/state";
 
@@ -53,7 +45,7 @@ public class AdminResource {
     // Intercambio de datos
     @GetMapping(value = ECHO + ID)
     public String echo(@RequestHeader(value = "token", required = false) String token, @PathVariable(value = "id") int id,
-            @RequestParam(defaultValue = "Non") String param) {
+                       @RequestParam(defaultValue = "Non") String param) {
         String response = "{\"id\":%d,\"token\":\"%s\",\"param\":\"%s\"}";
         return String.format(response, id, token, param);
     }
@@ -92,5 +84,5 @@ public class AdminResource {
         }
         return new Dto(666, "daemon", Gender.FEMALE, new GregorianCalendar(1979, 07, 22));
     }
-    
+
 }

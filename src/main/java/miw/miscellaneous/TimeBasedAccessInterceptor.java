@@ -1,12 +1,11 @@
 package miw.miscellaneous;
 
-import java.util.Calendar;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.logging.log4j.LogManager;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import java.util.Calendar;
 
 public class TimeBasedAccessInterceptor extends HandlerInterceptorAdapter {
 

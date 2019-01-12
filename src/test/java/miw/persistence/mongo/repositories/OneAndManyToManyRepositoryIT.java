@@ -1,16 +1,14 @@
 package miw.persistence.mongo.repositories;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import miw.TestConfig;
-
+import miw.persistence.mongo.documents.AnyDocument;
+import miw.persistence.mongo.documents.OneAndManyToManyDocument;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import miw.persistence.mongo.documents.AnyDocument;
-import miw.persistence.mongo.documents.OneAndManyToManyDocument;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

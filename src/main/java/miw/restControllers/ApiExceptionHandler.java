@@ -1,12 +1,12 @@
 package miw.restControllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -34,7 +34,7 @@ public class ApiExceptionHandler {
         ErrorMessage errorMessage = new ErrorMessage(exception, "");
         return errorMessage;
     }
-    
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler({UnauthorizedException.class})
     public void conflictRequest(Exception exception) {

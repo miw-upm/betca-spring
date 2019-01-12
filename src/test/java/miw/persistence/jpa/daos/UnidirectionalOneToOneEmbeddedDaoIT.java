@@ -1,14 +1,12 @@
 package miw.persistence.jpa.daos;
 
 import miw.TestConfig;
-
+import miw.persistence.jpa.entities.EmbeddableEntity;
+import miw.persistence.jpa.entities.UnidirectionalOneToOneEmbeddedEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import miw.persistence.jpa.entities.EmbeddableEntity;
-import miw.persistence.jpa.entities.UnidirectionalOneToOneEmbeddedEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

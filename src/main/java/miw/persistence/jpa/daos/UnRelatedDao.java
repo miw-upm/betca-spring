@@ -1,16 +1,14 @@
 package miw.persistence.jpa.daos;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import miw.persistence.jpa.entities.UnRelatedEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import miw.persistence.jpa.entities.UnRelatedEntity;
+import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.List;
 
 public interface UnRelatedDao extends JpaRepository<UnRelatedEntity, Integer> {
 

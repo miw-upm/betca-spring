@@ -2,9 +2,9 @@ package miw.schedulingAsync;
 
 
 import miw.TestConfig;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.concurrent.Future;
 

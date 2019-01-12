@@ -1,12 +1,11 @@
 package miw.persistence.mongo.repositories;
 
-import java.util.List;
-
+import miw.persistence.mongo.documents.AnyDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import miw.persistence.mongo.documents.AnyDocument;
+import java.util.List;
 
 public interface AnyRepository extends MongoRepository<AnyDocument, String> {
-    
+
     List<AnyDocument> findByValue(String value);
 }

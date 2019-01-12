@@ -6,9 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestConfig
 public class LibraryIT {
@@ -43,19 +41,19 @@ public class LibraryIT {
     @Test
     public void testFindNameByStyleName() {
         assertEquals(2, authorDao.findNameByStyleName("Infantil").size());
-        assertArrayEquals(new String[] {"Jesús", "Cris"}, authorDao.findNameByStyleName("Infantil").toArray());
+        assertArrayEquals(new String[]{"Jesús", "Cris"}, authorDao.findNameByStyleName("Infantil").toArray());
     }
-    
+
     @Test
-    public void testFindDistinctNameByAnyBook(){
+    public void testFindDistinctNameByAnyBook() {
         assertEquals(3, authorDao.findDistinctNameByAnyBook().size());
-        assertArrayEquals(new String[] {"Jesús", "Cris","Ana"}, authorDao.findDistinctNameByAnyBook().toArray());
+        assertArrayEquals(new String[]{"Jesús", "Cris", "Ana"}, authorDao.findDistinctNameByAnyBook().toArray());
     }
-    
+
     @Test
-    public void testFindNameByThemeName(){
+    public void testFindNameByThemeName() {
         assertEquals(2, authorDao.findNameByThemeName("Suspense").size());
-        assertArrayEquals(new String[] {"Cris","Ana"}, authorDao.findNameByThemeName("Suspense").toArray());
+        assertArrayEquals(new String[]{"Cris", "Ana"}, authorDao.findNameByThemeName("Suspense").toArray());
     }
 
     @AfterEach

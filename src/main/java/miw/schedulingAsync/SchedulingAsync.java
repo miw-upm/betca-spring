@@ -1,12 +1,12 @@
 package miw.schedulingAsync;
 
-import java.util.concurrent.Future;
-
 import org.apache.logging.log4j.LogManager;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.Future;
 
 @Component
 public class SchedulingAsync {

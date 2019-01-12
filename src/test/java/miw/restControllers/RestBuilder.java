@@ -1,26 +1,17 @@
 package miw.restControllers;
 
-import java.net.URI;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class RestBuilder<T> {
 
@@ -82,7 +73,7 @@ public class RestBuilder<T> {
         this.clazz = clazz;
         return this;
     }
-    
+
     public RestBuilder<T> port(int port) {
         this.port = port;
         return this;
