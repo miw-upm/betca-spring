@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Scope;
 // @PropertySource("file:///C:/JBB/miw.properties")
 // @PropertySource("http://server/application.properties")
 // @ConfigurationProperties(prefix = "miw")
+
 @Configuration
 public class InjectionConfig {
+
     @Bean
     @Scope("prototype") // Default singleton
     public PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService() {

@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 public class InjectionMain {
 
     @Autowired
-    private ConfigurableApplicationContext configurableApplicationContext;
-
-    @Autowired
     private SingletonMessageService singletonMessageService;
 
     @Autowired

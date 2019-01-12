@@ -11,11 +11,11 @@ import javax.annotation.PreDestroy;
 // @Scope("prototype") //Default singleton
 // @Scope(org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 
-@Service
+@Service  //@Component @Controller @Service...
 public class SingletonMessageService {
 
     @Value("${miw.name}")
-    private String name;
+    private String name = null;
 
     @PostConstruct
     public void constructor() {
