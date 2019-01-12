@@ -1,0 +1,16 @@
+language: java
+jdk:
+- oraclejdk8
+branches:
+  only:
+  - master
+  - develop
+notifications:
+  email:
+    recipients:
+    - j.bernal@upm.es
+services:
+  - mongodb
+script:
+#Test unitario y de integracion en develop
+- mvn verify
