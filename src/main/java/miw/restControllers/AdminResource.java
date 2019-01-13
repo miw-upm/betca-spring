@@ -3,8 +3,8 @@ package miw.restControllers;
 import miw.persistence.jpa.entities.Gender;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:4200")
@@ -13,7 +13,6 @@ import java.util.List;
 public class AdminResource {
 
     public static final String ADMINS = "/admins";
-
 
     public static final String STATE = "/state";
 
@@ -44,7 +43,8 @@ public class AdminResource {
 
     // Intercambio de datos
     @GetMapping(value = ECHO + ID)
-    public String echo(@RequestHeader(value = "token", required = false) String token, @PathVariable(value = "id") int id,
+    public String echo(@RequestHeader(value = "token", required = false) String token,
+                       @PathVariable(value = "id") int id,
                        @RequestParam(defaultValue = "Non") String param) {
         String response = "{\"id\":%d,\"token\":\"%s\",\"param\":\"%s\"}";
         return String.format(response, id, token, param);
@@ -63,10 +63,16 @@ public class AdminResource {
     //@Time
     @GetMapping(value = BODY + DTO_LIST)
     public List<Dto> bodyDtoList() {
-        Dto dto1 = new Dto(666, "daemon", Gender.FEMALE, new GregorianCalendar(1979, 07, 22));
-        Dto dto2 = new Dto(999, "last", Gender.MALE, new GregorianCalendar(1979, 07, 22));
-        Dto dto3 = new Dto(000, "first", Gender.FEMALE, new GregorianCalendar(1979, 07, 22));
+        Dto dto1 = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
+        Dto dto2 = new Dto(999, "last", Gender.MALE, LocalDateTime.now());
+        Dto dto3 = new Dto(000, "first", Gender.FEMALE, LocalDateTime.now());
         return Arrays.asList(dto1, dto2, dto3);
+    }
+
+    @PutMapping(value = ECHO + ID)
+    public Dto update(@PathVariable Integer id, @RequestBody Dto dto) {
+        dto.setId(id);
+        return dto;
     }
 
     // Excepciones
@@ -82,7 +88,7 @@ public class AdminResource {
         if (token.equals("Basic kk")) {
             throw new UnauthorizedException("token:" + token);
         }
-        return new Dto(666, "daemon", Gender.FEMALE, new GregorianCalendar(1979, 07, 22));
+        return new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
     }
 
 }

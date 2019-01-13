@@ -3,33 +3,34 @@ package miw.restControllers;
 import miw.persistence.jpa.entities.Gender;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Dto {
 
-    private int id;
+    private Integer id;
 
     private String name;
 
     private Gender gender;
 
-    private Calendar bornDate;
+    private LocalDateTime bornDate;
 
     public Dto() {
     }
 
-    public Dto(int id, String name, Gender gender, Calendar bornDate) {
+    public Dto(int id, String name, Gender gender, LocalDateTime bornDate) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.bornDate = bornDate;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,11 +50,11 @@ public class Dto {
         this.gender = gender;
     }
 
-    public Calendar getBornDate() {
+    public LocalDateTime getBornDate() {
         return bornDate;
     }
 
-    public void setBornDate(Calendar bornDate) {
+    public void setBornDate(LocalDateTime bornDate) {
         this.bornDate = bornDate;
     }
 
@@ -64,19 +65,12 @@ public class Dto {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        return id == ((Dto) obj).id;
+        return this == obj || obj != null && getClass() == obj.getClass() && id == ((Dto) obj).id;
     }
 
     @Override
     public String toString() {
-        String dayString = new SimpleDateFormat("dd-MMM-yyyy").format(bornDate.getTime());
-        return "Dto [id=" + id + ", name=" + name + ", gender=" + gender + ", bornDate=" + dayString + "]";
+        return "Dto [id=" + id + ", name=" + name + ", gender=" + gender + ", bornDate=" + bornDate + "]";
     }
 
 }

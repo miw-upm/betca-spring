@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -70,7 +71,7 @@ public class AdminResourceFunctionalTesting {
 
     @Test
     public void testBodyEcho() {
-        Dto dto = new Dto(666, "daemon", Gender.FEMALE, new GregorianCalendar(1979, 07, 22));
+        Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
         Dto response = new RestBuilder<Dto>(port).clazz(Dto.class).path(AdminResource.ADMINS).path(AdminResource.BODY).body(dto).post()
                 .build();
         assertEquals(dto, response);
@@ -88,6 +89,14 @@ public class AdminResourceFunctionalTesting {
         List<Dto> response = Arrays.asList(new RestBuilder<Dto[]>(port).path(AdminResource.ADMINS).path(AdminResource.BODY)
                 .path(AdminResource.DTO_LIST).clazz(Dto[].class).get().build());
         assertEquals(3, response.size());
+    }
+
+    @Test
+    public void testUpdate() {
+        Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
+        Dto response = new RestBuilder<Dto>(port).clazz(Dto.class).path(AdminResource.ADMINS).path(AdminResource.ECHO)
+                .path(AdminResource.ID).expand(999).body(dto).put().build();
+        assertEquals(new Integer(999), response.getId());
     }
 
     // Exceptions
@@ -131,7 +140,7 @@ public class AdminResourceFunctionalTesting {
     public void testErrorOk() {
         Dto response = new RestBuilder<Dto>(port).path(AdminResource.ADMINS).path(AdminResource.ERROR).path(AdminResource.ID).expand(666)
                 .header("token", "Basic good").clazz(Dto.class).get().build();
-        assertEquals(666, response.getId());
+        assertEquals(new Integer(666), response.getId());
     }
 
     @Test
