@@ -2,11 +2,13 @@ package miw.persistence.mongo.documents;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.Date;
 
 @Document(collection = "un_related") // Nombre de la colección, por defecto el nombre de la clase
 public class UnRelatedDocument {
@@ -17,6 +19,7 @@ public class UnRelatedDocument {
     private String id;
 
     @Field(value = "kcin") // Nombre del campo, por defecto el nombre del atributo
+    @Indexed(unique = true)
     private String nick;
 
     private Gender gender; // Se guarda el String asociado
@@ -24,7 +27,7 @@ public class UnRelatedDocument {
     // @DateTimeFormat(iso=ISO.DATE) // ISO.DATE_TIME, ISO.TIME
     // ISODate: YYYY-MM-DDThh:mm:ss.sTZD, TZD = time zone designator (Z or +hh:mm or -hh:mm)
     // (1997-07-16T19:20:30.45+01:00) (2018-02-22T22:20Z)
-    private Date bornDate;
+    private LocalDateTime bornDate;
 
     private String[] strings;
 
@@ -42,18 +45,19 @@ public class UnRelatedDocument {
     private String noPersistent;
 
     public UnRelatedDocument() {
+        //Empty by framework
     }
 
     public UnRelatedDocument(String nick) {
         this.nick = nick;
         this.gender = Gender.FEMALE;
-        this.bornDate = new Date();
+        this.bornDate = LocalDateTime.now();
         this.strings = new String[]{"uno", "dos"};
         this.large = "Large...";
         this.noPersistent = "noPersistent";
         this.booleano = true;
         this.integer = 666;
-        this.loger = this.bornDate.getTime();
+        this.loger = this.bornDate.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli();
         this.decimal = 666.666e30;
     }
 
@@ -90,7 +94,7 @@ public class UnRelatedDocument {
         this.gender = gender;
     }
 
-    public Date getBornDate() {
+    public LocalDateTime getBornDate() {
         return bornDate;
     }
 
@@ -125,5 +129,6 @@ public class UnRelatedDocument {
     public void setLoger(long loger) {
         this.loger = loger;
     }
+
 
 }

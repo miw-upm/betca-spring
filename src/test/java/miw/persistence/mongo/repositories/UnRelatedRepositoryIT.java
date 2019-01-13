@@ -5,6 +5,7 @@ import miw.persistence.mongo.documents.UnRelatedDocument;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.Arrays;
@@ -28,6 +29,15 @@ public class UnRelatedRepositoryIT {
     @Test
     public void test() {
         assertTrue(unRelatedRepository.count() > 0);
+    }
+
+    @Test
+    public void uniqueNickTest() {
+        UnRelatedDocument unRelatedDocument1 = new UnRelatedDocument("unique");
+        UnRelatedDocument unRelatedDocument2 = new UnRelatedDocument("unique");
+        this.unRelatedRepository.save(unRelatedDocument1);
+        assertThrows(DuplicateKeyException.class, () -> this.unRelatedRepository.save(unRelatedDocument2));
+        this.unRelatedRepository.delete(unRelatedDocument1);
     }
 
     @Test
@@ -90,6 +100,19 @@ public class UnRelatedRepositoryIT {
     public void testFindByNickAndLarge() {
         assertNotNull(unRelatedRepository.findByNickAndLarge("nick0", "Large..."));
         assertNull(unRelatedRepository.findByNickAndLarge("nick0", "NOT"));
+    }
+
+    @Test
+    public void testFindByNickLike() {
+        assertEquals(1, unRelatedRepository.findByNickLikeNullSafe("k1").size());
+        assertEquals(5, unRelatedRepository.findByNickLikeNullSafe(null).size());
+    }
+
+    @Test
+    public void testFindByNickLikeLargeLike() {
+        assertEquals(0, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe("k1", "no").size());
+        assertEquals(1, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe("k1", null).size());
+        assertEquals(5, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe(null, null).size());
     }
 
 }

@@ -15,31 +15,32 @@ public class OneAndManyToOneRepositoryIT {
 
     AnyDocument anyDocument3;
     @Autowired
-    private OneAndManyToOneRepository unidirectionalOneToOneRepository;
+    private OneAndManyToOneRepository oneAndManyToOneRepository;
     @Autowired
     private AnyRepository anyRepository;
 
     @BeforeEach
     public void populate() {
-        this.unidirectionalOneToOneRepository.deleteAll();
+        this.oneAndManyToOneRepository.deleteAll();
         this.anyRepository.deleteAll();
         AnyDocument anyDocument1 = new AnyDocument("any");
         anyDocument3 = new AnyDocument("3");
         anyDocument3.setId("3");
         this.anyRepository.save(anyDocument1);
         this.anyRepository.save(anyDocument3);
-        this.unidirectionalOneToOneRepository.save(new OneAndManyToOneDocument("nick1", anyDocument1));
-        this.unidirectionalOneToOneRepository.save(new OneAndManyToOneDocument("nick2", anyDocument1));
-        this.unidirectionalOneToOneRepository.save(new OneAndManyToOneDocument("nick3", anyDocument3));
+        this.oneAndManyToOneRepository.save(new OneAndManyToOneDocument("nick1", anyDocument1));
+        this.oneAndManyToOneRepository.save(new OneAndManyToOneDocument("nick2", anyDocument1));
+        this.oneAndManyToOneRepository.save(new OneAndManyToOneDocument("nick3", anyDocument3));
     }
 
     @Test
     public void test() {
-        assertTrue(unidirectionalOneToOneRepository.count() > 0);
+        assertTrue(oneAndManyToOneRepository.count() > 0);
     }
 
     @Test
-    public void testFindByAnyDocumentValue() {
-        assertNotNull(unidirectionalOneToOneRepository.findByAnyDocumentId("3"));
+    public void testFindByAnyDocumentId() {
+        assertNotNull(oneAndManyToOneRepository.findByAnyDocumentId("3"));
     }
+
 }

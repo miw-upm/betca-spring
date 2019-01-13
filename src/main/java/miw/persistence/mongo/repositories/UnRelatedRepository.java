@@ -21,7 +21,6 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
 
     List<UnRelatedDocument> findByIntegerGreaterThan(int integer, Pageable pageable);
 
-    List<UnRelatedDocument> findByNickIn(Collection<String> values);
 
     @Transactional
     int deleteByNick(String nick);
@@ -29,7 +28,7 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
     // Consultas por Query
 
     @Query("{'nick':?0}")
-        // not necessary
+        // NOT necessary
     UnRelatedDocument findByNick(String nick);
 
     // FIELDS: _id: incluido por defecto, 1: solo los especificados, 0: todos excepto el especificado
@@ -40,7 +39,20 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
     Query2Dto findBornDateByNick(String nick);
 
     @Query("{$and:[{'nick':?0},{'large':?1}]}")
-        // not necessary
+        // NOT necessary
     UnRelatedDocument findByNickAndLarge(String nick, String large);
 
+    @Query("{nick:{$in:?0} }")
+        // NOT necessary
+    List<UnRelatedDocument> findByNickIn(Collection nicks);
+
+    @Query("?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } }")
+        //$options: 'i': Case insensitivity
+    List<UnRelatedDocument> findByNickLikeNullSafe(String nick);  // allow NULL: all elements
+
+    @Query("{$and:["
+            + "?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } },"
+            + "?#{ [1] == null ? { $where : 'true'} : { large : {$regex:[1], $options: 'i'} } }"
+            + "] }")
+    List<UnRelatedDocument> findByNickLikeAndLargeLikeNullSafe(String nick, String large);  // allow NULL: all elements
 }
