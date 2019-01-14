@@ -2,9 +2,7 @@ package miw.restControllers;
 
 import miw.persistence.jpa.entities.Gender;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 public class Dto {
 
@@ -65,7 +63,7 @@ public class Dto {
 
     @Override
     public boolean equals(Object obj) {
-        return this == obj || obj != null && getClass() == obj.getClass() && id == ((Dto) obj).id;
+        return this == obj || obj != null && getClass() == obj.getClass() && id.equals(((Dto) obj).id);
     }
 
     @Override

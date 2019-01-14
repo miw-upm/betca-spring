@@ -1,8 +1,8 @@
-package miw.restControllers;
+package miw.restControllers.exceptions;
 
 public class MalformedHeaderException extends Exception {
 
-    public static final String DESCRIPTION = "Error de Authorization en cabecera por formato erroneo, debe estar en Auth Basic";
+    public static final String DESCRIPTION = "Cabecera por formato erroneo";
     private static final long serialVersionUID = -1344640670884805385L;
 
     public MalformedHeaderException() {

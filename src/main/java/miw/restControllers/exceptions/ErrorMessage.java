@@ -1,4 +1,4 @@
-package miw.restControllers;
+package miw.restControllers.exceptions;
 
 public class ErrorMessage {
 
@@ -8,13 +8,13 @@ public class ErrorMessage {
 
     private String path;
 
-    public ErrorMessage(Exception exception, String path) {
-        this(exception.getClass().getSimpleName(), exception.getMessage(), path);
+    public ErrorMessage(Exception exception) {
+        this(exception, "/");
     }
 
-    public ErrorMessage(String exception, String message, String path) {
-        this.exception = exception;
-        this.message = message;
+    public ErrorMessage(Exception exception, String path) {
+        this.exception = exception.getClass().getSimpleName();
+        this.message = exception.getMessage();
         this.path = path;
     }
 

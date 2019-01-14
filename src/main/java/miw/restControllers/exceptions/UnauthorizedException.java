@@ -1,4 +1,4 @@
-package miw.restControllers;
+package miw.restControllers.exceptions;
 
 public class UnauthorizedException extends Exception {
 

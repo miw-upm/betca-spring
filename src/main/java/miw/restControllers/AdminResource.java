@@ -1,6 +1,10 @@
 package miw.restControllers;
 
 import miw.persistence.jpa.entities.Gender;
+import miw.restControllers.exceptions.FieldAlreadyExistException;
+import miw.restControllers.exceptions.FieldInvalidException;
+import miw.restControllers.exceptions.MalformedHeaderException;
+import miw.restControllers.exceptions.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -16,8 +20,6 @@ public class AdminResource {
 
     public static final String STATE = "/state";
 
-    public static final String OUT_OF_TIME = "/out-of-time";
-
     public static final String ECHO = "/echo";
 
     public static final String ID = "/{id}";
@@ -28,17 +30,10 @@ public class AdminResource {
 
     public static final String DTO_LIST = "/dto-list";
 
-    public static final String ERROR = "/error";
-
     // Se puede comprobar con un navegador
     @GetMapping(value = STATE)
     public String state() {
         return "{\"state\":\"ok\"}";
-    }
-
-    @GetMapping(value = OUT_OF_TIME)
-    public String outOfTime() {
-        return "{\"state\":\"off\"}";
     }
 
     // Intercambio de datos
@@ -73,22 +68,6 @@ public class AdminResource {
     public Dto update(@PathVariable Integer id, @RequestBody Dto dto) {
         dto.setId(id);
         return dto;
-    }
-
-    // Excepciones
-    @GetMapping(value = ERROR + ID)
-    public Dto error(@RequestHeader(value = "token") String token, @PathVariable(value = "id") int id)
-            throws NotFoundUserIdException, UnauthorizedException, MalformedHeaderException {
-        if (id == 0) {
-            throw new NotFoundUserIdException("id:" + id);
-        }
-        if (token.equals("kk")) {
-            throw new MalformedHeaderException("token:" + token);
-        }
-        if (token.equals("Basic kk")) {
-            throw new UnauthorizedException("token:" + token);
-        }
-        return new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
     }
 
 }
