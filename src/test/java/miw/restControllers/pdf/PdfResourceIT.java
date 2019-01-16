@@ -13,7 +13,7 @@ class PdfResourceIT {
 
     @Test
     void testPdfs() {
-        String json = new RestBuilder<String>(port).clazz(String.class).path(PdfResource.PDFS)
+        new RestBuilder<String>(port).clazz(String.class).path(PdfResource.PDFS)
                 .param("title", "BETCA: Spring 5. PDF").param("paragraph", "paragraph")
                 .get().build();
 
