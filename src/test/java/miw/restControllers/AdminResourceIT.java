@@ -41,7 +41,7 @@ class AdminResourceIT {
 
     @Test
     void testStateRestBuilder() {
-        String json = new RestBuilder<String>(port).clazz(String.class).path(AdminResource.ADMINS).path(AdminResource.STATE).get().build();
+        String json = new RestBuilder<String>(port).clazz(String.class).path(AdminResource.ADMINS).path(AdminResource.STATE).get().log().build();
         assertEquals("{\"state\":\"ok\"}", json);
     }
 
