@@ -10,7 +10,7 @@ public class Style {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @Column(unique = true, nullable = false, length = 30)
     private String name;
@@ -23,24 +23,6 @@ public class Style {
     public Style(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Style [id=" + id + ", name=" + name + ", description=" + description + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Style)) {
-            return false;
-        }
-        return id == ((Style) obj).id;
     }
 
     public String getName() {
@@ -59,8 +41,26 @@ public class Style {
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((Style) obj).id));
+    }
+
+    @Override
+    public String toString() {
+        return "Style{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

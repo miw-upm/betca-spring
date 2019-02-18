@@ -7,7 +7,7 @@ public class Author {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -30,25 +30,6 @@ public class Author {
         this.style = style;
     }
 
-    @Override
-    public String toString() {
-        return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", contact=" + contact + ", style="
-                + style + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Author)) {
-            return false;
-        }
-        return id == ((Author) obj).id;
-    }
-
     public Contact getContact() {
         return contact;
     }
@@ -65,7 +46,7 @@ public class Author {
         this.style = style;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -77,4 +58,24 @@ public class Author {
         return surname;
     }
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((Author) obj).id));
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", contact=" + contact +
+                ", style=" + style +
+                '}';
+    }
 }

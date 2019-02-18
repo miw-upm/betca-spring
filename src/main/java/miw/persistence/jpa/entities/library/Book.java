@@ -8,7 +8,7 @@ public class Book {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String isbn;
 
@@ -24,31 +24,10 @@ public class Book {
     }
 
     public Book(String isbn, String title, List<Theme> themeList, List<Author> authorList) {
-        super();
         this.isbn = isbn;
         this.title = title;
         this.themeList = themeList;
         this.authorList = authorList;
-    }
-
-    @Override
-    public String toString() {
-        return "\nBook [id=" + id + ", isbn=" + isbn + ", title=" + title + ",\n    themeList=" + themeList + ",\n    authorList="
-                + authorList + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Book)) {
-            return false;
-        }
-
-        return id == ((Book) obj).id;
     }
 
     public String getIsbn() {
@@ -79,4 +58,25 @@ public class Book {
         return authorList;
     }
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((Book) obj).id));
+    }
+
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", themeList=" + themeList +
+                ", authorList=" + authorList +
+                '}';
+    }
 }

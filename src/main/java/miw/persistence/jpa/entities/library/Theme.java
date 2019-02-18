@@ -9,7 +9,7 @@ public class Theme {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -17,26 +17,7 @@ public class Theme {
     }
 
     public Theme(String name) {
-        super();
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Theme [id=" + id + ", name=" + name + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Theme)) {
-            return false;
-        }
-        return id == ((Theme) obj).id;
     }
 
     public String getName() {
@@ -47,8 +28,25 @@ public class Theme {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((Theme) obj).id));
+    }
+
+    @Override
+    public String toString() {
+        return "Theme{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
