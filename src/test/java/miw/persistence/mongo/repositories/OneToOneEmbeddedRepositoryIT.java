@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestConfig
-public class OneToOneEmbeddedRepositoryIT {
+class OneToOneEmbeddedRepositoryIT {
 
     @Autowired
     private OneToOneEmbeddedRepository unidirectionalOneToOneEmbeddedRepository;
 
     @BeforeEach
-    public void populate() {
+    void populate() {
         this.unidirectionalOneToOneEmbeddedRepository.deleteAll();
         this.unidirectionalOneToOneEmbeddedRepository.save(new OneToOneEmbeddedDocument("nick", new EmbeddableDocument(1, "1")));
         this.unidirectionalOneToOneEmbeddedRepository.save(new OneToOneEmbeddedDocument("nick", new EmbeddableDocument(2, "2")));
@@ -24,18 +24,18 @@ public class OneToOneEmbeddedRepositoryIT {
     }
 
     @Test
-    public void test() {
+    void test() {
         assertTrue(unidirectionalOneToOneEmbeddedRepository.count() > 0);
     }
 
     @Test
-    public void testFindFirstByEmbeddableDocumentValue() {
+    void testFindFirstByEmbeddableDocumentValue() {
         assertNotNull(unidirectionalOneToOneEmbeddedRepository.findFirstByEmbeddableDocumentValue("1"));
         assertNull(unidirectionalOneToOneEmbeddedRepository.findFirstByEmbeddableDocumentValue("NOT"));
     }
 
     @Test
-    public void testFindFirst10ByEmbeddableDocumentValue() {
+    void testFindFirst10ByEmbeddableDocumentValue() {
         assertEquals(2, unidirectionalOneToOneEmbeddedRepository.findFirst10ByEmbeddableDocumentValue("2").size());
     }
 
