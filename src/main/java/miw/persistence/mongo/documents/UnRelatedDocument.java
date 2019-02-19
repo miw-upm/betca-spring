@@ -33,13 +33,13 @@ public class UnRelatedDocument {
 
     private String large;
 
-    private boolean booleano;
+    private Boolean booleano;
 
-    private int integer;
+    private Integer integer;
 
-    private long loger;
+    private Long loger;
 
-    private double decimal;
+    private Double decimal;
 
     @Transient
     private String noPersistent;
@@ -61,29 +61,16 @@ public class UnRelatedDocument {
         this.decimal = 666.666e30;
     }
 
-    @Override
-    public String toString() {
-        return "UnRelatedDocument [id=" + id + ", nick=" + nick + ", gender=" + gender + ", bornDate=" + bornDate + ", strings="
-                + Arrays.toString(strings) + ", large=" + large + ", booleano=" + booleano + ", integer=" + integer + ", loger=" + loger
-                + ", decimal=" + decimal + ", noPersistent=" + noPersistent + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        return this.id.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof UnRelatedDocument && nick.equals(((UnRelatedDocument) obj).nick);
-    }
-
     public String getId() {
         return id;
     }
 
     public String getNick() {
         return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
     public Gender getGender() {
@@ -114,15 +101,15 @@ public class UnRelatedDocument {
         return noPersistent;
     }
 
-    public boolean isBooleano() {
+    public Boolean isBooleano() {
         return booleano;
     }
 
-    public void setBooleano(boolean booleano) {
+    public void setBooleano(Boolean booleano) {
         this.booleano = booleano;
     }
 
-    public long getLoger() {
+    public Long getLoger() {
         return loger;
     }
 
@@ -130,5 +117,31 @@ public class UnRelatedDocument {
         this.loger = loger;
     }
 
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this == obj) || ((obj != null) && (getClass().equals(obj.getClass())) && (id.equals(((UnRelatedDocument) obj).id)));
+    }
+
+    @Override
+    public String toString() {
+        return "UnRelatedDocument{" +
+                "id='" + id + '\'' +
+                ", nick='" + nick + '\'' +
+                ", gender=" + gender +
+                ", bornDate=" + bornDate +
+                ", strings=" + Arrays.toString(strings) +
+                ", large='" + large + '\'' +
+                ", booleano=" + booleano +
+                ", integer=" + integer +
+                ", loger=" + loger +
+                ", decimal=" + decimal +
+                ", noPersistent='" + noPersistent + '\'' +
+                '}';
+    }
 
 }

@@ -30,6 +30,10 @@ public class Book {
         this.authorList = authorList;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getIsbn() {
         return isbn;
     }
@@ -44,10 +48,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public List<Theme> getThemeList() {

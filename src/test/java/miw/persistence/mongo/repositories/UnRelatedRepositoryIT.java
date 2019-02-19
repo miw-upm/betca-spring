@@ -19,7 +19,7 @@ public class UnRelatedRepositoryIT {
     private UnRelatedRepository unRelatedRepository;
 
     @BeforeEach
-    public void populate() {
+    void populate() {
         this.unRelatedRepository.deleteAll();
         for (int i = 0; i < 5; i++) {
             this.unRelatedRepository.save(new UnRelatedDocument("nick" + i));
@@ -27,8 +27,17 @@ public class UnRelatedRepositoryIT {
     }
 
     @Test
-    public void test() {
+    void test() {
         assertTrue(unRelatedRepository.count() > 0);
+    }
+
+    @Test
+    void testCreateWithNull() {
+        this.unRelatedRepository.deleteAll();
+        this.unRelatedRepository.save(new UnRelatedDocument("nick"));
+        UnRelatedDocument unRelated = new UnRelatedDocument();
+        unRelated.setNick("nick-null");
+        this.unRelatedRepository.save(unRelated);
     }
 
     @Test
