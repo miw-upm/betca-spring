@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, String> {
-    // Consulta: por Nombre de Método
+
     UnRelatedDocument findByNickIgnoreCase(String nick);
 
     List<UnRelatedDocument> findFirst3ByNickStartingWith(String prefix);
@@ -25,11 +25,8 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
     @Transactional
     int deleteByNick(String nick);
 
-    // Consultas por Query
-
     @Query("{'nick':?0}")
-        // NOT necessary
-    UnRelatedDocument findByNick(String nick);
+    UnRelatedDocument findByNick(String nick); // Query NOT necessary
 
     // FIELDS: _id: incluido por defecto, 1: solo los especificados, 0: todos excepto el especificado
     @Query(value = "{'nick':?0}", fields = "{'bornDate':1,'large':1}")
@@ -39,16 +36,14 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
     Query2Dto findBornDateByNick(String nick);
 
     @Query("{$and:[{'nick':?0},{'large':?1}]}")
-        // NOT necessary
-    UnRelatedDocument findByNickAndLarge(String nick, String large);
+    UnRelatedDocument findByNickAndLarge(String nick, String large); // Query NOT necessary
 
     @Query("{nick:{$in:?0} }")
-        // NOT necessary
-    List<UnRelatedDocument> findByNickIn(Collection nicks);
+    List<UnRelatedDocument> findByNickIn(Collection nicks);  // Query NOT necessary
 
+    //$options: 'i': Case insensitivity
     @Query("?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } }")
-        //$options: 'i': Case insensitivity
-    List<UnRelatedDocument> findByNickLikeNullSafe(String nick);  // allow NULL: all elements
+    List<UnRelatedDocument> findByNickLikeIgnoreCaseNullSafe(String nick);  // allow NULL: all elements
 
     @Query("{$and:["
             + "?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } },"

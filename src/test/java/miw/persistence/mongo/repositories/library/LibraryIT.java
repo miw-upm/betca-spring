@@ -40,20 +40,7 @@ public class LibraryIT {
 
     @Test
     public void testFindNameByStyleName() {
-        //assertEquals(2, authorRepository.findNameByStyleName("Infantil").size());
-        //assertArrayEquals(new String[]{"Jesús", "Cris"}, authorRepository.findNameByStyleName("Infantil").toArray());
-    }
-
-    @Test
-    public void testFindDistinctNameByAnyBook() {
-        //assertEquals(3, authorRepository.findDistinctNameByAnyBook().size());
-        //assertArrayEquals(new String[]{"Jesús", "Cris", "Ana"}, authorRepository.findDistinctNameByAnyBook().toArray());
-    }
-
-    @Test
-    public void testFindNameByThemeName() {
-        //assertEquals(2, authorRepository.findNameByThemeName("Suspense").size());
-        //assertArrayEquals(new String[]{"Cris", "Ana"}, authorRepository.findNameByThemeName("Suspense").toArray());
+        assertEquals(2, authorRepository.findNameByStyle(styleRepository.findByNameIgnoreCase("Infantil")).size());
     }
 
     @AfterEach

@@ -69,17 +69,11 @@ public class UnRelatedRepositoryIT {
     }
 
     @Test
-    public void testFindByIdGreaterThan() {
+    public void testFindByIntegerGreaterThan() {
         assertEquals(2, unRelatedRepository.findByIntegerGreaterThan(0, PageRequest.of(0, 2)).size());
         assertEquals(2, unRelatedRepository.findByIntegerGreaterThan(0, PageRequest.of(1, 3)).size());
     }
 
-    @Test
-    public void testFindByNickIn() {
-        assertEquals(2, unRelatedRepository.findByNickIn(Arrays.asList("nick1", "nick2")).size());
-    }
-
-    // BORRADO
     @Test
     public void testDeleteByNick() {
         assertNotNull(unRelatedRepository.findByNick("nick0"));
@@ -87,7 +81,6 @@ public class UnRelatedRepositoryIT {
         assertNull(unRelatedRepository.findByNick("nick0"));
     }
 
-    // Query
     @Test
     public void testFindByNick() {
         assertNotNull(unRelatedRepository.findByNick("nick0"));
@@ -112,13 +105,18 @@ public class UnRelatedRepositoryIT {
     }
 
     @Test
-    public void testFindByNickLike() {
-        assertEquals(1, unRelatedRepository.findByNickLikeNullSafe("k1").size());
-        assertEquals(5, unRelatedRepository.findByNickLikeNullSafe(null).size());
+    public void testFindByNickIn() {
+        assertEquals(2, unRelatedRepository.findByNickIn(Arrays.asList("nick1", "nick2")).size());
     }
 
     @Test
-    public void testFindByNickLikeLargeLike() {
+    public void testFindByNickLikeIgnoreCaseNullSafe() {
+        assertEquals(1, unRelatedRepository.findByNickLikeIgnoreCaseNullSafe("k1").size());
+        assertEquals(5, unRelatedRepository.findByNickLikeIgnoreCaseNullSafe(null).size());
+    }
+
+    @Test
+    public void testFindByNickLikeLargeLikeNullSafe() {
         assertEquals(0, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe("k1", "no").size());
         assertEquals(1, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe("k1", null).size());
         assertEquals(5, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe(null, null).size());

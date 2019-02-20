@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AnyRepository extends MongoRepository<AnyDocument, String> {
 
-    List<AnyDocument> findByValue(String value);
+    AnyDocument findFirstByValue(String value);
 }

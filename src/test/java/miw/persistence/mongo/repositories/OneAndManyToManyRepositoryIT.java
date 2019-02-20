@@ -8,8 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestConfig
@@ -25,17 +27,31 @@ public class OneAndManyToManyRepositoryIT {
     public void seedDb() {
         this.oneToManyRepository.deleteAll();
         this.anyRepository.deleteAll();
-        List<AnyDocument> anyDocumentList = new ArrayList<>();
-        anyDocumentList.add(new AnyDocument("any"));
-        anyDocumentList.add(new AnyDocument("any2"));
+        List<AnyDocument> anyDocumentList = Arrays.asList(
+                new AnyDocument("any"),
+                new AnyDocument("any2"),
+                new AnyDocument("any3")
+        );
         this.anyRepository.saveAll(anyDocumentList);
-        this.oneToManyRepository.save(new OneAndManyToManyDocument("nick", anyDocumentList));
-        this.oneToManyRepository.save(new OneAndManyToManyDocument("nick2", anyDocumentList));
+        this.oneToManyRepository.save(new OneAndManyToManyDocument("nick",
+                Arrays.asList(anyDocumentList.get(0), anyDocumentList.get(1))
+        ));
+        this.oneToManyRepository.save(new OneAndManyToManyDocument("nick2",
+                Arrays.asList(anyDocumentList.get(0), anyDocumentList.get(2))
+        ));
     }
 
     @Test
-    public void test() {
+    public void testCount() {
         assertTrue(oneToManyRepository.count() > 0);
+    }
+
+    @Test
+    public void testFindByAnyDocumentListContaining() {
+        AnyDocument any = anyRepository.findFirstByValue("any");
+        AnyDocument any2 = anyRepository.findFirstByValue("any2");
+        assertEquals(2, oneToManyRepository.findByAnyDocumentListContaining(any).size());
+        assertEquals(1, oneToManyRepository.findByAnyDocumentListContaining(any2).size());
     }
 
 
