@@ -1,13 +1,8 @@
 package miw.restControllers.exceptions;
 
-public class BadRequestException extends Exception {
+public class BadRequestException extends RuntimeException {
 
-    public static final String DESCRIPTION = "Bad Request Exception";
-    private static final long serialVersionUID = 6830756676887746370L;
-
-    public BadRequestException() {
-        this("");
-    }
+    private static final String DESCRIPTION = "Bad Request Exception (400)";
 
     public BadRequestException(String detail) {
         super(DESCRIPTION + ". " + detail);

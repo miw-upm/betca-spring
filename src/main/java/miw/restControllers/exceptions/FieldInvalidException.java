@@ -1,13 +1,8 @@
 package miw.restControllers.exceptions;
 
-public class FieldInvalidException extends Exception {
+public class FieldInvalidException extends BadRequestException {
 
-    public static final String DESCRIPTION = "Invalid Field";
-    private static final long serialVersionUID = -1344640670884805385L;
-
-    public FieldInvalidException() {
-        this("");
-    }
+    private static final String DESCRIPTION = "Invalid Field";
 
     public FieldInvalidException(String detail) {
         super(DESCRIPTION + ". " + detail);

@@ -29,8 +29,7 @@ public class ExceptionResource {
 
     @GetMapping(value = ERROR + ID)
     public Dto error(@RequestHeader(value = "token") String token,
-                     @PathVariable(value = "id") int id, @RequestParam String param)
-            throws NotFoundException, MalformedHeaderException, FieldInvalidException, FieldAlreadyExistException {
+                     @PathVariable(value = "id") int id, @RequestParam String param) {
 
         if (token.equals("kk")) {
             throw new MalformedHeaderException("token:" + token);

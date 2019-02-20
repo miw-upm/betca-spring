@@ -1,17 +1,12 @@
 package miw.restControllers;
 
 import miw.persistence.jpa.entities.Gender;
-import miw.restControllers.exceptions.FieldAlreadyExistException;
-import miw.restControllers.exceptions.FieldInvalidException;
-import miw.restControllers.exceptions.MalformedHeaderException;
-import miw.restControllers.exceptions.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(AdminResource.ADMINS)
 public class AdminResource {
@@ -60,7 +55,7 @@ public class AdminResource {
     public List<Dto> bodyDtoList() {
         Dto dto1 = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
         Dto dto2 = new Dto(999, "last", Gender.MALE, LocalDateTime.now());
-        Dto dto3 = new Dto(000, "first", Gender.FEMALE, LocalDateTime.now());
+        Dto dto3 = new Dto(0, "first", Gender.FEMALE, LocalDateTime.now());
         return Arrays.asList(dto1, dto2, dto3);
     }
 

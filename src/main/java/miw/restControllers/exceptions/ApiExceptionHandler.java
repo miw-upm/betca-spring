@@ -21,8 +21,6 @@ public class ApiExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({
             BadRequestException.class,
-            MalformedHeaderException.class,
-            FieldInvalidException.class,
             org.springframework.dao.DuplicateKeyException.class,
             org.springframework.web.HttpRequestMethodNotSupportedException.class,
             org.springframework.web.bind.MethodArgumentNotValidException.class,
@@ -32,9 +30,8 @@ public class ApiExceptionHandler {
             org.springframework.http.converter.HttpMessageNotReadableException.class
     })
     @ResponseBody
-    public ErrorMessage badRequest(Exception exception) {
-        ErrorMessage errorMessage = new ErrorMessage(exception, "");
-        return errorMessage;
+    public ErrorMessage badRequest(HttpServletRequest request, Exception exception) {
+        return new ErrorMessage(exception, request.getRequestURI());
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
@@ -42,17 +39,17 @@ public class ApiExceptionHandler {
             ForbiddenException.class
     })
     @ResponseBody
-    public ErrorMessage forbiddenRequest(Exception exception) {
-        ErrorMessage errorMessage = new ErrorMessage(exception, "");
-        return errorMessage;
+    public ErrorMessage forbiddenRequest(HttpServletRequest request, Exception exception) {
+        return new ErrorMessage(exception, request.getRequestURI());
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler({FieldAlreadyExistException.class})
+    @ExceptionHandler({
+            ConflictException.class
+    })
     @ResponseBody
-    public ErrorMessage conflict(Exception exception) {
-        ErrorMessage errorMessage = new ErrorMessage(exception, "");
-        return errorMessage;
+    public ErrorMessage conflict(HttpServletRequest request, Exception exception) {
+        return new ErrorMessage(exception, request.getRequestURI());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -66,9 +63,9 @@ public class ApiExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({Exception.class})
     @ResponseBody
-    public ErrorMessage fatalErrorUnexpectedException(Exception exception) {
+    public ErrorMessage fatalErrorUnexpectedException(HttpServletRequest request, Exception exception) {
         exception.printStackTrace();
-        return new ErrorMessage(exception);
+        return new ErrorMessage(exception, request.getRequestURI());
     }
 
 }

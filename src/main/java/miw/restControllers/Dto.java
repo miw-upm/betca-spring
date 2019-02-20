@@ -1,5 +1,6 @@
 package miw.restControllers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import miw.persistence.jpa.entities.Gender;
 
 import java.time.LocalDateTime;
@@ -10,8 +11,10 @@ public class Dto {
 
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Gender gender;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDateTime bornDate;
 
     public Dto() {

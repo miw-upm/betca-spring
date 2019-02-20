@@ -1,5 +1,6 @@
 package miw.restControllers;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -17,18 +18,27 @@ class ExceptionResourceIT {
     @Test
     void testErrorNotToken() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port)
+                new RestBuilder<>(port)
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
                         .param("param", "good")
                         .get().build()
         );
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+    }
+
+    @Test
+    void testErrorNotTokenNotException() {
+        String json = new RestBuilder<String>(port).clazz(String.class)
+                .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
+                .param("param", "good")
+                .get().notError().build();
+        LogManager.getLogger(this.getClass()).info("Error Message: " + json);
     }
 
     @Test
     void testErrorMalFormedToken() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port).header("token", "kk")
+                new RestBuilder<>(port).header("token", "kk")
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
                         .param("param", "good")
                         .get().build()
@@ -37,9 +47,19 @@ class ExceptionResourceIT {
     }
 
     @Test
+    void testErrorMalFormedTokenNotException() {
+        String json = new RestBuilder<String>(port).clazz(String.class).header("token", "kk")
+                .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
+                .param("param", "good")
+                .get().notError().build();
+        LogManager.getLogger(this.getClass()).info("Error Message: " + json);
+
+    }
+
+    @Test
     void testErrorIdFormat() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port).header("token", "Basic good")
+                new RestBuilder<>(port).header("token", "Basic good")
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand("kk")
                         .param("param", "good")
                         .get().build()
@@ -50,7 +70,7 @@ class ExceptionResourceIT {
     @Test
     void testErrorNotExistId() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port).header("token", "Basic good")
+                new RestBuilder<>(port).header("token", "Basic good")
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(0)
                         .param("param", "good")
                         .get().build()
@@ -59,9 +79,19 @@ class ExceptionResourceIT {
     }
 
     @Test
+    void testErrorNotExistIdNotException() {
+        String json = new RestBuilder<String>(port).clazz(String.class).header("token", "Basic good")
+                .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(0)
+                .param("param", "good")
+                .get().notError().build();
+        LogManager.getLogger(this.getClass()).info("Error Message: " + json);
+    }
+
+
+    @Test
     void testErrorLostParam() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port).header("token", "Basic good")
+                new RestBuilder<>(port).header("token", "Basic good")
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
                         .get().build()
         );
@@ -71,7 +101,7 @@ class ExceptionResourceIT {
     @Test
     void testErrorInvalidParam() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port).header("token", "Basic good")
+                new RestBuilder<>(port).header("token", "Basic good")
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
                         .param("param", "")
                         .get().build()
@@ -80,9 +110,18 @@ class ExceptionResourceIT {
     }
 
     @Test
+    void testErrorInvalidParamNotException() {
+        String json = new RestBuilder<String>(port).clazz(String.class).header("token", "Basic good")
+                .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
+                .param("param", "")
+                .get().notError().build();
+        LogManager.getLogger(this.getClass()).info("Error Message: " + json);
+    }
+
+    @Test
     void testErrorConflictParam() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<Dto>(port).header("token", "Basic good")
+                new RestBuilder<>(port).header("token", "Basic good")
                         .path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.ERROR).path(AdminResource.ID).expand(66)
                         .param("param", "kk")
                         .get().build()

@@ -1,13 +1,8 @@
 package miw.restControllers.exceptions;
 
-public class UnauthorizedException extends Exception {
+public class UnauthorizedException extends RuntimeException {
 
-    public static final String DESCRIPTION = "La identificación utilizada no tiene la autoridad suficiente";
-    private static final long serialVersionUID = -1344640670884805385L;
-
-    public UnauthorizedException() {
-        this("");
-    }
+    private static final String DESCRIPTION = "Unauthorized Exception (401)";
 
     public UnauthorizedException(String detail) {
         super(DESCRIPTION + ". " + detail);

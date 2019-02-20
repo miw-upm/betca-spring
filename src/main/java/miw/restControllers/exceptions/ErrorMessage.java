@@ -8,10 +8,6 @@ public class ErrorMessage {
 
     private String path;
 
-    public ErrorMessage(Exception exception) {
-        this(exception, "/");
-    }
-
     public ErrorMessage(Exception exception, String path) {
         this.exception = exception.getClass().getSimpleName();
         this.message = exception.getMessage();
@@ -32,7 +28,10 @@ public class ErrorMessage {
 
     @Override
     public String toString() {
-        return "ErrorMessage [exception=" + exception + ", message=" + message + ", path=" + path + "]";
+        return "ErrorMessage{" +
+                "exception='" + exception + '\'' +
+                ", message='" + message + '\'' +
+                ", path='" + path + '\'' +
+                '}';
     }
-
 }

@@ -5,10 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -18,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ApiTestConfig
 class AdminResourceIT {
@@ -48,8 +45,9 @@ class AdminResourceIT {
     // Parametros y cuerpo --------------------------------------------------------------------------------
     @Test
     void testParamEcho() {
-        String json = new RestBuilder<String>(port).clazz(String.class).path(AdminResource.ADMINS).path(AdminResource.ECHO)
-                .path(AdminResource.ID).expand(666).param("param", "paaaaram").header("token", "toooken").get().build();
+        String json = new RestBuilder<String>(port).clazz(String.class).header("token", "toooken")
+                .path(AdminResource.ADMINS).path(AdminResource.ECHO).path(AdminResource.ID).expand(666)
+                .param("param", "paaaaram").get().build();
         assertEquals("{\"id\":666,\"token\":\"toooken\",\"param\":\"paaaaram\"}", json);
     }
 
@@ -70,8 +68,8 @@ class AdminResourceIT {
 
     @Test
     void testBodyDtoList() {
-        List<Dto> response = Arrays.asList(new RestBuilder<Dto[]>(port).path(AdminResource.ADMINS).path(AdminResource.BODY)
-                .path(AdminResource.DTO_LIST).clazz(Dto[].class).get().build());
+        List<Dto> response = Arrays.asList(new RestBuilder<Dto[]>(port).clazz(Dto[].class).path(AdminResource.ADMINS)
+                .path(AdminResource.BODY).path(AdminResource.DTO_LIST).get().build());
         assertEquals(3, response.size());
     }
 

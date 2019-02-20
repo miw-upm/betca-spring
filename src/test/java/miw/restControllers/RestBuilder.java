@@ -1,14 +1,19 @@
 package miw.restControllers;
 
 import org.apache.logging.log4j.LogManager;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -36,6 +41,8 @@ public class RestBuilder<T> {
     private String authorization = null;
 
     private Object body = null;
+
+    private File file = null;
 
     private MultiValueMap<String, String> params;
 
@@ -94,14 +101,15 @@ public class RestBuilder<T> {
         return this;
     }
 
-    public RestBuilder<T> basicAuth(String token) {
-        return basicAuth(token, "");
-    }
-
     public RestBuilder<T> basicAuth(String nick, String pass) {
         String auth = nick + ":" + pass;
         String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
         this.authorization = "Basic " + encodedAuth;
+        return this;
+    }
+
+    public RestBuilder<T> bearerAuth(String token) {
+        this.authorization = "Bearer " + token;
         return this;
     }
 
@@ -112,6 +120,11 @@ public class RestBuilder<T> {
 
     public RestBuilder<T> header(String key, String value) {
         this.headerValues.put(key, value);
+        return this;
+    }
+
+    public RestBuilder<T> loadFile(String fileName) throws IOException {
+        this.file = new ClassPathResource(fileName).getFile();
         return this;
     }
 
@@ -148,6 +161,12 @@ public class RestBuilder<T> {
         if (!this.mediaTytes.isEmpty()) {
             headers.setAccept(this.mediaTytes);
         }
+        if (this.file != null) {
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+            body.add("file", new FileSystemResource(this.file));
+            this.body = body;
+        }
         return headers;
     }
 
@@ -162,7 +181,6 @@ public class RestBuilder<T> {
             uriComponents = uriComponents.expand(expandList.toArray());
         }
         return uriComponents.encode().toUri();
-
     }
 
     public RestBuilder<T> log() {
