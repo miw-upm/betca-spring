@@ -1,8 +1,5 @@
 package miw.persistence.mongo.documents.library;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class Contact {
 
     private String email;
