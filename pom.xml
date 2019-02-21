@@ -32,6 +32,8 @@
         <junit.platform.version>1.2.0</junit.platform.version>
         <itextpdf.version>7.0.2</itextpdf.version>
         <auth0.version>3.4.1</auth0.version>
+        <swagger.version>2.9.2</swagger.version>
+
     </properties>
 
     <dependencies>
@@ -95,6 +97,17 @@
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
             <scope>test</scope>
         </dependency> -->
+        <!-- Swagger ====================================== -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
         <!-- ================ TEST ================== -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
