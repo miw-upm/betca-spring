@@ -4,9 +4,7 @@ import miw.persistence.mongo.documents.library.Author;
 import miw.persistence.mongo.documents.library.NameDto;
 import miw.persistence.mongo.documents.library.Style;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface AuthorRepository extends MongoRepository<Author, String> {

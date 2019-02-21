@@ -31,9 +31,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
-        LogManager.getLogger(this.getClass().getName()).debug(">>> FILTER JWT...");
+
         String authHeader = request.getHeader(AUTHORIZATION);
         if (jwtService.isBearer(authHeader)) {
+            LogManager.getLogger(this.getClass().getName()).debug(">>> FILTER JWT...");
             List<GrantedAuthority> authorities = jwtService.roles(authHeader).stream()
                     .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
             UsernamePasswordAuthenticationToken authentication =

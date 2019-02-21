@@ -1,8 +1,8 @@
 package miw.restControllers;
 
+import miw.restControllers.filter.MyFilter;
 import miw.restControllers.filter.TimeAccessFilter;
 import miw.restControllers.jwt.JwtAuthorizationFilter;
-import miw.restControllers.filter.MyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
