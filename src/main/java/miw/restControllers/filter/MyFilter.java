@@ -1,4 +1,4 @@
-package miw.restControllers.jwt;
+package miw.restControllers.filter;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.web.filter.OncePerRequestFilter;
