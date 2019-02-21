@@ -29,27 +29,18 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req,
-                                    HttpServletResponse res,
-                                    FilterChain chain) throws IOException, ServletException {
-
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws IOException, ServletException {
         LogManager.getLogger(this.getClass().getName()).debug(">>> FILTER JWT...");
-
-        String authHeader = req.getHeader(AUTHORIZATION);
-
-        if (!jwtService.isBearer(authHeader)) {
-            chain.doFilter(req, res);
-            return;
+        String authHeader = request.getHeader(AUTHORIZATION);
+        if (jwtService.isBearer(authHeader)) {
+            List<GrantedAuthority> authorities = jwtService.roles(authHeader).stream()
+                    .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(jwtService.user(authHeader), null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        List<GrantedAuthority> authorities = jwtService.roles(authHeader).stream()
-                .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
-
-        UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(jwtService.user(authHeader), null, authorities);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
+        filterChain.doFilter(request, response);
     }
 
 }

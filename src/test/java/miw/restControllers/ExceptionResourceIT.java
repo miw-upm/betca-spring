@@ -139,6 +139,13 @@ class ExceptionResourceIT {
     }
 
     @Test
+    void testMyFilter() {
+        new RestBuilder<>(port).path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.MY_FILTER).get().build();
+    }
+
+
+
+    @Test
     void testOutOfTime() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
                 new RestBuilder<>(port).path(ExceptionResource.EXCEPTIONS).path(ExceptionResource.OUT_OF_TIME).get().build()

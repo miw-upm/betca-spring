@@ -3,6 +3,7 @@ package miw.restControllers.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import miw.restControllers.exceptions.JwtException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -51,7 +52,6 @@ public class JwtService {
         } catch (Exception exception) {
             throw new JwtException("JWT is wrong. " + exception.getMessage());
         }
-
     }
 
     public List<String> roles(String authorization) throws JwtException {

@@ -1,6 +1,7 @@
 package miw.restControllers.jwt;
 
 import miw.TestConfig;
+import miw.restControllers.exceptions.JwtException;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

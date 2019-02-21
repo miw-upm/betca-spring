@@ -2,6 +2,7 @@ package miw.restControllers;
 
 import miw.miscellaneous.TimeAccessFilter;
 import miw.restControllers.jwt.JwtAuthorizationFilter;
+import miw.restControllers.jwt.MyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -43,12 +44,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().httpBasic().and().addFilter(jwtAuthorizationFilter())
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                // .antMatchers(SecurityResource.SECURITY + SecurityResource.USER + "/**").authenticated()
-                // .antMatchers(HttpMethod.GET, SecurityResource.SECURITY + SecurityResource.ADMIN).hasRole("ADMIN")
+        http.csrf().disable().httpBasic()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilter(jwtAuthorizationFilter());
     }
 
+    @Bean
+    public FilterRegistrationBean<MyFilter> myFilter() {
+        FilterRegistrationBean<MyFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new MyFilter());
+        filterRegistrationBean.addUrlPatterns(ExceptionResource.EXCEPTIONS + ExceptionResource.MY_FILTER);
+        return filterRegistrationBean;
+    }
 
     @Bean
     public FilterRegistrationBean<TimeAccessFilter> timeAccessFilter() {
@@ -63,6 +70,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtAuthorizationFilter jwtAuthorizationFilter() throws Exception {
         return new JwtAuthorizationFilter(this.authenticationManager());
     }
-
 
 }
