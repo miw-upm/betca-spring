@@ -23,3 +23,10 @@
 1. **Import Project**, y seleccionar la carpeta del proyecto.
 1. Marcar **Create Project from external model**, elegir **Maven**.
 1. **Next** … **Finish**.
+
+### Instalar MondoDB
+1. Web: https://docs.mongodb.com/getting-started/shell/installation/
+1. Instalar el `*.zip`, version __Community Server__   
+   * Descomprimir y crear la carpeta `%path%/data/db`
+   * Arrancar el servidor: `%path%/bin> mongod --dbpath %path%/data/db`
+   * Se puede arrancar la consola: `%path%/bin> mongo`
