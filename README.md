@@ -1,4 +1,4 @@
-# Tecnología Spring: Proyecto TPV - Back-end
+# Proyecto para docencia Spring 5
 #### Back-end con Tecnologías de Código Abierto (SPRING)
 #### [Máster en Ingeniería Web por la U.P.M.](http://miw.etsisi.upm.es)
 

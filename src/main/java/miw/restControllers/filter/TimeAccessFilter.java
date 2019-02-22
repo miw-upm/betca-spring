@@ -1,6 +1,5 @@
 package miw.restControllers.filter;
 
-import miw.restControllers.exceptions.ForbiddenException;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.web.filter.OncePerRequestFilter;
 
