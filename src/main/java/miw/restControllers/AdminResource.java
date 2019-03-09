@@ -13,6 +13,7 @@ public class AdminResource {
 
     public static final String ADMINS = "/admins";
 
+
     public static final String STATE = "/state";
 
     public static final String ECHO = "/echo";

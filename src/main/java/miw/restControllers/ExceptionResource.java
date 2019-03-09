@@ -16,6 +16,7 @@ public class ExceptionResource {
 
     public static final String EXCEPTIONS = "/exceptions";
 
+
     public static final String MY_FILTER = "/my-filter";
 
     public static final String OUT_OF_TIME = "/out-of-time";
@@ -35,8 +36,7 @@ public class ExceptionResource {
     }
 
     @GetMapping(value = ERROR + ID)
-    public Dto error(@RequestHeader(value = "token") String token,
-                     @PathVariable(value = "id") int id, @RequestParam String param) {
+    public Dto error(@RequestHeader String token, @PathVariable int id, @RequestParam String param) {
 
         if (token.equals("kk")) {
             throw new MalformedHeaderException("token:" + token);

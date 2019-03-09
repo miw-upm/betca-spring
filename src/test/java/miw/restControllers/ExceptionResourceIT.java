@@ -144,7 +144,6 @@ class ExceptionResourceIT {
     }
 
 
-
     @Test
     void testOutOfTime() {
         HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->

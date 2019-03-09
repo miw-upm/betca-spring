@@ -47,6 +47,7 @@ public class UnRelatedDaoIT {
 
     @Test
     public void testFindByNickIgnoreCase() {
+
         assertNotNull(unRelatedDao.findByNickIgnoreCase("NICK1"));
     }
 

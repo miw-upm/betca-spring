@@ -6,7 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestConfig
 public class LibraryIT {
@@ -42,6 +45,25 @@ public class LibraryIT {
     public void testFindNameByStyleName() {
         assertEquals(2, authorRepository.findNameByStyle(styleRepository.findByNameIgnoreCase("Infantil")).size());
     }
+
+
+    @Test
+    public void testFindContactByName() {
+        System.out.println("===>>>" + authorRepository.findContactByName("Ana"));
+    }
+
+    @Test
+    public void testFindContactEmailJsonByName() {
+        System.out.println("===>>>" + authorRepository.findContactEmailJsonByName("Ana"));
+    }
+
+    @Test
+    public void testFindContactEmailByName() {
+        System.out.println("===>>>" + authorRepository.findContactEmailByName("Ana").stream().map(
+                author -> author.getContact().getEmail()
+        ).collect(Collectors.toList()));
+    }
+
 
     @AfterEach
     public void deleteAll() {

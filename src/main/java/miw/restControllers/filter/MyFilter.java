@@ -16,5 +16,6 @@ public class MyFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         LogManager.getLogger(this.getClass().getName()).debug(">>> FILTER MyFilter...");
         filterChain.doFilter(request, response);
+        // post proceso
     }
 }
