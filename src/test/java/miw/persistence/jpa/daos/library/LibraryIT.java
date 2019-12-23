@@ -47,7 +47,7 @@ public class LibraryIT {
     @Test
     public void testFindDistinctNameByAnyBook() {
         assertEquals(3, authorDao.findDistinctNameByAnyBook().size());
-        assertArrayEquals(new String[]{"Jesús", "Cris", "Ana"}, authorDao.findDistinctNameByAnyBook().toArray());
+        assertArrayEquals(new String[]{"Ana", "Cris", "Jesús"}, authorDao.findDistinctNameByAnyBook().toArray());
     }
 
     @Test
