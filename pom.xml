@@ -1,15 +1,33 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>es.upm.miw</groupId>
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>betca-spring</artifactId>
+    <groupId>es.upm.miw</groupId>
     <version>1.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>betca-spring</name>
-    <description>BETCA-spring5 project for Spring Boot</description>
+    <name>${project.groupId}.${project.artifactId}</name>
+    <description>Proyecto para apoyo docente a la asignatura BETCA-Spring (MIW-UPM)</description>
+    <url>http://github.com/miw-upm/betca-spring</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Jesus Bernal</name>
+            <id>J.Bernal</id>
+            <email>j.bernal@upm.es</email>
+            <organization>MIW-UPM</organization>
+            <organizationUrl>http://miw.etsisi.upm.es</organizationUrl>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,17 +37,24 @@
     </parent>
 
     <properties>
-        <!-- Version ====================================== -->
-        <jdk.version>1.8</jdk.version>
+        <!-- Encode -->
         <encoding>UTF-8</encoding>
-        <deploy>${project.artifactId}-${project.version}</deploy>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
         <project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+        <!-- Java -->
+        <jdk.version>1.8</jdk.version>
+
+        <deploy>${project.artifactId}-${project.version}</deploy>
+
+        <!-- Maven -->
+        <maven.compiler.version>3.5</maven.compiler.version>
         <!-- Maven. Test de Integración -->
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
+        <!-- JUnit -->
         <junit.platform.version>1.2.0</junit.platform.version>
+        <!-- various -->
         <itextpdf.version>7.0.2</itextpdf.version>
         <auth0.version>3.4.1</auth0.version>
         <swagger.version>2.9.2</swagger.version>
