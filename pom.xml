@@ -1,15 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>betca-spring</artifactId>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.11.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>es.upm.miw</groupId>
+    <artifactId>betca-spring</artifactId>
     <version>1.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}.${project.artifactId}</name>
-    <description>Proyecto para apoyo docente a la asignatura BETCA-Spring (MIW-UPM)</description>
+    <description>Project for teaching support to the BETCA-Spring (MIW-UPM)</description>
     <url>http://github.com/miw-upm/betca-spring</url>
 
     <licenses>
@@ -29,13 +36,6 @@
         </developer>
     </developers>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.11.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <properties>
         <!-- Encode -->
         <encoding>UTF-8</encoding>
@@ -52,14 +52,15 @@
         <!-- Maven. Test de Integración -->
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
+
         <!-- JUnit -->
         <junit.platform.version>1.2.0</junit.platform.version>
+
         <!-- various -->
         <itextpdf.version>7.0.2</itextpdf.version>
         <auth0.version>3.4.1</auth0.version>
         <swagger.version>2.9.2</swagger.version>
         <lombok.version>1.18.8</lombok.version>
-
     </properties>
 
     <dependencies>
@@ -72,6 +73,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
         <!-- JWT -->
         <dependency>
             <groupId>com.auth0</groupId>
