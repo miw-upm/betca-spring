@@ -18,6 +18,7 @@ public class Style {
     private String description;
 
     public Style() {
+        //Empty for framework
     }
 
     public Style(String name, String description) {

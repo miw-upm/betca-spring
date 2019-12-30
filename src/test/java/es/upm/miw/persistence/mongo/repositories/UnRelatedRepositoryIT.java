@@ -62,10 +62,10 @@ public class UnRelatedRepositoryIT {
 
     @Test
     public void testFindByNickOrLargeOrderByIdDesc() {
-        assertTrue(unRelatedRepository.findByNickOrLargeOrderByLogerDesc(
-                "NoNick", "Large...").get(0).getLoger() >= unRelatedRepository
-                .findByNickOrLargeOrderByLogerDesc("NoNick", "Large...").get(1).getLoger());
-        assertEquals(5, unRelatedRepository.findByNickOrLargeOrderByLogerDesc("NoNick", "Large...").size());
+        assertTrue(unRelatedRepository.findByNickOrLargeOrderByLongerDesc(
+                "NoNick", "Large...").get(0).getLonger() >= unRelatedRepository
+                .findByNickOrLargeOrderByLongerDesc("NoNick", "Large...").get(1).getLonger());
+        assertEquals(5, unRelatedRepository.findByNickOrLargeOrderByLongerDesc("NoNick", "Large...").size());
     }
 
     @Test

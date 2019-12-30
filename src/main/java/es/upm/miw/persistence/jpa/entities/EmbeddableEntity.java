@@ -10,6 +10,7 @@ public class EmbeddableEntity {
     private String value;
 
     public EmbeddableEntity() {
+        //Empty for framework
     }
 
     public EmbeddableEntity(int number, String value) {

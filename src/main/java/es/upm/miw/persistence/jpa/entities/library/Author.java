@@ -21,6 +21,7 @@ public class Author {
     private Style style;
 
     public Author() {
+        //Empty for framework
     }
 
     public Author(String name, String surname, Contact contact, Style style) {

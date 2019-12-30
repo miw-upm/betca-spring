@@ -17,7 +17,7 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
 
     List<UnRelatedDocument> findFirst3ByNickStartingWith(String prefix);
 
-    List<UnRelatedDocument> findByNickOrLargeOrderByLogerDesc(String nick, String large);
+    List<UnRelatedDocument> findByNickOrLargeOrderByLongerDesc(String nick, String large);
 
     List<UnRelatedDocument> findByIntegerGreaterThan(int integer, Pageable pageable);
 

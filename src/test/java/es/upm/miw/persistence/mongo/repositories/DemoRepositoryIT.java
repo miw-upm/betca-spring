@@ -1,7 +1,7 @@
 package es.upm.miw.persistence.mongo.repositories;
 
-import es.upm.miw.persistence.mongo.documents.Demo;
 import es.upm.miw.TestConfig;
+import es.upm.miw.persistence.mongo.documents.Demo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

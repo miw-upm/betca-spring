@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class AnyEntity {
+public class AnotherEntity {
 
     @Id
     @GeneratedValue
@@ -13,11 +13,11 @@ public class AnyEntity {
 
     private String value;
 
-    public AnyEntity() {
+    public AnotherEntity() {
         //Empty for framework
     }
 
-    public AnyEntity(String value) {
+    public AnotherEntity(String value) {
         this.value = value;
     }
 
@@ -36,12 +36,12 @@ public class AnyEntity {
 
     @Override
     public boolean equals(Object obj) {
-        return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((AnyEntity) obj).id));
+        return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((AnotherEntity) obj).id));
     }
 
     @Override
     public String toString() {
-        return "AnyEntity [id=" + id + ", value=" + value + "]";
+        return "AnotherEntity [id=" + id + ", value=" + value + "]";
     }
 
 }

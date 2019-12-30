@@ -26,14 +26,14 @@ public interface UnRelatedDao extends JpaRepository<UnRelatedEntity, Integer> {
     // Consulta: JPQL
     // ?1 ?2 ?3...
     // :name ... @Param("name")
-    @Query("select u.nick from un_related u where u.nick like ?1")
+    @Query("select u.nick from UnRelatedEntity u where u.nick like ?1")
     List<String> findNickByNickLike(String nick);
 
-    @Query("select u.id from un_related u where u.id > ?1 and u.id < ?2")
+    @Query("select u.id from UnRelatedEntity u where u.id > ?1 and u.id < ?2")
     List<Integer> findIdByIdBetween(int initial, int end);
 
     // Consulta: SQL
-    @Query(value = "SELECT * FROM un_related WHERE KCIN = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM un_related_entity WHERE KCIN = ?1", nativeQuery = true)
     UnRelatedEntity findByNick(String nick);
 
     @Transactional
@@ -44,7 +44,7 @@ public interface UnRelatedDao extends JpaRepository<UnRelatedEntity, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "delete from un_related u where u.nick = ?1")
+    @Query(value = "delete from UnRelatedEntity u where u.nick = ?1")
     void deleteByNickQuery(String nick);
 
 }

@@ -10,6 +10,7 @@ public class Contact {
     private int phone;
 
     public Contact() {
+        //Empty for framework
     }
 
     public Contact(String email, int phone) {

@@ -17,12 +17,12 @@ public class ApiLogs {
 
     @Before("allResources()")
     public void apiRequestLog(JoinPoint jp) {
-        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info("------------------------- o -------------------------");
+        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug("------------------------- o -------------------------");
         StringBuilder log = new StringBuilder(jp.getSignature().getName() + " >>>");
         for (Object arg : jp.getArgs()) {
             log.append("\n   ARG: " + arg);
         }
-        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info(log);
+        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(log);
     }
 
     @AfterReturning(pointcut = "allResources()", returning = "result")
@@ -38,14 +38,14 @@ public class ApiLogs {
         if (log.length() > 2000) {
             log = log.substring(0, 2000) + ".... (+" + log.length() + " characters)";
         }
-        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info(log);
+        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(log);
     }
 
     @AfterThrowing(pointcut = "allResources()", throwing = "exception")
     public void apiResponseExceptionLog(JoinPoint jp, Exception exception) {
         String log = "<<< Return Exception << " + jp.getSignature().getName() + ": " + exception.getClass().getSimpleName() + "->"
                 + exception.getMessage();
-        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info(log);
+        LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(log);
     }
 
 }

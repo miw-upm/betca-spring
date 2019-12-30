@@ -37,7 +37,7 @@ public class UnRelatedDocument {
 
     private Integer integer;
 
-    private Long loger;
+    private Long longer;
 
     private Double decimal;
 
@@ -57,7 +57,7 @@ public class UnRelatedDocument {
         this.noPersistent = "noPersistent";
         this.booleano = true;
         this.integer = 666;
-        this.loger = this.bornDate.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli();
+        this.longer = this.bornDate.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli();
         this.decimal = 666.666e30;
     }
 
@@ -109,12 +109,12 @@ public class UnRelatedDocument {
         this.booleano = booleano;
     }
 
-    public Long getLoger() {
-        return loger;
+    public Long getLonger() {
+        return longer;
     }
 
-    public void setLoger(long loger) {
-        this.loger = loger;
+    public void setLonger(long longer) {
+        this.longer = longer;
     }
 
     @Override
@@ -138,7 +138,7 @@ public class UnRelatedDocument {
                 ", large='" + large + '\'' +
                 ", booleano=" + booleano +
                 ", integer=" + integer +
-                ", loger=" + loger +
+                ", longer=" + longer +
                 ", decimal=" + decimal +
                 ", noPersistent='" + noPersistent + '\'' +
                 '}';

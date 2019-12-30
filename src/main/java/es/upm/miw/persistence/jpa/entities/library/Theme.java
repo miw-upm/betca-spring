@@ -14,6 +14,7 @@ public class Theme {
     private String name;
 
     public Theme() {
+        //Empty for framework
     }
 
     public Theme(String name) {

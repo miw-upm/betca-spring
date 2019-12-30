@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class AnyClass implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int number;
+    private Integer number;
 
     private String value;
 
@@ -22,7 +22,7 @@ public class AnyClass implements Serializable {
         return "AnyClass [number=" + number + ", value=" + value + "]";
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 

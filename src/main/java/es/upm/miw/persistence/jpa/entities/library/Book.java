@@ -21,6 +21,7 @@ public class Book {
     private List<Author> authorList;
 
     public Book() {
+        //Empty for framework
     }
 
     public Book(String isbn, String title, List<Theme> themeList, List<Author> authorList) {
@@ -67,7 +68,6 @@ public class Book {
     public boolean equals(Object obj) {
         return this == obj || obj != null && getClass() == obj.getClass() && (id.equals(((Book) obj).id));
     }
-
 
     @Override
     public String toString() {
