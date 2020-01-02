@@ -1,21 +1,23 @@
 package es.upm.miw.persistence.mongo.repositories.library;
 
 import es.upm.miw.TestConfig;
+import es.upm.miw.persistence.mongo.documents.library.*;
+import es.upm.miw.persistence.mongo.repositories.LibraryService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestConfig
-public class LibraryIT {
+class LibraryIT {
 
     @Autowired
     private RepositoriesLibraryService repositoriesLibraryService;
+
+    @Autowired
+    private LibraryService libraryService;
 
     @Autowired
     private BookRepository bookRepository;
@@ -27,46 +29,59 @@ public class LibraryIT {
     private StyleRepository styleRepository;
 
     @BeforeEach
-    public void populate() {
+    void populate() {
         repositoriesLibraryService.seedDb();
     }
 
     @Test
-    public void testPopulate() {
-        assertTrue(3 == bookRepository.count());
+    void testPopulate() {
+        assertTrue(bookRepository.count() >= 3);
     }
 
     @Test
-    public void testFindByStyle() {
-        assertEquals(2, authorRepository.findByStyle(styleRepository.findByNameIgnoreCase("Infantil")).size());
+    void testFindByStyleName() {
+        assertTrue(authorRepository.findByStyle(styleRepository.findByNameIgnoreCase("Infantil"))
+                .stream().map(Author::getName).anyMatch("Jesús"::equals));
     }
 
     @Test
-    public void testFindNameByStyleName() {
-        assertEquals(2, authorRepository.findNameByStyle(styleRepository.findByNameIgnoreCase("Infantil")).size());
-    }
-
-
-    @Test
-    public void testFindContactByName() {
-        System.out.println("===>>>" + authorRepository.findContactByName("Ana"));
+    void testFindNameByStyleName() {
+        assertTrue(authorRepository.findNameByStyle(styleRepository.findByNameIgnoreCase("Infantil"))
+                .stream().map(NameDto::getName).anyMatch("Jesús"::equals));
     }
 
     @Test
-    public void testFindContactEmailJsonByName() {
-        System.out.println("===>>>" + authorRepository.findContactEmailJsonByName("Ana"));
+    void testFindByContactEmail() {
+        assertTrue(authorRepository.findByContactEmail("j@gmail.com")
+                .stream().map(Author::getName).anyMatch("Jesús"::equals));
     }
 
     @Test
-    public void testFindContactEmailByName() {
-        System.out.println("===>>>" + authorRepository.findContactEmailByName("Ana").stream().map(
-                author -> author.getContact().getEmail()
-        ).collect(Collectors.toList()));
+    void testFindContactByName() {
+        assertTrue(authorRepository.findContactByName("Ana")
+                .stream().map(ContactDto::getContact).map(Contact::getEmail).anyMatch("a@gmail.com"::equals));
     }
 
+    @Test
+    void testFindContactEmailByName() {
+        assertTrue(libraryService.findContactEmailByAuthorName("Ana")
+                .stream().map(EmailDto::getEmail).anyMatch("a@gmail.com"::equals));
+    }
+
+    @Test
+    void testFindAuthorByBookByThemeName() {
+        assertTrue(libraryService.findAuthorByBookByThemeName("Acción")
+                .stream().map(Author::getName).anyMatch(name -> "Jesús".equals(name) || "Ana".equals(name)));
+    }
+
+    @Test
+    void testFindAuthorNameByExampleAuthor() {
+        Author author = new Author("Ana", "Ber", null, null);
+        System.out.println("===>>>" + libraryService.findAuthorNameByExampleAuthor(author));
+    }
 
     @AfterEach
-    public void deleteAll() {
+    void deleteAll() {
         repositoriesLibraryService.deleteDb();
     }
 

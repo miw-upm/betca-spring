@@ -15,13 +15,34 @@ public interface AuthorRepository extends MongoRepository<Author, String> {
 
     List<NameDto> findNameByStyle(Style style);
 
+    List<Author> findByContactEmail(String email);
+
     @Query(value = "{'name':?0}", fields = "{'_id':0,'contact':1}")
     List<ContactDto> findContactByName(String name);
 
-    @Query(value = "{'name':?0}", fields = "{'_id':0,'contact.email':1}")
-    List<String> findContactEmailJsonByName(String name);
-
-    @Query(value = "{'name':?0}", fields = "{'_id':0,'contact.email':1}")
-    List<Author> findContactEmailByName(String name);
+    @Query(value = "{'name':?0}", fields = "{'_id':0,'contact.email':1}") //[{"contact":{"email":"a@gmail.com"}}]
+    List<ContactDto> findContactEmailByName(String name);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

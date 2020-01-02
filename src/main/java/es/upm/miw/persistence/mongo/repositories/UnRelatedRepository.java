@@ -21,12 +21,11 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
 
     List<UnRelatedDocument> findByIntegerGreaterThan(int integer, Pageable pageable);
 
-
     @Transactional
     int deleteByNick(String nick);
 
-    @Query("{'nick':?0}")
-    UnRelatedDocument findByNick(String nick); // Query NOT necessary
+    // @Query("{'nick':?0}") // Query NOT necessary
+    UnRelatedDocument findByNick(String nick);
 
     // FIELDS: _id: incluido por defecto, 1: solo los especificados, 0: todos excepto el especificado
     @Query(value = "{'nick':?0}", fields = "{'bornDate':1,'large':1}")
@@ -35,19 +34,19 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
     @Query(value = "{'nick':?0}", fields = "{'_id':0,'bornDate':1}")
     Query2Dto findBornDateByNick(String nick);
 
-    @Query("{$and:[{'nick':?0},{'large':?1}]}")
-    UnRelatedDocument findByNickAndLarge(String nick, String large); // Query NOT necessary
+    // @Query("{$and:[{'nick':?0},{'large':?1}]}") // Query NOT necessary
+    UnRelatedDocument findByNickAndLarge(String nick, String large);
 
-    @Query("{nick:{$in:?0} }")
-    List<UnRelatedDocument> findByNickIn(Collection nicks);  // Query NOT necessary
+    // @Query("{nick:{$in:?0} }") // Query NOT necessary
+    List<UnRelatedDocument> findByNickIn(Collection nicks);
 
-    //$options: 'i': Case insensitivity
+    //$options: 'i': Case insensitivity // allow NULL: all elements
     @Query("?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } }")
-    List<UnRelatedDocument> findByNickLikeIgnoreCaseNullSafe(String nick);  // allow NULL: all elements
+    List<UnRelatedDocument> findByNickLikeIgnoreCaseNullSafe(String nick);
 
-    @Query("{$and:["
+    @Query("{$and:[" // allow NULL: all elements
             + "?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } },"
             + "?#{ [1] == null ? { $where : 'true'} : { large : {$regex:[1], $options: 'i'} } }"
             + "] }")
-    List<UnRelatedDocument> findByNickLikeAndLargeLikeNullSafe(String nick, String large);  // allow NULL: all elements
+    List<UnRelatedDocument> findByNickLikeAndLargeLikeNullSafe(String nick, String large);
 }
