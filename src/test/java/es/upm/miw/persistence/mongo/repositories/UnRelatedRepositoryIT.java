@@ -78,7 +78,7 @@ class UnRelatedRepositoryIT {
     void testDeleteByNick() {
         assertNotNull(unRelatedRepository.findByNick("nick0"));
         unRelatedRepository.deleteByNick("nick0");
-        assertNull(unRelatedRepository.findByNick("nick0"));
+        assertFalse(unRelatedRepository.findByNick("nick0").isPresent());
     }
 
     @Test

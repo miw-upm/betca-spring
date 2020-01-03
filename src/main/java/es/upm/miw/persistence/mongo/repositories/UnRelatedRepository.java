@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.repository.Query;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, String> {
 
@@ -25,7 +26,7 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
     int deleteByNick(String nick);
 
     // @Query("{'nick':?0}") // Query NOT necessary
-    UnRelatedDocument findByNick(String nick);
+    Optional<UnRelatedDocument> findByNick(String nick);
 
     // FIELDS: _id: incluido por defecto, 1: solo los especificados, 0: todos excepto el especificado
     @Query(value = "{'nick':?0}", fields = "{'bornDate':1,'large':1}")
@@ -49,4 +50,5 @@ public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, 
             + "?#{ [1] == null ? { $where : 'true'} : { large : {$regex:[1], $options: 'i'} } }"
             + "] }")
     List<UnRelatedDocument> findByNickLikeAndLargeLikeNullSafe(String nick, String large);
+
 }

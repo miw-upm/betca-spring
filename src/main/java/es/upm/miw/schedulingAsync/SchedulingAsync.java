@@ -15,7 +15,7 @@ public class SchedulingAsync {
     // (*) Cualquier valor, (/X) cada X, (?) sin especificar
     public static final String CADA_MINUTO = "0 * * * * *";
 
-    public static final String CADA_2_SEGUNDOS = "*/2 * * * * *";
+    public static final String CADA_10_SEGUNDOS = "*/10 * * * * *";
 
     public static final String CADA_MEDIA_NOCHE = "0 0 0 * * *";
 
@@ -25,9 +25,9 @@ public class SchedulingAsync {
 
     public static final String A_LAS_9_DIAS_LABORABLES = "0 0 9 * * MON-FRI";
 
-    @Scheduled(cron = CADA_2_SEGUNDOS)
+    @Scheduled(cron = CADA_10_SEGUNDOS)
     public void schedule() {
-        LogManager.getLogger(this.getClass().getName()).info("scheduled...CADA_2_SEGUNDOS");
+        LogManager.getLogger(this.getClass().getName()).info("scheduled...CADA_10_SEGUNDOS");
     }
 
     @Async

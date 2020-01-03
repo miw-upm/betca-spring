@@ -22,29 +22,29 @@ public class RepositoriesLibraryService {
     private ThemeRepository themeRepository;
 
     public void seedDb() {
-        Theme[] themeArray = {
+        Theme[] themes = {
                 new Theme("Acción"),
                 new Theme("Suspense"),
                 new Theme("Drama")};
-        themeRepository.saveAll(Arrays.asList(themeArray));
+        themeRepository.saveAll(Arrays.asList(themes));
 
-        Style[] styleArray = {
+        Style[] styles = {
                 new Style("Infantil", "Lectura sencilla"),
                 new Style("Especializado", "Expertos de la temática")};
-        styleRepository.saveAll(Arrays.asList(styleArray));
+        styleRepository.saveAll(Arrays.asList(styles));
 
-        Author[] authorArray = {
-                new Author("Jesús", "Ber", new Contact("j@gmail.com", 666666661), styleArray[0]),
-                new Author("Cris", "Ber", new Contact("c@gmail.com", 666666662), styleArray[0]),
-                new Author("Ana", "Ber", new Contact("a@gmail.com", 666666663), styleArray[1]),
-                new Author("Ana", "Reb", new Contact("a2@gmail.com", 666666663), styleArray[1])};
-        authorRepository.saveAll(Arrays.asList(authorArray));
+        Author[] authors = {
+                new Author("Jesús", "Ber", new Contact("j@gmail.com", 666666661), styles[0]),
+                new Author("Cris", "Ber", new Contact("c@gmail.com", 666666662), styles[0]),
+                new Author("Ana", "Ber", new Contact("a@gmail.com", 666666663), styles[1]),
+                new Author("Ana", "Reb", new Contact("a2@gmail.com", 666666663), styles[1])};
+        authorRepository.saveAll(Arrays.asList(authors));
 
-        Book[] bookArray = {
-                new Book("isbn1", "El calabacín", Arrays.asList(themeArray[0], themeArray[2]), Arrays.asList(authorArray[0])),
-                new Book("isbn2", "La mazorca", Arrays.asList(themeArray[1]), Arrays.asList(authorArray[1], authorArray[2])),
-                new Book("isbn3", "El pepino", Arrays.asList(themeArray[0]), Arrays.asList(authorArray[2]))};
-        bookRepository.saveAll(Arrays.asList(bookArray));
+        Book[] books = {
+                new Book("isbn1", "La naranja", Arrays.asList(themes[0], themes[2]), Arrays.asList(authors[0])),
+                new Book("isbn2", "El limón", Arrays.asList(themes[1]), Arrays.asList(authors[1], authors[2])),
+                new Book("isbn3", "El pepino", Arrays.asList(themes[0]), Arrays.asList(authors[2]))};
+        bookRepository.saveAll(Arrays.asList(books));
     }
 
     public void deleteDb() {

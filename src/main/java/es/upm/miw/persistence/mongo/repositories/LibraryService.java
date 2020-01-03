@@ -38,13 +38,13 @@ public class LibraryService {
         Style style = new Style("Uno", "dos");
         Query query5 = new Query();
         query5.addCriteria(Criteria.where("age").is(style));
-
         System.out.println("query5 - " + query5.toString());
     }
 
     public List<EmailDto> findContactEmailByAuthorName(String name) {
         return this.authorRepository.findContactEmailByName(name).
-                stream().map(contact -> new EmailDto(contact.getContact().getEmail())).collect(Collectors.toList());
+                stream().map(contact -> new EmailDto(contact.getContact().getEmail()))
+                .collect(Collectors.toList());
     }
 
     public List<Author> findAuthorByBookByThemeName(String name) {

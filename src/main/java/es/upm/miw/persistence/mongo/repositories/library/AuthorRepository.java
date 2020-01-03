@@ -20,9 +20,8 @@ public interface AuthorRepository extends MongoRepository<Author, String> {
     @Query(value = "{'name':?0}", fields = "{'_id':0,'contact':1}")
     List<ContactDto> findContactByName(String name);
 
-    @Query(value = "{'name':?0}", fields = "{'_id':0,'contact.email':1}") //[{"contact":{"email":"a@gmail.com"}}]
-    List<ContactDto> findContactEmailByName(String name);
-
+    @Query(value = "{'name':?0}", fields = "{'_id':0,'contact.email':1}")
+    List<ContactDto> findContactEmailByName(String name); //[{"contact":{"email":"a@gmail.com"}}]
 }
 
 

@@ -5,10 +5,14 @@ import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface UnRelatedReactiveRepository extends ReactiveSortingRepository<UnRelatedDocument, String> {
+public interface UnRelatedReactRepository extends ReactiveSortingRepository<UnRelatedDocument, String> {
 
     Mono<UnRelatedDocument> findByNickIgnoreCase(String nick);
 
     Flux<UnRelatedDocument> findFirst3ByNickStartingWith(String prefix);
+
+    Flux<UnRelatedDocument> findByNickContains(String contain);
+
+    Mono<UnRelatedDocument> findByNick(String nick);
 
 }
