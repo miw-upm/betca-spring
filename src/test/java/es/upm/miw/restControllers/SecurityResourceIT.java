@@ -1,92 +1,95 @@
 package es.upm.miw.restControllers;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 
 @ApiTestConfig
 class SecurityResourceIT {
 
-    @Value("${local.server.port}")
-    private int port = 0;
+    @Autowired
+    private WebTestClient webTestClient;
 
     @Test
     void testAllUserOK() {
-        new RestBuilder<>(port).basicAuth("user", "123456")
-                .path(SecurityResource.SECURITY).path(SecurityResource.ALL)
-                .get().build();
+        webTestClient
+                .mutate().filter(basicAuthentication("user", "123456")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.ALL)
+                .exchange()
+                .expectStatus().isOk();
     }
 
     @Test
     void testUserOK() {
-        new RestBuilder<>(port).basicAuth("user", "123456")
-                .path(SecurityResource.SECURITY).path(SecurityResource.USER)
-                .get().build();
+        webTestClient
+                .mutate().filter(basicAuthentication("user", "123456")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.USER)
+                .exchange()
+                .expectStatus().isOk();
     }
 
     @Test
     void testUserOtherUserOK() {
-        new RestBuilder<>(port).basicAuth("manager", "123456")
-                .path(SecurityResource.SECURITY).path(SecurityResource.USER)
-                .get().build();
+        webTestClient
+                .mutate().filter(basicAuthentication("manager", "123456")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.USER)
+                .exchange()
+                .expectStatus().isOk();
     }
 
     @Test
     void testManagerOK() {
-        new RestBuilder<>(port).basicAuth("manager", "123456")
-                .path(SecurityResource.SECURITY).path(SecurityResource.MANAGER)
-                .get().build();
+        webTestClient
+                .mutate().filter(basicAuthentication("manager", "123456")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.MANAGER)
+                .exchange()
+                .expectStatus().isOk();
     }
 
     @Test
     void testAdminOK() {
-        new RestBuilder<>(port).basicAuth("admin", "123456")
-                .path(SecurityResource.SECURITY).path(SecurityResource.ADMIN)
-                .get().build();
+        webTestClient
+                .mutate().filter(basicAuthentication("admin", "123456")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.ADMIN)
+                .exchange()
+                .expectStatus().isOk();
     }
 
     @Test
     void testAdminUnauthorizedError() {
-        HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<>(port)
-                        .path(SecurityResource.SECURITY).path(SecurityResource.ADMIN)
-                        .get().build()
-        );
-        assertEquals(HttpStatus.UNAUTHORIZED, exception.getStatusCode());
+        webTestClient
+                .get().uri(SecurityResource.SECURITY + SecurityResource.ADMIN)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
     @Test
     void testAdminUnauthorizedPassError() {
-        HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<>(port).basicAuth("admin", "kk")
-                        .path(SecurityResource.SECURITY).path(SecurityResource.ADMIN)
-                        .get().build()
-        );
-        assertEquals(HttpStatus.UNAUTHORIZED, exception.getStatusCode());
+        webTestClient
+                .mutate().filter(basicAuthentication("admin", "kk")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.ADMIN)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
     @Test
     void testAdminUnauthorizedUserError() {
-        HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<>(port).basicAuth("kk", "kk")
-                        .path(SecurityResource.SECURITY).path(SecurityResource.ADMIN)
-                        .get().build()
-        );
-        assertEquals(HttpStatus.UNAUTHORIZED, exception.getStatusCode());
+        webTestClient
+                .mutate().filter(basicAuthentication("kk", "kk")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.ADMIN)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
     @Test
     void testAdminUnauthorizedUser() {
-        HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<>(port).basicAuth("user", "123456")
-                        .path(SecurityResource.SECURITY).path(SecurityResource.ADMIN)
-                        .get().build()
-        );
-        assertEquals(HttpStatus.UNAUTHORIZED, exception.getStatusCode());
+        webTestClient
+                .mutate().filter(basicAuthentication("user", "123456")).build()
+                .get().uri(SecurityResource.SECURITY + SecurityResource.ADMIN)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
 }

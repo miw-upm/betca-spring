@@ -1,7 +1,7 @@
 package es.upm.miw.restControllers;
 
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -17,8 +17,8 @@ import java.lang.annotation.Target;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureWebTestClient
 @TestPropertySource(locations = "classpath:test.properties")
 @ActiveProfiles("dev")
-@Tag("api")
 public @interface ApiTestConfig {
 }

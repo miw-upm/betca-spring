@@ -1,22 +1,25 @@
 package es.upm.miw.restControllers.pdf;
 
 import es.upm.miw.restControllers.ApiTestConfig;
-import es.upm.miw.restControllers.RestBuilder;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 @ApiTestConfig
 class PdfResourceIT {
 
-    @Value("${local.server.port}")
-    private int port = 0;
+    @Autowired
+    private WebTestClient webTestClient;
 
     @Test
     void testPdfs() {
-        new RestBuilder<String>(port).clazz(String.class).path(PdfResource.PDFS)
-                .param("title", "BETCA: Spring 5. PDF").param("paragraph", "paragraph")
-                .get().build();
-
+        webTestClient
+                .get().uri(uriBuilder -> uriBuilder
+                .path(PdfResource.PDFS).queryParam("title", "BETCA: Spring 5. PDF")
+                .queryParam("paragraph", "paragraph")
+                .build())
+                .exchange()
+                .expectStatus().isOk();
     }
 
 }

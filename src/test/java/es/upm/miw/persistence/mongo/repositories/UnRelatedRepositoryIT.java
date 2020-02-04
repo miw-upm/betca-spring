@@ -2,6 +2,7 @@ package es.upm.miw.persistence.mongo.repositories;
 
 import es.upm.miw.TestConfig;
 import es.upm.miw.persistence.mongo.documents.UnRelatedDocument;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,24 +23,15 @@ class UnRelatedRepositoryIT {
 
     @BeforeEach
     void populate() {
-        this.unRelatedRepository.deleteAll();
-        for (int i = 0; i < 5; i++) {
-            this.unRelatedRepository.save(new UnRelatedDocument("nick" + i));
-        }
+        Stream<UnRelatedDocument> documents = Stream.iterate(0, i -> i + 1).limit(5L).map(i ->
+                new UnRelatedDocument("nick" + i)
+        );
+        this.unRelatedRepository.saveAll(documents.collect(Collectors.toList()));
     }
 
     @Test
     void test() {
         assertTrue(unRelatedRepository.count() > 0);
-    }
-
-    @Test
-    void testCreateWithNull() {
-        this.unRelatedRepository.deleteAll();
-        this.unRelatedRepository.save(new UnRelatedDocument("nick"));
-        UnRelatedDocument unRelated = new UnRelatedDocument();
-        unRelated.setNick("nick-null");
-        this.unRelatedRepository.save(unRelated);
     }
 
     @Test
@@ -120,6 +114,11 @@ class UnRelatedRepositoryIT {
         assertEquals(0, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe("k1", "no").size());
         assertEquals(1, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe("k1", null).size());
         assertEquals(5, unRelatedRepository.findByNickLikeAndLargeLikeNullSafe(null, null).size());
+    }
+
+    @AfterEach
+    void deleteDB() {
+        this.unRelatedRepository.deleteAll();
     }
 
 }

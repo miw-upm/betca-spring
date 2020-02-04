@@ -1,27 +1,31 @@
 package es.upm.miw.restControllers.jwt;
 
 import es.upm.miw.restControllers.ApiTestConfig;
-import es.upm.miw.restControllers.RestBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 
 @ApiTestConfig
 class JwtResourceIT {
 
-    @Value("${local.server.port}")
-    private int port = 0;
+    @Autowired
+    private WebTestClient webTestClient;
 
     private String jwt;
 
     @BeforeEach
     void login() {
-        this.jwt = new RestBuilder<String>(port).clazz(String.class).basicAuth("user", "123456")
-                .path(JwtResource.JWTS).path(JwtResource.TOKEN).post().build();
+        this.jwt = webTestClient
+                .mutate().filter(basicAuthentication("user", "123456")).build()
+                .post().uri(JwtResource.JWTS + JwtResource.TOKEN)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .returnResult().getResponseBody();
     }
 
     @Test
@@ -30,19 +34,21 @@ class JwtResourceIT {
     }
 
     @Test
-    void testGetTokenNonAuthBasic() {
-        HttpClientErrorException exception = assertThrows(HttpClientErrorException.class, () ->
-                new RestBuilder<String>(port).clazz(String.class).path(JwtResource.JWTS).path(JwtResource.TOKEN)
-                        .post().build());
-        assertEquals(HttpStatus.UNAUTHORIZED, exception.getStatusCode());
+    void testGetTokenNotAuthBasic() {
+        webTestClient
+                .post().uri(JwtResource.JWTS + JwtResource.TOKEN)
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
 
     @Test
     void testVerify() {
-        String json = new RestBuilder<String>(port).clazz(String.class).header("Authorization", "Bearer " + this.jwt)
-                .path(JwtResource.JWTS).get().build();
-        assertNotNull(json);
+        webTestClient
+                .get().uri(JwtResource.JWTS)
+                .header("Authorization", "Bearer " + this.jwt)
+                .exchange()
+                .expectStatus().isOk();
     }
 
 }
