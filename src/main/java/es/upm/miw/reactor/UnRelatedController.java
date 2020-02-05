@@ -25,43 +25,43 @@ public class UnRelatedController {
         this.unRelatedRepository = unRelatedRepository;
     }
 
-    public LocalDateTime findBornDateByNickAssured(String nick) {
+    public LocalDateTime findBornDateByNickAssuredSynchronous(String nick) {
         return this.unRelatedRepository.findByNick(nick)
                 .orElseThrow(() -> new NotFoundException("…"))
                 .getBornDate();
     }
 
-    public Mono<LocalDateTime> findBornDateByNickAssuredReact(String nick) {
+    public Mono<LocalDateTime> findBornDateByNickAssuredAsynchronous(String nick) {
         return this.unRelatedReactRepository.findByNick(nick)
                 .switchIfEmpty(Mono.error(new NotFoundException("…")))
                 .map(UnRelatedDocument::getBornDate);
     }
 
-    public LocalDateTime findBornDateByNickAssuredReactERRORChainBreak(String nick) {
+    public LocalDateTime findBornDateByNickAssuredSynchronousERRORChainBreak(String nick) {
         return this.unRelatedReactRepository.findByNick(nick)
                 .switchIfEmpty(Mono.error(new NotFoundException("…")))
                 .map(UnRelatedDocument::getBornDate).block();
     }
 
-    public void notExistsByNickAssured(String nick) {
+    public void notExistsByNickAssuredSynchronous(String nick) {
         if (this.unRelatedRepository.findByNick(nick).isPresent()) {
             throw new ConflictException("…");
         }
     }
 
-    public Mono<Void> notExistsByNickAssuredReact(String nick) {
+    public Mono<Void> notExistsByNickAssuredAsynchronous(String nick) {
         return this.unRelatedReactRepository.findByNick(nick)
                 .handle((document, sink) -> sink.error(new ConflictException("…")));
     }
 
-    public void findByNickAssuredAndUpdateLarge(String nick, String large) {
+    public void findByNickAssuredAndUpdateLargeSynchronous(String nick, String large) {
         UnRelatedDocument entity = this.unRelatedRepository.findByNick(nick)
                 .orElseThrow(() -> new NotFoundException("…"));
         entity.setLarge(large);
         this.unRelatedRepository.save(entity);
     }
 
-    public Mono<Void> findByNickAssuredAndUpdateLargeReact(String nick, String large) {
+    public Mono<Void> findByNickAssuredAndUpdateLargeAsynchronous(String nick, String large) {
         Mono<UnRelatedDocument> unRelated = this.unRelatedReactRepository.findByNick(nick)
                 .switchIfEmpty(Mono.error(new NotFoundException("…")))
                 .map(document -> {
@@ -71,7 +71,7 @@ public class UnRelatedController {
         return this.unRelatedReactRepository.saveAll(unRelated).then();
     }
 
-    public Mono<Void> updateDocumentsReact() {
+    public Mono<Void> updateDocumentsAsynchronous() {
         Flux<UnRelatedDocument> documents = unRelatedReactRepository.findAll().map(
                 document -> {
                     document.setLarge("new");

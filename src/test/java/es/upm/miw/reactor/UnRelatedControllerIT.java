@@ -42,76 +42,76 @@ class UnRelatedControllerIT {
     }
 
     @Test
-    void testFindBornDateByNickAssured() {
-        LocalDateTime bornDate = this.unRelatedController.findBornDateByNickAssured("7");
+    void testFindBornDateByNickAssuredSynchronous() {
+        LocalDateTime bornDate = this.unRelatedController.findBornDateByNickAssuredSynchronous("7");
         assertNotNull(bornDate);
     }
 
     @Test
-    void testFindBornDateByNickAssuredException() {
-        assertThrows(NotFoundException.class, () -> this.unRelatedController.findBornDateByNickAssured("NO"));
+    void testFindBornDateByNickAssuredSynchronousException() {
+        assertThrows(NotFoundException.class, () -> this.unRelatedController.findBornDateByNickAssuredSynchronous("NO"));
     }
 
     @Test
-    void testFindBornDateByNickAssuredReact() {
+    void testFindBornDateByNickAssuredAsynchronous() {
         StepVerifier
-                .create(this.unRelatedController.findBornDateByNickAssuredReact("7"))
+                .create(this.unRelatedController.findBornDateByNickAssuredAsynchronous("7"))
                 .expectNextMatches(date -> LocalDateTime.now().getDayOfMonth() == date.getDayOfMonth())
                 .expectComplete()
                 .verify();
     }
 
     @Test
-    void testFindBornDateByNickAssuredReactException() {
+    void testFindBornDateByNickAssuredAsynchronousException() {
         StepVerifier
-                .create(this.unRelatedController.findBornDateByNickAssuredReact("NO"))
+                .create(this.unRelatedController.findBornDateByNickAssuredAsynchronous("NO"))
                 .expectError()
                 .verify();
     }
 
     @Test
-    void testFindBornDateByNickAssuredReactERRORChainBreak() {
-        LocalDateTime bornDate = this.unRelatedController.findBornDateByNickAssuredReactERRORChainBreak("7");
+    void testFindBornDateByNickAssuredSynchronousERRORChainBreak() {
+        LocalDateTime bornDate = this.unRelatedController.findBornDateByNickAssuredSynchronousERRORChainBreak("7");
         assertNotNull(bornDate);
     }
 
     @Test
-    void testNotExistsByNickAssured() {
-        this.unRelatedController.notExistsByNickAssured("NO");
+    void testNotExistsByNickAssuredSynchronous() {
+        this.unRelatedController.notExistsByNickAssuredSynchronous("NO");
     }
 
     @Test
-    void testNotExistsByNickAssuredException() {
-        assertThrows(ConflictException.class, () -> this.unRelatedController.notExistsByNickAssured("7"));
+    void testNotExistsByNickAssuredSynchronousException() {
+        assertThrows(ConflictException.class, () -> this.unRelatedController.notExistsByNickAssuredSynchronous("7"));
     }
 
     @Test
-    void testNotExistsByNickAssuredReact() {
+    void testNotExistsByNickAssuredAsynchronous() {
         StepVerifier
-                .create(this.unRelatedController.notExistsByNickAssuredReact("NO"))
+                .create(this.unRelatedController.notExistsByNickAssuredAsynchronous("NO"))
                 .expectComplete()
                 .verify();
     }
 
     @Test
-    void testNotExistsByNickAssuredReactException() {
+    void testNotExistsByNickAssuredAsynchronousException() {
         StepVerifier
-                .create(this.unRelatedController.notExistsByNickAssuredReact("7"))
+                .create(this.unRelatedController.notExistsByNickAssuredAsynchronous("7"))
                 .expectError()
                 .verify();
     }
 
 
     @Test
-    void testFindByNickAssuredAndUpdateLarge() {
-        this.unRelatedController.findByNickAssuredAndUpdateLarge("7", "new");
+    void testFindByNickAssuredAndUpdateLargeSynchronous() {
+        this.unRelatedController.findByNickAssuredAndUpdateLargeSynchronous("7", "new");
         assertEquals("new", unRelatedRepository.findByNick("7").get().getLarge());
     }
 
     @Test
-    void testFindByIdAssuredAndUpdateNickReact() {
+    void testFindByIdAssuredAndUpdateNickAsynchronous() {
         StepVerifier
-                .create(this.unRelatedController.findByNickAssuredAndUpdateLargeReact("7", "new"))
+                .create(this.unRelatedController.findByNickAssuredAndUpdateLargeAsynchronous("7", "new"))
                 .expectComplete()
                 .verify();
         StepVerifier
@@ -123,8 +123,8 @@ class UnRelatedControllerIT {
 
     @Test
     void testParallel() {
-        Mono<LocalDateTime> mono1 = this.unRelatedController.findBornDateByNickAssuredReact("3");
-        Mono<Void> mono2 = this.unRelatedController.findByNickAssuredAndUpdateLargeReact("6", "new");
+        Mono<LocalDateTime> mono1 = this.unRelatedController.findBornDateByNickAssuredAsynchronous("3");
+        Mono<Void> mono2 = this.unRelatedController.findByNickAssuredAndUpdateLargeAsynchronous("6", "new");
         StepVerifier
                 .create(Mono.when(mono1, mono2))
                 .expectComplete()
@@ -132,12 +132,12 @@ class UnRelatedControllerIT {
     }
 
     @Test
-    void testUpdateDocumentsReact() {
+    void testUpdateDocumentsAsynchronous() {
         System.out.println(">>>>> Start asynchronous");
         System.out.println("    Count: " + this.unRelatedRepository.count());
         long time = new Date().getTime();
         StepVerifier
-                .create(unRelatedController.updateDocumentsReact())
+                .create(unRelatedController.updateDocumentsAsynchronous())
                 .expectComplete()
                 .verify();
         System.out.println("    update: " + (new Date().getTime() - time) + "msg");
