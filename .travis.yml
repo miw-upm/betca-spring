@@ -10,5 +10,4 @@ notifications:
 services:
   - mongodb
 script:
-#Test unitario y de integracion en develop
-- mvn verify
+- mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=miw-upm-github -Dsonar.login=$SONAR

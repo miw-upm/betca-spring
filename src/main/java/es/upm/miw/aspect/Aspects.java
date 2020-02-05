@@ -18,15 +18,15 @@ public class Aspects {
     public void allMethodsPublic() {
     }
 
-    @Pointcut("execution(* miw.aspectTarget.*.* (..))")
+    @Pointcut("execution(* es.upm.miw.aspectTarget.*.* (..))")
     public void allMethodsPackage() {
     }
 
-    @Pointcut("within(miw.aspectTarget.*)")
+    @Pointcut("within(es.upm.miw.aspectTarget.*)")
     public void allMethodsInPackage() {
     }
 
-    @Pointcut("within(miw.aspectTarget..*)")
+    @Pointcut("within(es.upm.miw.aspectTarget..*)")
     public void allMethodsInPackageAndSubPackage() {
     }
 

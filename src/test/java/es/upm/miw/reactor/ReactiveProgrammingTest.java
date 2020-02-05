@@ -106,6 +106,7 @@ class ReactiveProgrammingTest {
         StepVerifier
                 .create(new ReactiveProgramming().logs(
                         Flux.just(1, 4, 7, 8, 13)))
+                .expectNext(1, 4, 7, 8, 13)
                 .expectComplete()
                 .verify();
     }

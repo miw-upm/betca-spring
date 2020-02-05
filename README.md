@@ -4,13 +4,10 @@
 
 ### Estado del código
 [![Build Status](https://travis-ci.org/miw-upm/betca-spring.svg?branch=develop)](https://travis-ci.org/miw-upm/betca-spring)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=es.upm.miw%3Abetca-spring&metric=alert_status)](https://sonarcloud.io/dashboard?id=es.upm.miw%3Abetca-spring)
 
 ### Tecnologías necesarias
-* Java
-* Maven
-* Spring
-* JPA
-* Mongodb
+`Java` `Maven` `Spring-Boot` `Reactor` `MondoDB`
 
 ### Clonar el proyecto
 1. Clonar el repositorio en tu equipo, **mediante consola**:
