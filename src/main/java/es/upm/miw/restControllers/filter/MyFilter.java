@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class MyFilter extends OncePerRequestFilter {
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        // pre process
         LogManager.getLogger(this.getClass().getName()).debug(">>> FILTER MyFilter...");
+        // passing chain
         filterChain.doFilter(request, response);
-        // post proceso
+        // post process
     }
 }

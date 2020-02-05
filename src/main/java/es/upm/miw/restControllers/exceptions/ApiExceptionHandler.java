@@ -57,7 +57,7 @@ public class ApiExceptionHandler {
             UnauthorizedException.class,
             org.springframework.security.access.AccessDeniedException.class
     })
-    public void unauthorized(Exception exception) {
+    public void unauthorized() {
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

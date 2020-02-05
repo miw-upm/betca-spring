@@ -16,7 +16,6 @@ public class ExceptionResource {
 
     public static final String EXCEPTIONS = "/exceptions";
 
-
     public static final String MY_FILTER = "/my-filter";
 
     public static final String OUT_OF_TIME = "/out-of-time";

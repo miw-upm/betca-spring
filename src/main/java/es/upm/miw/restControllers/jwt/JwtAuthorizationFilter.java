@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public static final String AUTHORIZATION = "Authorization";
+    private static final String AUTHORIZATION = "Authorization";
 
     @Autowired
     private JwtService jwtService;
@@ -36,7 +36,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         if (jwtService.isBearer(authHeader)) {
             LogManager.getLogger(this.getClass().getName()).debug(">>> FILTER JWT...");
             List<GrantedAuthority> authorities = jwtService.roles(authHeader).stream()
-                    .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
+                    .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(jwtService.user(authHeader), null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);

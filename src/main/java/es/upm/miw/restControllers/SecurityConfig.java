@@ -4,6 +4,7 @@ import es.upm.miw.restControllers.filter.MyFilter;
 import es.upm.miw.restControllers.filter.TimeAccessFilter;
 import es.upm.miw.restControllers.jwt.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +24,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Qualifier("miw.users")
     @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,8 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().httpBasic()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        http
+                .csrf().disable() //Cross-Site Request Forgery disable to API
+                .httpBasic() // login with Auth Basic for getting a token
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // stateless to API
                 .and().addFilter(jwtAuthorizationFilter());
     }
 

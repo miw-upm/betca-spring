@@ -23,6 +23,5 @@ public class TimeAccessFilter extends OncePerRequestFilter {
         } else {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
-        // Post proceso
     }
 }
