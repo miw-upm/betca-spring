@@ -8,6 +8,10 @@ import java.math.BigDecimal;
 
 public class ReactiveProgramming {
 
+    public BigDecimal mapFromStringToBigDecimal(String value) {
+        return new BigDecimal(value);
+    }
+
     public Mono<BigDecimal> mapMonoFromStringToBigDecimal(Mono<String> mono) {
         return mono.map(BigDecimal::new);
     }

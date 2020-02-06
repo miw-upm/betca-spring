@@ -46,7 +46,7 @@ public class ApiLogs {
         this.addLog(jp.getSignature().getName());
         this.addLog(" >>>");
         for (Object arg : jp.getArgs()) {
-            this.addLog(String.format(" ARG: %s", arg.toString()));
+            this.addLog(String.format(" ARG: %s", arg));
         }
         LogManager.getLogger(this.getClass()).debug(this.log);
     }

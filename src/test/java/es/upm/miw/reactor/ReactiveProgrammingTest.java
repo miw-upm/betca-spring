@@ -8,7 +8,14 @@ import reactor.test.StepVerifier;
 import java.math.BigDecimal;
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ReactiveProgrammingTest {
+
+    @Test
+    void testMapFromStringToBigDecimal() {
+        assertEquals(0, BigDecimal.TEN.compareTo(new ReactiveProgramming().mapFromStringToBigDecimal("10")));
+    }
 
     @Test
     void testMapMonoFromStringToBigDecimal() {
