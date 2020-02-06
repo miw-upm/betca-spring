@@ -1,6 +1,6 @@
 package es.upm.miw.rest_controllers.pdf;
 
-import es.upm.miw.rest_controllers.ApiTestConfig;
+import es.upm.miw.ApiTestConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.reactive.server.WebTestClient;

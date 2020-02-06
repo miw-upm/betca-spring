@@ -27,6 +27,15 @@ public class Dto {
         this.bornDate = bornDate;
     }
 
+    public Dto(int id) {
+        this.id = id;
+        this.name = "uno";
+        this.gender = Gender.MALE;
+        this.bornDate = LocalDateTime.now();
+    }
+
+
+
     public Integer getId() {
         return id;
     }

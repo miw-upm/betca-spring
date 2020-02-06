@@ -1,6 +1,6 @@
 package es.upm.miw.rest_controllers.jwt;
 
-import es.upm.miw.rest_controllers.ApiTestConfig;
+import es.upm.miw.ApiTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
