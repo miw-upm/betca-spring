@@ -42,33 +42,31 @@ public class ApiLogs {
 
     @AfterReturning(pointcut = "allResources()", returning = "returnValue")
     public void apiResponseLog(JoinPoint jp, Object returnValue) {
-        String response = "<<< Return << " + jp.getSignature().getName() + ": ";
-        Consumer<Object> consumer = result -> {
-            LogManager.getLogger(this.getClass()).debug(this.cut(response + result));
-        };
+        String log = "<<< Return << " + jp.getSignature().getName() + ": ";
+        Consumer<Object> consumer = result ->
+                LogManager.getLogger(this.getClass()).debug(() -> log + this.cut(result.toString()));
         Consumer<Throwable> error = throwable -> {
-            String log = "<<< EXCEPTION " + response + throwable;
-            LogManager.getLogger(this.getClass()).debug(log);
+            LogManager.getLogger(this.getClass()).debug(() -> "<<< EXCEPTION " + log + throwable);
         };
 
         if (returnValue != null) {
             String result = returnValue.getClass().getSimpleName();
             if ("MonoIgnoreElements".equals(result)) {
-                LogManager.getLogger(this.getClass()).debug(response, "Mono<Void>");
+                LogManager.getLogger(this.getClass()).debug(log, "Mono<Void>");
             } else if (result.length() > 3 && "Flux".equals(result.substring(0, 4))) {
                 ((Flux<Object>) returnValue).subscribe(consumer, error);
             } else if (result.length() > 3 && "Mono".equals(result.substring(0, 4))) {
                 ((Mono<Object>) returnValue).subscribe(consumer, error);
             } else {
                 try {
-                    result = new ObjectMapper().writeValueAsString(returnValue);
+                    log.concat(new ObjectMapper().writeValueAsString(returnValue));
                 } catch (JsonProcessingException e) {
-                    result = returnValue.toString();
+                    log.concat(returnValue.toString());
                 }
-                LogManager.getLogger(this.getClass()).debug(cut(response + result));
+                LogManager.getLogger(this.getClass()).debug(() -> log + cut(result));
             }
         } else {
-            LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(response, "null");
+            LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(log, "null");
         }
     }
 

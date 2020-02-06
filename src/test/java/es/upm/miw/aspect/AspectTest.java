@@ -1,10 +1,12 @@
 package es.upm.miw.aspect;
 
 import es.upm.miw.TestConfig;
-import es.upm.miw.aspectTarget.ServiceOne;
+import es.upm.miw.aspect_target.ServiceOne;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.IOException;
 
 @TestConfig
 public class AspectTest {
@@ -14,40 +16,40 @@ public class AspectTest {
 
     @Test
     public void methodTest() {
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
         serviceOne.method();
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
     }
 
     @Test
     public void argStringTest() {
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
-        serviceOne.argString("cadena");
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
+        serviceOne.argString("string");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
     }
 
     @Test
     public void returnIntTest() {
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
         serviceOne.returnInt();
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
     }
 
     @Test
     public void exceptionTest() {
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
         try {
             serviceOne.exception();
-        } catch (Exception e) {
-            LogManager.getLogger("miw").debug(">>>>>>>>>> Se trata la exception");
+        } catch (IOException e) {
+            LogManager.getLogger(getClass()).debug(">>>>>>>>>> Se trata la exception");
         }
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
     }
 
     @Test
     public void annotationTest() {
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
         serviceOne.annotation();
-        LogManager.getLogger("miw").debug("------------------------- ooo -------------------------------------");
+        LogManager.getLogger(getClass()).debug("------------------------- ooo -------------------------------------");
     }
 }

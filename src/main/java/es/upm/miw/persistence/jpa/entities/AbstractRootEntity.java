@@ -2,15 +2,14 @@ package es.upm.miw.persistence.jpa.entities;
 
 import javax.persistence.*;
 
-//InheritanceType.JOINED: Una tabla por clase
-//InheritanceType.SINGLE_TABLE: En una tabla se mapea todo
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//se mapea en una tabla, InheritanceType.JOINED: Una tabla por clase
 public abstract class AbstractRootEntity {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String nick;
 
@@ -28,14 +27,10 @@ public abstract class AbstractRootEntity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        } else {
-            return id == obj.hashCode();
-        }
+        return (this == obj) || ((obj != null) && (getClass().equals(obj.getClass())) && (id.equals(((AbstractRootEntity) obj).id)));
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

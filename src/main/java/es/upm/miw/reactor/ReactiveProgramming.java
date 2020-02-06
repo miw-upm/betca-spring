@@ -1,5 +1,6 @@
 package es.upm.miw.reactor;
 
+import org.apache.logging.log4j.LogManager;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -24,7 +25,7 @@ public class ReactiveProgramming {
     }
 
     public Flux<Integer> logs(Flux<Integer> flux) {
-        return flux.doOnNext(System.out::println);
+        return flux.doOnNext(LogManager.getLogger(this.getClass())::debug);
     }
 
     public Flux<Integer> filterPositive(Flux<Integer> flux) {

@@ -19,4 +19,10 @@ public class ConcreteEntity extends AbstractEntity {
         return name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return (this == obj) || ((obj != null) && (getClass().equals(obj.getClass())) && (this.getId().equals(((ConcreteEntity) obj).getId())));
+    }
+
+
 }

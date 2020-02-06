@@ -21,4 +21,10 @@ public abstract class AbstractEntity extends AbstractRootEntity {
         return description;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return (this == obj) || ((obj != null) && (getClass().equals(obj.getClass())) && (this.getId().equals(((AbstractEntity) obj).getId())));
+    }
+
+
 }
