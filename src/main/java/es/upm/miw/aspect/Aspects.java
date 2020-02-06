@@ -61,7 +61,7 @@ public class Aspects {
     @AfterThrowing(pointcut = "allMethodsInPackage()", throwing = "exception")
     public void adviseJ(JoinPoint jp, Exception exception) {
         LogManager.getLogger(this.getClass())
-                .debug("=== Consejo Despues de ejecutar metodos que provocan una Exception, return:",
+                .debug(() -> "=== Consejo Despues de ejecutar metodos que provocan una Exception, return:" +
                         exception.getMessage());
     }
 

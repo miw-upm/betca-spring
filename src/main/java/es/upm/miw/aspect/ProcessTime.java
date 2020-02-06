@@ -22,7 +22,7 @@ public class ProcessTime {
     public Object time(ProceedingJoinPoint pjp) throws Throwable {
         long initTime = new Date().getTime();
         Object obj = pjp.proceed();
-        LogManager.getLogger(this.getClass()).debug(String.format("-----> ProcessTime (%s:%s): %d ms",
+        LogManager.getLogger(this.getClass()).debug(() -> String.format("-----> ProcessTime (%s:%s): %d ms",
                 pjp.getSignature().getDeclaringTypeName(), pjp.getSignature().getName(), new Date().getTime() - initTime));
         return obj;
     }

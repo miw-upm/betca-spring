@@ -15,14 +15,14 @@ import javax.annotation.PreDestroy;
 public class SingletonMessageService {
 
     @Value("${miw.name}")
-// @Autowired public SingletonMessageService(Environment environment) {this.name = environment.getProperty("miw.name");}
-    private String name = null;
+
+    private String name = null;// @Autowired public SingletonMessageService(Environment environment) {this.name = environment.getProperty("miw.name");}
 
 
     @PostConstruct
     public void constructor() {
         LogManager.getLogger(this.getClass()).debug("===>>> create Bean: SingletonMessageService");
-        LogManager.getLogger(this.getClass()).debug(String.format("===>>> miw.name: %s", this.name));
+        LogManager.getLogger(this.getClass()).debug(()->"===>>> miw.name: "+ this.name);
     }
 
     public String getMessage() {

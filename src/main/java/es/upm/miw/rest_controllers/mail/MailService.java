@@ -43,7 +43,7 @@ public class MailService {
         simpleMailMessage.setText(msg);
         try {
             mailSender.send(simpleMailMessage);
-            LogManager.getLogger(this.getClass().getName()).info(String.format("E-MAIL from: %s, to: %s, subject: %s", from, to, subject));
+            LogManager.getLogger(this.getClass().getName()).debug(()->String.format("E-MAIL from: %s, to: %s, subject: %s", from, to, subject));
         } catch (Exception e) {
             throw new MailException("Mail service unavailable");
         }

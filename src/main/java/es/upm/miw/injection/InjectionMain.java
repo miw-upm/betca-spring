@@ -23,8 +23,8 @@ public class InjectionMain {
     }
 
     public void debug() {
-        LogManager.getLogger(this.getClass()).info(String.format("===>>> %s", this.singletonMessageService.getMessage()));
-        LogManager.getLogger(this.getClass()).info(String.format("===>>> %s", this.prototypeInjectionOnlyMessageService.getMessage()));
+        LogManager.getLogger(this.getClass()).debug(() -> "===>>> " + this.singletonMessageService.getMessage());
+        LogManager.getLogger(this.getClass()).debug(() -> "===>>> " + this.prototypeInjectionOnlyMessageService.getMessage());
     }
 
 }

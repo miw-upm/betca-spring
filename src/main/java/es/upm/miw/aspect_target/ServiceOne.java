@@ -16,12 +16,12 @@ public class ServiceOne {
     }
 
     public void argString(String name) {
-        LogManager.getLogger(this.getClass()).debug(String.format("-----------------> ServiceOne:argOneString(name= %s)", name));
+        LogManager.getLogger(this.getClass()).debug(() -> "-----------------> ServiceOne:argOneString(name= " + name);
     }
 
     public int returnInt() {
         int result = 666;
-        LogManager.getLogger(this.getClass()).debug(String.format("-----------------> ServiceOne:returnInt return= %s", result));
+        LogManager.getLogger(this.getClass()).debug(() -> "-----------------> ServiceOne:returnInt return= " + result);
         return result;
     }
 
@@ -32,7 +32,7 @@ public class ServiceOne {
 
     @MyMethodAnnotation
     public void annotation() {
-        LogManager.getLogger("miw").debug("-----------------> ServiceOne:annotation");
+        LogManager.getLogger(this.getClass()).debug("-----------------> ServiceOne:annotation");
     }
 
 }

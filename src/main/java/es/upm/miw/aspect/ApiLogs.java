@@ -56,8 +56,8 @@ public class ApiLogs {
         this.resetLog();
         this.addLog(String.format("<<< Return << %s: ", this.addLog(jp.getSignature().getName())));
         Consumer<Throwable> error = throwable ->
-                LogManager.getLogger(this.getClass()).debug(this.addLog("<<< EXCEPTION " + throwable));
-        Runnable complete = () -> LogManager.getLogger(this.getClass()).debug(this.addLog(" (Flux-Mono Complete)"));
+                LogManager.getLogger(this.getClass()).debug(() -> this.addLog("<<< EXCEPTION " + throwable));
+        Runnable complete = () -> LogManager.getLogger(this.getClass()).debug(() -> this.addLog(" (Flux-Mono Complete)"));
         if (returnValue != null) {
             String methodName = returnValue.getClass().getSimpleName();
             if (methodName.startsWith("Flux")) {
@@ -74,7 +74,7 @@ public class ApiLogs {
                 LogManager.getLogger(this.getClass()).debug(this.log);
             }
         } else {
-            LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(this.addLog("null"));
+            LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(() -> this.addLog("null"));
         }
     }
 

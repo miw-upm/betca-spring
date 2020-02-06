@@ -35,7 +35,6 @@ public class Dto {
     }
 
 
-
     public Integer getId() {
         return id;
     }

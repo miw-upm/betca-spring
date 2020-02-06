@@ -10,6 +10,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static es.upm.miw.reactor.WebFluxResource.WEB_FLUX;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ApiTestConfig
 class WebFluxResourceIT {
@@ -33,7 +34,7 @@ class WebFluxResourceIT {
                 .get().uri(WEB_FLUX + WebFluxResource.MONO_EMPTY)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(String.class)
+                .expectBody(Dto.class)
                 .value(Assertions::assertNull);
     }
 
@@ -66,7 +67,7 @@ class WebFluxResourceIT {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(Dto.class)
-                .value(response -> response.isEmpty());
+                .value(response -> assertTrue(response.isEmpty()));
     }
 
     @Test
