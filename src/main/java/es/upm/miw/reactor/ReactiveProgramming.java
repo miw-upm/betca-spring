@@ -34,8 +34,11 @@ public class ReactiveProgramming {
 
     public Flux<Integer> filterPositive(Flux<Integer> flux) {
         return flux.handle((n, sink) -> {
-            if (n < 0) sink.error(new RuntimeException("..."));
-            else sink.next(n);
+            if (n < 0) {
+                sink.error(new RuntimeException("..."));
+            } else {
+                sink.next(n);
+            }
         });
     }
 

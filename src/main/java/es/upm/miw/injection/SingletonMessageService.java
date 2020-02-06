@@ -22,7 +22,7 @@ public class SingletonMessageService {
     @PostConstruct
     public void constructor() {
         LogManager.getLogger(this.getClass()).debug("===>>> create Bean: SingletonMessageService");
-        LogManager.getLogger(this.getClass()).debug(()->"===>>> miw.name: "+ this.name);
+        LogManager.getLogger(this.getClass()).debug(() -> "===>>> miw.name: " + this.name);
     }
 
     public String getMessage() {

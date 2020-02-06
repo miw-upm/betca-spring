@@ -41,7 +41,7 @@ public class ApiLogs {
     @Before("allResources()")
     public void apiRequestLog(JoinPoint jp) {
         LogManager.getLogger(this.getClass())
-                .info("------------------------------- o -------------------------------");
+                .debug("------------------------------- o -------------------------------");
         this.resetLog();
         this.addLog(jp.getSignature().getName());
         this.addLog(" >>>");
@@ -61,10 +61,15 @@ public class ApiLogs {
         if (returnValue != null) {
             String methodName = returnValue.getClass().getSimpleName();
             if (methodName.startsWith("Flux")) {
-                ((Flux<Object>) returnValue).subscribe(result ->
-                        this.addLog("\n" + result.toString()), error, complete);
+                ((Flux<Object>) returnValue)
+                        .doOnNext(result -> this.addLog("\n" + result.toString()))
+                        .doOnError(error)
+                        .doOnComplete(complete);
             } else if (methodName.startsWith("Mono")) {
-                ((Mono<Object>) returnValue).subscribe(result -> this.addLog(result.toString()), error, complete);
+                ((Mono<Object>) returnValue)
+                        .doOnNext(result -> this.addLog(result.toString()))
+                        .doOnError(error)
+                        .doOnTerminate(complete);
             } else {
                 try {
                     this.addLog(new ObjectMapper().writeValueAsString(returnValue));

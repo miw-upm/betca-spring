@@ -27,7 +27,7 @@
       * Se puede arrancar la consola: `%path%/bin> mongo`
 
 ### :book: Diapositivas (/docs)
-* [Diapositivas de BETCA-Spring](docs/miw-betca-diapositivas-spring.pdf)   
+* [Diapositivas de BETCA-Spring](docs/miw-betca-diapositivas-spring.pdf).   
 
 ### :movie_camera: Videos (www.youtube.com/miw-upm)
 * Lista de reproducción: **BETCA-Spring (Curso 2019-20). Back-end con Tecnologías de Código Abierto**
