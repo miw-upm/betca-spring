@@ -1,5 +1,6 @@
 package es.upm.miw.reactor;
 
+import es.upm.miw.persistence.mongo.documents.Gender;
 import es.upm.miw.persistence.mongo.documents.UnRelatedDocument;
 import es.upm.miw.persistence.mongo.repositories.UnRelatedReactRepository;
 import es.upm.miw.persistence.mongo.repositories.UnRelatedRepository;
@@ -54,11 +55,32 @@ public class UnRelatedController {
                 .handle((document, sink) -> sink.error(new ConflictException("…")));
     }
 
-    public void findByNickAssuredAndUpdateLargeSynchronous(String nick, String large) {
-        UnRelatedDocument entity = this.unRelatedRepository.findByNick(nick)
+    public UnRelatedDocument findByNickIsFemaleAssuredSynchronous(String nick) {
+        UnRelatedDocument document = this.unRelatedRepository.findByNick(nick)
                 .orElseThrow(() -> new NotFoundException("…"));
-        entity.setLarge(large);
-        this.unRelatedRepository.save(entity);
+        if (document.getGender().equals(Gender.MALE)) {
+            throw new ConflictException("…");
+        }
+        return document;
+    }
+
+    public Mono<UnRelatedDocument> findByNickIsFemaleAssuredAsynchronous(String nick) {
+        Mono<UnRelatedDocument> unRelated = this.unRelatedReactRepository.findByNick(nick)
+                .switchIfEmpty(Mono.error(new NotFoundException("…")));
+        return unRelated.handle((document, sink) -> {
+            if (document.getGender().equals(Gender.FEMALE)) {
+                sink.next(document);
+            } else {
+                sink.error(new ConflictException("…"));
+            }
+        });
+    }
+
+    public void findByNickAssuredAndUpdateLargeSynchronous(String nick, String large) {
+        UnRelatedDocument document = this.unRelatedRepository.findByNick(nick)
+                .orElseThrow(() -> new NotFoundException("…"));
+        document.setLarge(large);
+        this.unRelatedRepository.save(document);
     }
 
     public Mono<Void> findByNickAssuredAndUpdateLargeAsynchronous(String nick, String large) {

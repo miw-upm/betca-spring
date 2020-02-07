@@ -7,7 +7,7 @@
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=es.upm.miw%3Abetca-spring&metric=alert_status)](https://sonarcloud.io/dashboard?id=es.upm.miw%3Abetca-spring)
 
 ### Tecnologías necesarias
-`Java` `Maven` `Spring-Boot` `Reactor` `MondoDB`
+`Java` `Maven` `Spring-Boot` `Reactor` `WebFlux` `MondoDB` `JPA`
 
 ### :gear: Instalación del proyecto
 1. Clonar el repositorio en tu equipo, **mediante consola**:
@@ -41,7 +41,7 @@
  y otro para el [Back-end: Spring](https://github.com/miw-upm/betca-tpv-spring/projects/1).
 * Dividir la `Historia` en **tareas** mas pequeñas, cada tarea un **Issue#**. Asignaros la **issue#xx** y asociarle la etiqueta oportuna de la **Historia**.
 Asignar el **Hito**. Justo antes de empezar una **tarea**, asignar la estimación de tiempo: **puntos**. Al finalizar una **tarea**, asignarle el tiempo consumido y cerrarla.
-Utilizar un flujo de trabajo ramificado, visto en `IWVG: Ecosistema` o `APAW`.
+Utilizar un flujo de trabajo ramificado, visto en `IWVG: Ecosistema` o `APAW`. Acordaros de incluir `#?` en los mensajes de los commits.
 * Como referencia podríamos tener entre 5 y 15 tareas.  
 * Realizar fusiones frecuentes con develop del código estable, y subirlo al remoto. **Siempre vigilar la estabilidad de código**.  
 * Como ejemplo proponemos la siguiente división:  

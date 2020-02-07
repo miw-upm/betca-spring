@@ -17,7 +17,6 @@ public class DtoClassTest {
 
     @Test
     void testGetters() {
-
         LogManager.getLogger(this.getClass()).info("===>>> getter:" + this.dtoClass.getName());
     }
 

@@ -1,6 +1,7 @@
 package es.upm.miw.reactor;
 
 import es.upm.miw.TestConfig;
+import es.upm.miw.persistence.mongo.documents.Gender;
 import es.upm.miw.persistence.mongo.documents.UnRelatedDocument;
 import es.upm.miw.persistence.mongo.repositories.UnRelatedReactRepository;
 import es.upm.miw.persistence.mongo.repositories.UnRelatedRepository;
@@ -35,9 +36,14 @@ class UnRelatedControllerIT {
 
     @BeforeEach
     void seedDatabase() {
-        Stream<UnRelatedDocument> documents = Stream.iterate(0, i -> i + 1).limit(10L).map(i ->
-                new UnRelatedDocument(String.valueOf(i))
-        );
+        Stream<UnRelatedDocument> documents = Stream.iterate(0, i -> i + 1).limit(10L)
+                .map(i -> new UnRelatedDocument(String.valueOf(i)))
+                .map(document -> {
+                    if ("3".equals(document.getNick())) {
+                        document.setGender(Gender.MALE);
+                    }
+                    return document;
+                });
         this.unRelatedRepository.saveAll(documents.collect(Collectors.toList()));
     }
 
@@ -101,6 +107,33 @@ class UnRelatedControllerIT {
                 .verify();
     }
 
+    @Test
+    void testFindByNickIsFemaleAssuredSynchronous() {
+        UnRelatedDocument document = this.unRelatedController.findByNickIsFemaleAssuredSynchronous("2");
+        assertNotNull(document);
+    }
+
+    @Test
+    void testFindByNickIsFemaleAssuredSynchronousException() {
+        assertThrows(ConflictException.class, () -> this.unRelatedController.notExistsByNickAssuredSynchronous("3"));
+    }
+
+    @Test
+    void testFindByNickIsFemaleAssuredAsynchronous(){
+        StepVerifier
+                .create(this.unRelatedController.findByNickIsFemaleAssuredAsynchronous("2"))
+                .expectNextCount(1)
+                .expectComplete()
+                .verify();
+    }
+
+    @Test
+    void testFindByNickIsFemaleAssuredAsynchronousError(){
+        StepVerifier
+                .create(this.unRelatedController.findByNickIsFemaleAssuredAsynchronous("3"))
+                .expectError()
+                .verify();
+    }
 
     @Test
     void testFindByNickAssuredAndUpdateLargeSynchronous() {
