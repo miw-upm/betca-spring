@@ -3,6 +3,7 @@ package es.upm.miw.reactor;
 import es.upm.miw.rest_controllers.Dto;
 import es.upm.miw.rest_controllers.exceptions.BadRequestException;
 import es.upm.miw.rest_controllers.exceptions.ConflictException;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,9 @@ public class WebFluxResource {
 
     @GetMapping(value = FLUX)
     public Flux<Dto> readFlux() {
-        return Flux.interval(Duration.ofMillis(100)).map(value -> new Dto(value.intValue())).take(5);
+        return Flux.interval(Duration.ofMillis(100))
+                .map(value -> new Dto(value.intValue())).take(5)
+                .doOnEach(log -> LogManager.getLogger(this.getClass()).debug(log));
     }
 
     @GetMapping(value = FLUX_EMPTY)
@@ -51,7 +54,8 @@ public class WebFluxResource {
     @GetMapping(value = FLUX_ERROR)
     public Flux<Dto> readFluxError() {
         return Flux.interval(Duration.ofMillis(100)).map(value -> new Dto(value.intValue())).take(2)
-                .concatWith(Mono.error(new ConflictException("flux error")));
+                .concatWith(Mono.error(new ConflictException("flux error")))
+                .doOnEach(log -> LogManager.getLogger(this.getClass()).debug(log));
     }
 
 }

@@ -7,10 +7,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import java.util.function.Consumer;
 
 @Profile("dev")
 @Component
@@ -54,40 +50,29 @@ public class ApiLogs {
     @AfterReturning(pointcut = "allResources()", returning = "returnValue")
     public void apiResponseLog(JoinPoint jp, Object returnValue) {
         this.resetLog();
-        this.addLog(String.format("<<< Return << %s: ", this.addLog(jp.getSignature().getName())));
-        Consumer<Throwable> error = throwable ->
-                LogManager.getLogger(this.getClass()).debug(() -> this.addLog("<<< EXCEPTION " + throwable));
-        Runnable complete = () -> LogManager.getLogger(this.getClass()).debug(() -> this.addLog(" (Flux-Mono Complete)"));
+        this.addLog("<<< Return << ");
         if (returnValue != null) {
             String methodName = returnValue.getClass().getSimpleName();
-            if (methodName.startsWith("Flux")) {
-                ((Flux<Object>) returnValue)
-                        .doOnNext(result -> this.addLog("\n" + result.toString()))
-                        .doOnError(error)
-                        .doOnComplete(complete);
-            } else if (methodName.startsWith("Mono")) {
-                ((Mono<Object>) returnValue)
-                        .doOnNext(result -> this.addLog(result.toString()))
-                        .doOnError(error)
-                        .doOnTerminate(complete);
+            if (methodName.startsWith("Flux") || methodName.startsWith("Mono")) {
+                this.addLog(methodName);
             } else {
                 try {
                     this.addLog(new ObjectMapper().writeValueAsString(returnValue));
                 } catch (JsonProcessingException e) {
                     this.addLog(returnValue.toString());
                 }
-                LogManager.getLogger(this.getClass()).debug(this.log);
             }
+            LogManager.getLogger(this.getClass()).debug(this.log);
         } else {
-            LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).debug(() -> this.addLog("null"));
+            LogManager.getLogger(this.getClass()).debug(() -> this.addLog("null"));
         }
     }
 
     @AfterThrowing(pointcut = "allResources()", throwing = "exception")
     public void apiResponseExceptionLog(JoinPoint jp, Exception exception) {
         this.resetLog();
-        this.addLog(String.format("<<< Return << %s <<< EXCEPTION << %s: %s"
-                , jp.getSignature().getName(), exception.getClass().getSimpleName(), exception.getMessage()));
+        this.addLog(String.format("<<< Return << EXCEPTION << %s: %s"
+                , exception.getClass().getSimpleName(), exception.getMessage()));
         LogManager.getLogger(this.getClass()).info(log);
     }
 
