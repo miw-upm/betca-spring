@@ -2,6 +2,7 @@ language: java
 branches:
   only:
   - master
+  - /^release-[0-999].[0-999]$/
   - develop
 notifications:
   email:
