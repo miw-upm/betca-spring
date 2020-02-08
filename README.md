@@ -34,6 +34,7 @@
 
 ### :page_with_curl: Enunciado de la práctica
 * Desarrollar una historia completa (Full-Stack: Angular-Spring) sobre la aplicacion TPV.
+* Todo el software deberá estar en ingles.
 * [Historias de Usuario.](https://github.com/miw-upm/betca-tpv-spring/wiki)
 
 ### :memo:Metodología de trabajo
