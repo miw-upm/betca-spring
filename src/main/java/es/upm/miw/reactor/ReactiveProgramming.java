@@ -1,6 +1,7 @@
 package es.upm.miw.reactor;
 
 import org.apache.logging.log4j.LogManager;
+import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -8,12 +9,23 @@ import java.math.BigDecimal;
 
 public class ReactiveProgramming {
 
-    public BigDecimal mapFromStringToBigDecimal(String value) {
+    public BigDecimal mapFromStringToBigDecimal(String value) { // Synchronous
         return new BigDecimal(value);
     }
 
-    public Mono<BigDecimal> mapMonoFromStringToBigDecimal(Mono<String> mono) {
+    public Mono<BigDecimal> mapMonoFromStringToBigDecimal(Mono<String> mono) { // Asynchronous
         return mono.map(BigDecimal::new);
+    }
+
+    public Mono<BigDecimal> ERRORMapMonoFromStringToBigDecimalBySubscribeERROR(Mono<String> mono) {
+        EmitterProcessor<BigDecimal> emitter = EmitterProcessor.create();
+        mono.subscribe( // ERROR. Methods returning a Publisher should not call the subscribe method directly
+                // because it can break the reactive chain, consider using operators like flatMap, zip, then...
+                s -> emitter.onNext(new BigDecimal(s)),
+                emitter::onError,
+                emitter::onComplete
+        );
+        return emitter.next();
     }
 
     public Flux<BigDecimal> mapFluxFromStringToBigDecimal(Flux<String> flux) {

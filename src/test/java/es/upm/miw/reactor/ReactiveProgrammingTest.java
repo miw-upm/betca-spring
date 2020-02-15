@@ -58,6 +58,16 @@ class ReactiveProgrammingTest {
     }
 
     @Test
+    void testERRORMapMonoFromStringToBigDecimalBySubscribeERROR() {
+        StepVerifier
+                .create(new ReactiveProgramming().mapMonoFromStringToBigDecimal(
+                        Mono.just("10")))
+                .expectNext(BigDecimal.TEN)
+                .expectComplete()
+                .verify();
+    }
+
+    @Test
     void testMapMonoFromStringToBigDecimalStepVerifier() {
         StepVerifier
                 .create(new ReactiveProgramming().mapMonoFromStringToBigDecimal(
