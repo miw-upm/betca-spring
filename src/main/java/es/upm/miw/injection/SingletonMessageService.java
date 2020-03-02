@@ -15,7 +15,6 @@ import javax.annotation.PreDestroy;
 public class SingletonMessageService {
 
     @Value("${miw.name}")
-
     private String name = null;// @Autowired public SingletonMessageService(Environment environment) {this.name = environment.getProperty("miw.name");}
 
 

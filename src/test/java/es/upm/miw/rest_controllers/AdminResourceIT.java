@@ -35,9 +35,9 @@ class AdminResourceIT {
         Dto response = this.webTestClient
                 .mutate().filter(basicAuthentication("user", "123456")).build()
                 .put()
-                //.uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID, 999)
+                //.uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID, 999)
                 .uri(uriBuilder -> uriBuilder
-                        .path(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID)
+                        .path(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID)
                         .queryParam("param", "value")
                         .build(999)
                 )
@@ -105,7 +105,7 @@ class AdminResourceIT {
     void testUpdate() {
         Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
         Dto response = this.webTestClient
-                .put().uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID, 999)
+                .put().uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID, 999)
                 .body(BodyInserters.fromObject(dto))
                 .exchange()
                 .expectStatus().isOk()

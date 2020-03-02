@@ -19,7 +19,7 @@ class ExceptionResourceIT {
     void testErrorNotToken() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "good").build(66))
                 .exchange()
                 .expectStatus().isBadRequest();
@@ -29,7 +29,7 @@ class ExceptionResourceIT {
     void testErrorMalFormedToken() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "good").build(66))
                 .header("token", "kk")
                 .exchange()
@@ -40,7 +40,7 @@ class ExceptionResourceIT {
     void testErrorIdFormat() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "good").build("kk"))
                 .header("token", "Basic good")
                 .exchange()
@@ -51,7 +51,7 @@ class ExceptionResourceIT {
     void testErrorNotExistId() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "good").build(0))
                 .header("token", "Basic good")
                 .exchange()
@@ -62,7 +62,7 @@ class ExceptionResourceIT {
     void testErrorLostParam() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID).build(66))
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID).build(66))
                 .header("token", "Basic good")
                 .exchange()
                 .expectStatus().isBadRequest();
@@ -72,7 +72,7 @@ class ExceptionResourceIT {
     void testErrorInvalidParam() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "").build(66))
                 .header("token", "Basic good")
                 .exchange()
@@ -83,7 +83,7 @@ class ExceptionResourceIT {
     void testErrorConflictParam() {
         this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "kk").build(66))
                 .header("token", "Basic good")
                 .exchange()
@@ -94,7 +94,7 @@ class ExceptionResourceIT {
     void testOk() {
         Dto response = this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
-                        .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID)
+                        .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                         .queryParam("param", "good").build(66))
                 .header("token", "Basic good")
                 .exchange()

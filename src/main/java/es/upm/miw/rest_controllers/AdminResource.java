@@ -18,7 +18,7 @@ public class AdminResource {
 
     public static final String ECHO = "/echo";
 
-    public static final String ID = "/{id}";
+    public static final String ID_ID = "/{id}";
 
     public static final String BODY = "/body";
 
@@ -33,7 +33,7 @@ public class AdminResource {
     }
 
     // Intercambio de datos
-    @GetMapping(value = ECHO + ID)
+    @GetMapping(value = ECHO + ID_ID)
     public String doEcho(@RequestHeader(value = "token", required = false) String token,
                          @PathVariable(value = "id") int id,
                          @RequestParam(defaultValue = "Non") String param) {
@@ -60,7 +60,7 @@ public class AdminResource {
         return Arrays.asList(dto1, dto2, dto3);
     }
 
-    @PutMapping(value = ECHO + ID)
+    @PutMapping(value = ECHO + ID_ID)
     public Dto update(@PathVariable Integer id, @RequestBody Dto dto) {
         dto.setId(id);
         return dto;

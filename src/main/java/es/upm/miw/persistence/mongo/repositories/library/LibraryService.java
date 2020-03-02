@@ -1,13 +1,10 @@
-package es.upm.miw.persistence.mongo.repositories;
+package es.upm.miw.persistence.mongo.repositories.library;
 
 import es.upm.miw.persistence.jpa.entities.library.Style;
 import es.upm.miw.persistence.mongo.documents.library.Author;
 import es.upm.miw.persistence.mongo.documents.library.Book;
 import es.upm.miw.persistence.mongo.documents.library.EmailDto;
 import es.upm.miw.persistence.mongo.documents.library.Theme;
-import es.upm.miw.persistence.mongo.repositories.library.AuthorRepository;
-import es.upm.miw.persistence.mongo.repositories.library.BookRepository;
-import es.upm.miw.persistence.mongo.repositories.library.ThemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.query.Criteria;

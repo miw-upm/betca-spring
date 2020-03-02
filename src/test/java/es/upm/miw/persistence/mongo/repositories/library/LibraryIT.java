@@ -2,7 +2,6 @@ package es.upm.miw.persistence.mongo.repositories.library;
 
 import es.upm.miw.TestConfig;
 import es.upm.miw.persistence.mongo.documents.library.*;
-import es.upm.miw.persistence.mongo.repositories.LibraryService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
