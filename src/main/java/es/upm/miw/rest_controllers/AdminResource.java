@@ -10,20 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping(AdminResource.ADMINS)
 public class AdminResource {
-
     public static final String ADMINS = "/admins";
 
-
     public static final String STATE = "/state";
-
     public static final String ECHO = "/echo";
-
     public static final String ID_ID = "/{id}";
-
     public static final String BODY = "/body";
-
     public static final String STRING_LIST = "/string-list";
-
     public static final String DTO_LIST = "/dto-list";
 
     // Se puede comprobar con un navegador
@@ -34,7 +27,7 @@ public class AdminResource {
 
     // Intercambio de datos
     @GetMapping(value = ECHO + ID_ID)
-    public String doEcho(@RequestHeader(value = "token", required = false) String token,
+    public String paramsEcho(@RequestHeader(value = "token", required = false) String token,
                          @PathVariable(value = "id") int id,
                          @RequestParam(defaultValue = "Non") String param) {
         String response = "{\"id\":%d,\"token\":\"%s\",\"param\":\"%s\"}";
@@ -42,7 +35,7 @@ public class AdminResource {
     }
 
     @PostMapping(value = BODY)
-    public Dto readBody(@RequestBody Dto dto) {
+    public Dto bodyEcho(@RequestBody Dto dto) {
         return dto;
     }
 

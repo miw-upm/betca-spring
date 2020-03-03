@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,10 +45,12 @@ public class LibraryService {
                 .collect(Collectors.toList());
     }
 
-    public List<Author> findAuthorByBookByThemeName(String name) {
+    public Set<Author> findAuthorByBookByThemeName(String name) {
         List<Theme> themes = this.themeRepository.findByName(name);
         return this.bookRepository.findByThemeListIn(themes)
-                .map(Book::getAuthorList).flatMap(Collection::stream).collect(Collectors.toList());
+                .map(Book::getAuthorList)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     public List<String> findAuthorNameByExampleAuthor(Author author) {

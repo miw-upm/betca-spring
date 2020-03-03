@@ -1,6 +1,7 @@
 package es.upm.miw.rest_controllers;
 
 import es.upm.miw.ApiTestConfig;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +18,14 @@ class ExceptionResourceIT {
 
     @Test
     void testErrorNotToken() {
-        this.webTestClient
+        String json = this.webTestClient
                 .get().uri(uriBuilder -> uriBuilder
                 .path(ExceptionResource.EXCEPTIONS + ExceptionResource.ERROR + AdminResource.ID_ID)
                 .queryParam("param", "good").build(66))
                 .exchange()
-                .expectStatus().isBadRequest();
+                .expectStatus().isBadRequest()
+                .expectBody(String.class).returnResult().getResponseBody();
+        LogManager.getLogger(this.getClass()).debug("BETCA-spring: Response: " + json);
     }
 
     @Test
@@ -121,6 +124,5 @@ class ExceptionResourceIT {
                 .exchange()
                 .expectStatus().isForbidden();
     }
-
 
 }

@@ -20,23 +20,12 @@ public class ExceptionResource {
 
     public static final String OUT_OF_TIME = "/out-of-time";
 
-    public static final String ID = "/{id}";
+    public static final String ID_ID = "/{id}";
 
     public static final String ERROR = "/error";
 
-    @GetMapping(value = MY_FILTER)
-    public String myFilter() {
-        return "{\"state\":\"my-filter\"}";
-    }
-
-    @GetMapping(value = OUT_OF_TIME)
-    public String outOfTime() {
-        return "{\"state\":\"off\"}";
-    }
-
-    @GetMapping(value = ERROR + ID)
+    @GetMapping(value = ERROR + ID_ID)
     public Dto doError(@RequestHeader String token, @PathVariable int id, @RequestParam String param) {
-
         if (token.equals("kk")) {
             throw new MalformedHeaderException("token:" + token);
         }
@@ -51,6 +40,16 @@ public class ExceptionResource {
         }
 
         return new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
+    }
+
+    @GetMapping(value = MY_FILTER)
+    public String myFilter() {
+        return "{\"state\":\"my-filter\"}";
+    }
+
+    @GetMapping(value = OUT_OF_TIME)
+    public String outOfTime() {
+        return "{\"state\":\"off\"}";
     }
 
 }

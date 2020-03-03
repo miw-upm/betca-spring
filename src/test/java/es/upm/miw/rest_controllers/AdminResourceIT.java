@@ -30,29 +30,6 @@ class AdminResourceIT {
     private WebTestClient webTestClient;
 
     @Test
-    void testUpdateClient() {
-        Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
-        Dto response = this.webTestClient
-                .mutate().filter(basicAuthentication("user", "123456")).build()
-                .put()
-                //.uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID, 999)
-                .uri(uriBuilder -> uriBuilder
-                        .path(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID)
-                        .queryParam("param", "value")
-                        .build(999)
-                )
-                .body(BodyInserters.fromObject(dto))
-                .header("name", "value1", "value2", "value3")
-                .header("Authorization", "Bearer eyJ0eXAiOiJ...")
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(Dto.class)
-                .returnResult().getResponseBody();
-        assertNotNull(response);
-        assertEquals(new Integer(999), response.getId());
-    }
-
-    @Test
     void testState() {
         String json = this.webTestClient
                 .get().uri(AdminResource.ADMINS + AdminResource.STATE)
@@ -60,9 +37,23 @@ class AdminResourceIT {
                 .expectStatus().isOk()
                 .expectBody(String.class)
                 .returnResult().getResponseBody();
-
-        LogManager.getLogger("BETCA-spring: /admins...").info("Response: " + json);
+        LogManager.getLogger(this.getClass()).debug("BETCA-spring: /admins... Response: " + json);
         assertEquals("{\"state\":\"ok\"}", json);
+    }
+
+    @Test
+    void testParamsEcho() {
+        String json = this.webTestClient
+                .get().uri(uriBuilder -> uriBuilder
+                        .path(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID)
+                        .queryParam("param", "value")
+                        .build(999)
+                ) .header("token", "kG3Ss2DrS")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .returnResult().getResponseBody();
+        LogManager.getLogger(this.getClass()).debug("BETCA-spring: /admins... Response: " + json);
     }
 
     @Test
@@ -107,6 +98,29 @@ class AdminResourceIT {
         Dto response = this.webTestClient
                 .put().uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID, 999)
                 .body(BodyInserters.fromObject(dto))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Dto.class)
+                .returnResult().getResponseBody();
+        assertNotNull(response);
+        assertEquals(new Integer(999), response.getId());
+    }
+
+    @Test
+    void testUpdateClient() {
+        Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now());
+        Dto response = this.webTestClient
+                .mutate().filter(basicAuthentication("user", "123456")).build()
+                .put()
+                //.uri(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID, 999)
+                .uri(uriBuilder -> uriBuilder
+                        .path(AdminResource.ADMINS + AdminResource.ECHO + AdminResource.ID_ID)
+                        .queryParam("param", "value")
+                        .build(999)
+                )
+                .body(BodyInserters.fromObject(dto))
+                .header("name", "value1", "value2", "value3")
+                .header("Authorization", "Bearer eyJ0eXAiOiJ...")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)
