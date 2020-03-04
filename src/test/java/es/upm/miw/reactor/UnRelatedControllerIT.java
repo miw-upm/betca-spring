@@ -39,8 +39,11 @@ class UnRelatedControllerIT {
         Stream<UnRelatedDocument> documents = Stream.iterate(0, i -> i + 1).limit(10L)
                 .map(i -> new UnRelatedDocument(String.valueOf(i)))
                 .map(document -> {
+                    document.setLonger(1L);
                     if ("3".equals(document.getNick())) {
                         document.setGender(Gender.MALE);
+                        document.setBooleano(false);
+                        document.setLonger(3L);
                     }
                     return document;
                 });
@@ -128,9 +131,17 @@ class UnRelatedControllerIT {
     }
 
     @Test
-    void testFindByNickIsFemaleAssuredAsynchronousError(){
+    void testFindByNickIsFemaleAssuredAsynchronousErrorMale(){
         StepVerifier
                 .create(this.unRelatedController.findByNickIsFemaleAssuredAsynchronous("3"))
+                .expectError()
+                .verify();
+    }
+
+    @Test
+    void testFindByNickIsFemaleAssuredAsynchronousErrorEmpty(){
+        StepVerifier
+                .create(this.unRelatedController.findByNickIsFemaleAssuredAsynchronous("kk"))
                 .expectError()
                 .verify();
     }
@@ -151,6 +162,21 @@ class UnRelatedControllerIT {
                 .create(this.unRelatedReactRepository.findByNick("7"))
                 .expectNextMatches(document -> "new".equals(document.getLarge()))
                 .expectComplete()
+                .verify();
+    }
+
+    @Test
+    void testFindByGenderAndIfMaleThenLongerX2ElseLongerX3AndUpdateAll() {
+        StepVerifier
+                .create(this.unRelatedController.findByGenderAndIfMaleThenLongerX2ElseLongerX3AndUpdateAll())
+                .expectComplete()
+                .verify();
+        StepVerifier
+                .create(this.unRelatedReactRepository.findAll())
+                .expectNextMatches(document -> document.getLonger().equals(3L))
+                .expectNextCount(2)
+                .expectNextMatches(document -> document.getLonger().equals(6L))
+                .thenCancel()
                 .verify();
     }
 

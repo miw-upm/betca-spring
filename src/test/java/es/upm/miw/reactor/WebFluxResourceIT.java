@@ -2,15 +2,19 @@ package es.upm.miw.reactor;
 
 import es.upm.miw.ApiTestConfig;
 import es.upm.miw.rest_controllers.Dto;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
+
+import java.util.List;
 
 import static es.upm.miw.reactor.WebFluxResource.WEB_FLUX;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ApiTestConfig
 class WebFluxResourceIT {
@@ -47,34 +51,30 @@ class WebFluxResourceIT {
     }
 
     @Test
-    void testReadFlux() {
-        this.webTestClient
-                .get().uri(WEB_FLUX + WebFluxResource.FLUX)
+    void testReadFluxList() {
+        List<Dto> dtos = this.webTestClient
+                .get().uri(WEB_FLUX + WebFluxResource.FLUX_LIST)
+                //.accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(Dto.class)
-                .value(response -> {
-                            assertEquals(5, response.size());
-                            assertEquals(new Integer(0), response.get(0).getId());
-                        }
-                );
+                .returnResult().getResponseBody();
+        LogManager.getLogger(this.getClass()).debug(dtos);
     }
 
     @Test
-    void testReadFluxEmpty() {
-        this.webTestClient
-                .get().uri(WEB_FLUX + WebFluxResource.FLUX_EMPTY)
+    void testReadFluxEvents() {
+        Flux<Dto> dtoFlux = this.webTestClient
+                .get().uri(WEB_FLUX + WebFluxResource.FLUX_EVENTS)
+                .accept(MediaType.APPLICATION_STREAM_JSON)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBodyList(Dto.class)
-                .value(response -> assertTrue(response.isEmpty()));
+                .returnResult(Dto.class).getResponseBody();
+        StepVerifier
+                .create(dtoFlux)
+                .consumeNextWith(LogManager.getLogger(this.getClass())::debug)
+                .thenCancel()
+                .verify();
     }
 
-    @Test
-    void testReadFluxError() {
-        this.webTestClient
-                .get().uri(WEB_FLUX + WebFluxResource.FLUX_ERROR)
-                .exchange()
-                .expectStatus().isEqualTo(HttpStatus.CONFLICT);
-    }
 }

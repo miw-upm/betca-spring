@@ -17,7 +17,7 @@ public class ReactiveProgramming {
         return mono.map(BigDecimal::new);
     }
 
-    public Mono<BigDecimal> ERRORMapMonoFromStringToBigDecimalBySubscribeERROR(Mono<String> mono) {
+    public Mono<BigDecimal> MapMonoFromStringToBigDecimalBySubscribe(Mono<String> mono) {
         EmitterProcessor<BigDecimal> emitter = EmitterProcessor.create();
         mono.subscribe( // ERROR. Methods returning a Publisher should not call the subscribe method directly
                 // because it can break the reactive chain, consider using operators like flatMap, zip, then...

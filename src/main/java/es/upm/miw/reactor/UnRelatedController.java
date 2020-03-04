@@ -21,7 +21,8 @@ public class UnRelatedController {
     private UnRelatedRepository unRelatedRepository;
 
     @Autowired
-    public UnRelatedController(UnRelatedReactRepository unRelatedReactRepository, UnRelatedRepository unRelatedRepository) {
+    public UnRelatedController(UnRelatedReactRepository unRelatedReactRepository,
+                               UnRelatedRepository unRelatedRepository) {
         this.unRelatedReactRepository = unRelatedReactRepository;
         this.unRelatedRepository = unRelatedRepository;
     }
@@ -94,12 +95,27 @@ public class UnRelatedController {
     }
 
     public Mono<Void> updateDocumentsAsynchronous() {
-        Flux<UnRelatedDocument> documents = unRelatedReactRepository.findAll().map(
-                document -> {
+        Flux<UnRelatedDocument> documents = this.unRelatedReactRepository.findAll()
+                .map(document -> {
                     document.setLarge("new");
                     return document;
                 });
-        return unRelatedReactRepository.saveAll(documents).then();
+        return this.unRelatedReactRepository.saveAll(documents).then();
+    }
+
+    public Mono<Void> findByGenderAndIfMaleThenLongerX2ElseLongerX3AndUpdateAll(){
+        Flux<UnRelatedDocument> maleDocuments = this.unRelatedReactRepository.findByGender(Gender.MALE)
+                .map(document -> {
+                    document.setLonger(document.getLonger()*2);
+                    return document;
+                });
+        Flux<UnRelatedDocument> femaleDocuments = this.unRelatedReactRepository.findByGender(Gender.FEMALE)
+                .map(document -> {
+                    document.setLonger(document.getLonger()*3);
+                    return document;
+                });
+        return Mono.when(this.unRelatedReactRepository.saveAll(maleDocuments),
+                this.unRelatedReactRepository.saveAll(femaleDocuments));
     }
 
 }

@@ -17,31 +17,10 @@ class ReactiveProgrammingTest {
         assertEquals(0, BigDecimal.TEN.compareTo(new ReactiveProgramming().mapFromStringToBigDecimal("10")));
     }
 
-    @Test
-    void testMapMonoFromStringToBigDecimal() {
-        Mono<BigDecimal> mono = new ReactiveProgramming().mapMonoFromStringToBigDecimal(
-                Mono.just("10"));
-        System.out.println("mono: " + mono);
-        System.out.print("mono.subscribe(): ");
-        mono.subscribe(System.out::println);
-        mono.block(); //Bloquea la ejecución hasta que finaliza el mono para poder probar el test
-    }
-
-    @Test
-    void testMapFluxFromStringToBigDecimal() {
-        Flux<BigDecimal> flux = new ReactiveProgramming()
-                .mapFluxFromStringToBigDecimal(
-                        Flux.interval(Duration.ofMillis(1)).map(String::valueOf)).take(5);
-        flux.subscribe(System.out::println);
-        System.out.println("flux: " + flux);
-        flux.blockLast(); //Bloquea la ejecución hasta que finaliza el flux para poder probar el test
-    }
-
-    @Test
+   @Test
     void testMonoNoEmptyWithMonoEmpty() {
         StepVerifier
-                .create(new ReactiveProgramming().monoNoEmpty(
-                        Mono.empty()))
+                .create(new ReactiveProgramming().monoNoEmpty(Mono.empty()))
                 .expectNext(0)
                 .expectComplete()
                 .verify();
@@ -50,19 +29,8 @@ class ReactiveProgrammingTest {
     @Test
     void testMonoNoEmptyWithMono() {
         StepVerifier
-                .create(new ReactiveProgramming().monoNoEmpty(
-                        Mono.just(1)))
+                .create(new ReactiveProgramming().monoNoEmpty(Mono.just(1)))
                 .expectNext(1)
-                .expectComplete()
-                .verify();
-    }
-
-    @Test
-    void testERRORMapMonoFromStringToBigDecimalBySubscribeERROR() {
-        StepVerifier
-                .create(new ReactiveProgramming().mapMonoFromStringToBigDecimal(
-                        Mono.just("10")))
-                .expectNext(BigDecimal.TEN)
                 .expectComplete()
                 .verify();
     }
@@ -81,7 +49,7 @@ class ReactiveProgrammingTest {
     void testMapFluxFromStringToBigDecimalStepVerifier() {
         StepVerifier
                 .create(new ReactiveProgramming().mapFluxFromStringToBigDecimal(
-                        Flux.interval(Duration.ofMillis(1)).map(String::valueOf)).take(5))
+                        Flux.interval(Duration.ofMillis(10)).map(String::valueOf)).take(5))
                 .expectNext(BigDecimal.ZERO, BigDecimal.ONE)
                 .expectNextCount(3)
                 .expectComplete()
