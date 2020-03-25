@@ -28,8 +28,8 @@ public class AdminResource {
     // Intercambio de datos
     @GetMapping(value = ECHO + ID_ID)
     public String paramsEcho(@RequestHeader(value = "token", required = false) String token,
-                         @PathVariable(value = "id") int id,
-                         @RequestParam(defaultValue = "Non") String param) {
+                             @PathVariable(value = "id") int id,
+                             @RequestParam(defaultValue = "Non") String param) {
         String response = "{\"id\":%d,\"token\":\"%s\",\"param\":\"%s\"}";
         return String.format(response, id, token, param);
     }

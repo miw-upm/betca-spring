@@ -68,6 +68,16 @@ class UnRelatedControllerIT {
                 .expectNextMatches(date -> LocalDateTime.now().getDayOfMonth() == date.getDayOfMonth())
                 .expectComplete()
                 .verify();
+
+        StepVerifier
+                .create(this.unRelatedReactRepository.findAll())
+                .expectNextMatches(document-> document.getLonger().equals(1L))
+                .expectNextCount(2)
+                .expectNextMatches(document-> document.getLonger().equals(3L))
+                .expectNextMatches(document-> document.getLonger().equals(1L))
+                .thenCancel()
+                .verify();
+
     }
 
     @Test

@@ -103,15 +103,15 @@ public class UnRelatedController {
         return this.unRelatedReactRepository.saveAll(documents).then();
     }
 
-    public Mono<Void> findByGenderAndIfMaleThenLongerX2ElseLongerX3AndUpdateAll(){
+    public Mono<Void> findByGenderAndIfMaleThenLongerX2ElseLongerX3AndUpdateAll() {
         Flux<UnRelatedDocument> maleDocuments = this.unRelatedReactRepository.findByGender(Gender.MALE)
                 .map(document -> {
-                    document.setLonger(document.getLonger()*2);
+                    document.setLonger(document.getLonger() * 2);
                     return document;
                 });
         Flux<UnRelatedDocument> femaleDocuments = this.unRelatedReactRepository.findByGender(Gender.FEMALE)
                 .map(document -> {
-                    document.setLonger(document.getLonger()*3);
+                    document.setLonger(document.getLonger() * 3);
                     return document;
                 });
         return Mono.when(this.unRelatedReactRepository.saveAll(maleDocuments),

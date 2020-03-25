@@ -2,7 +2,6 @@ package es.upm.miw.reactor;
 
 import es.upm.miw.rest_controllers.Dto;
 import es.upm.miw.rest_controllers.exceptions.BadRequestException;
-import org.apache.logging.log4j.LogManager;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +44,7 @@ public class WebFluxResource {
                 .map(value -> new Dto(value.intValue())).take(5);
     }
 
-    @GetMapping(value = FLUX_EVENTS, produces = MediaType.APPLICATION_STREAM_JSON_VALUE ) // TEXT_EVENT_STREAM_VALUE
+    @GetMapping(value = FLUX_EVENTS, produces = MediaType.APPLICATION_STREAM_JSON_VALUE) // TEXT_EVENT_STREAM_VALUE
     public Flux<Dto> readFluxHowEvents() {
         return Flux.interval(Duration.ofMillis(2000))
                 .map(value -> new Dto(value.intValue())).take(5);

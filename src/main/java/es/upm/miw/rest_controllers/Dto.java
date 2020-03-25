@@ -79,7 +79,7 @@ public class Dto {
 
     @Override
     public String toString() {
-        return "DtoClass [id=" + id + ", name=" + name + ", gender=" + gender + ", bornDate=" + bornDate + "]";
+        return "DtoWithLombok [id=" + id + ", name=" + name + ", gender=" + gender + ", bornDate=" + bornDate + "]";
     }
 
 }

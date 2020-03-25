@@ -61,7 +61,7 @@
         <itextpdf.version>7.0.2</itextpdf.version>
         <auth0.version>3.4.1</auth0.version>
         <swagger.version>2.9.2</swagger.version>
-        <lombok.version>1.18.8</lombok.version>
+        <lombok.version>1.18.12</lombok.version>
     </properties>
 
     <dependencies>
@@ -128,7 +128,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-        <!-- Lombok for DTO's-->
+        <!-- LombokConfig for DTO's-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -16,6 +16,6 @@ public interface UnRelatedReactRepository extends ReactiveSortingRepository<UnRe
 
     Mono<UnRelatedDocument> findByNick(String nick);
 
-    Flux<UnRelatedDocument> findByGender (Gender gender);
+    Flux<UnRelatedDocument> findByGender(Gender gender);
 
 }

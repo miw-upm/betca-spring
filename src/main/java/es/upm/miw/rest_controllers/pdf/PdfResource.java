@@ -26,7 +26,7 @@ public class PdfResource {
                 .tableCell("1", "2", "3", "4", "5", "6")
                 .tableCell("1", "2", "3", "4", "5", "6")
                 .tableCell("1", "2", "3", "4", "5", "6")
-                .tableColumnsHeader(" ", "Desc.", "Ud.", "DtoClass.%", "€", "E.")
+                .tableColumnsHeader(" ", "Desc.", "Ud.", "DtoWithLombok.%", "€", "E.")
                 .tableColspanRight("TOTAL")
                 .build()
                 .line()
