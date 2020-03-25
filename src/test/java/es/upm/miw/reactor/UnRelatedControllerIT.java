@@ -210,6 +210,7 @@ class UnRelatedControllerIT {
                 .expectComplete()
                 .verify();
         System.out.println("    update: " + (new Date().getTime() - time) + "msg");
+        System.out.println("All: " + this.unRelatedRepository.findAll());
     }
 
     @AfterEach

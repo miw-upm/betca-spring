@@ -67,6 +67,16 @@ class ReactiveProgrammingTest {
     }
 
     @Test
+    void testFilterPositive2() {
+        StepVerifier
+                .create(new ReactiveProgramming().filterPositive2(
+                        Flux.just(1, 4, -7, 8, 13)))
+                .expectNextCount(2)
+                .expectError()
+                .verify();
+    }
+
+    @Test
     void testMapMonoFromStringToBigDecimalMas099() {
         StepVerifier
                 .create(new ReactiveProgramming().mapMonoFromStringToBigDecimalMas099(

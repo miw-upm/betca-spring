@@ -103,6 +103,16 @@ public class UnRelatedController {
         return this.unRelatedReactRepository.saveAll(documents).then();
     }
 
+    public Mono<Void> updateDocumentsAsynchronous2() {
+        return this.unRelatedReactRepository.findAll()
+                .map(document -> {
+                    document.setLarge("new");
+                    return document;
+                })
+                .flatMap(document -> this.unRelatedReactRepository.save(document))
+                .then();
+    }
+
     public Mono<Void> findByGenderAndIfMaleThenLongerX2ElseLongerX3AndUpdateAll() {
         Flux<UnRelatedDocument> maleDocuments = this.unRelatedReactRepository.findByGender(Gender.MALE)
                 .map(document -> {

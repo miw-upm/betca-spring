@@ -45,6 +45,16 @@ public class ReactiveProgramming {
     }
 
     public Flux<Integer> filterPositive(Flux<Integer> flux) {
+        return flux.flatMap(n -> {
+            if (n < 0) {
+                return Mono.error(new RuntimeException("..."));
+            } else {
+                return Mono.just(n);
+            }
+        });
+    }
+
+    public Flux<Integer> filterPositive2(Flux<Integer> flux) {
         return flux.handle((n, sink) -> {
             if (n < 0) {
                 sink.error(new RuntimeException("..."));
