@@ -29,9 +29,7 @@ public class ExceptionResource {
         if (token.equals("kk")) {
             throw new MalformedHeaderException("token:" + token);
         }
-        if (id == 0) {
-            throw new NotFoundException("id:" + id);
-        }
+
         if (param.isEmpty()) {
             throw new FieldInvalidException("param: " + param);
         }
