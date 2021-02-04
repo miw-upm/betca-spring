@@ -2,8 +2,8 @@
 ## Back-end con Tecnologías de Código Abierto (BETCA).
 > Este proyecto es un apoyo docente de la asignatura y contiene ejemplos prácticos sobre Spring
 
-### Tecnologías necesarias
-`Java` `Maven` `GitHub` `Spring-boot` 
+[Versión BETCA-Python](https://github.com/miw-upm/betca-python)
+
 
 ### :gear: Instalación del proyecto
 1. Clonar el repositorio en tu equipo, **mediante consola**:
@@ -15,9 +15,7 @@
    1. **Import Project**, y seleccionar la carpeta del proyecto.
    1. Marcar **Create Project from external model**, elegir **Maven**.
    1. **Next** … **Finish**.   
-3. Ejecución.
-   1. Desplegar el proyecto localmente: `> mvn clean install`
-   1. Arrancar el proyecto: `> mvn spring-boot:run -pl shop-application`
-
-
-
+3. Ejecución de un proyecto:
+```sh
+> mvn spring-boot:run -pl betca-rest
+```
