@@ -13,7 +13,7 @@ public class SingletonMessageService {
 
     private String name;
 
-    public SingletonMessageService(@Value("${miw.name}") String name) {
+    public SingletonMessageService(@Value("${miw.name}") String name) {  // resources/application.properties
         this.name = name;
         LogManager.getLogger(this.getClass()).info("===>>> create Bean: SingletonMessageService");
     }

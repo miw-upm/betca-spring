@@ -11,8 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.anyInt;
 
-
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class InjectionMainMessageServiceMockTest {
 
