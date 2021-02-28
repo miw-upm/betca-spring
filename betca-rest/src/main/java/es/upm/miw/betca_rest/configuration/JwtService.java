@@ -22,7 +22,7 @@ public class JwtService {
     private int expire;
 
     @Autowired
-    public JwtService(@Value("miw.jwt.secret") String secret, @Value("miw.jwt.issuer") String issuer,
+    public JwtService(@Value("${miw.jwt.secret}") String secret, @Value("${miw.jwt.issuer}") String issuer,
                       @Value("${miw.jwt.expire}") int expire) {
         this.secret = secret;
         this.issuer = issuer;
