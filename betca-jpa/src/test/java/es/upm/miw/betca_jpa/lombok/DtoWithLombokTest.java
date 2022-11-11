@@ -17,6 +17,7 @@ class DtoWithLombokTest {
         this.dto1 = DtoWithLombok.builder().id("1").name("Name1").surName("surName1").email("email1").build();
         this.dto2 = DtoWithLombok.builder().id("1").name("Name2").surName("surName2").email("email2").build();
         new DtoWithLombok();
+        new DtoWithLombok("1","Name1","surName1","email1",null);
     }
 
     @Test

@@ -14,18 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class AggregationEntity {
-
     @Id
     @GeneratedValue
     private Integer id;
-
     private String nick;
-
     @ManyToOne //@JoinColumn
     private AnotherEntity anotherEntity;
-
     @ManyToMany(fetch = FetchType.EAGER) //@JoinColumn
     private List<AnotherEntity> anotherEntityList;
-
-
 }

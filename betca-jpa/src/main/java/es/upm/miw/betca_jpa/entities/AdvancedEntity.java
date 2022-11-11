@@ -13,14 +13,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 public class AdvancedEntity {
-
     @Id
     @GeneratedValue
     private Integer id;
-
     @Column(unique = true, nullable = false)
     private String nick;
-
     @Lob
     private String large;
 }

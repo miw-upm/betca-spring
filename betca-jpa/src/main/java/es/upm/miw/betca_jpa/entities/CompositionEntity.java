@@ -11,21 +11,15 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class CompositionEntity {
-
     @Id
     @GeneratedValue
     private Integer id;
-
     private String nick;
-
     @Embedded
     private EmbeddableEntity embeddableEntity;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Singular("anyEntity")
     private List<AnyEntity> anyEntityList;
-
     @Lob
     private AnyClass[] anyClassArray;
-
 }

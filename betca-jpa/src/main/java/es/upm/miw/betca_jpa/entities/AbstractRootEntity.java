@@ -11,11 +11,9 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //se mapea en una tabla, InheritanceType.JOINED: Una tabla por clase
 public abstract class AbstractRootEntity {
-
     @Id
     @GeneratedValue
     private Integer id;
-
     private String nick;
 
     public AbstractRootEntity(String nick) {

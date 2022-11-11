@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 
 @Entity
 public class OtherConcreteEntity extends AbstractEntity {
-
     private String surname;
 
     public OtherConcreteEntity() {

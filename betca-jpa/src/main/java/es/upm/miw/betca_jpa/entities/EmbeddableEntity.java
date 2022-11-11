@@ -11,9 +11,6 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @Embeddable
 public class EmbeddableEntity {
-
     private Integer number;
-
     private String value;
-
 }

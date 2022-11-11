@@ -11,13 +11,10 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class AnyEntity {
-
     @Id
     @GeneratedValue
     private Integer id;
-
     private String value;
-
     public AnyEntity(String value) {
         this.value = value;
     }
