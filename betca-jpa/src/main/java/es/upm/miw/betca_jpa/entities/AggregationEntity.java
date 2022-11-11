@@ -25,7 +25,7 @@ public class AggregationEntity {
     private AnotherEntity anotherEntity;
 
     @ManyToMany(fetch = FetchType.EAGER) //@JoinColumn
-    private List< AnotherEntity > anotherEntityList;
+    private List<AnotherEntity> anotherEntityList;
 
 
 }

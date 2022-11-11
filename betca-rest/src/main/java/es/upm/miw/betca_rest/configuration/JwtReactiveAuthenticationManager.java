@@ -19,7 +19,7 @@ public class JwtReactiveAuthenticationManager implements ReactiveAuthenticationM
     }
 
     @Override
-    public Mono< Authentication > authenticate(Authentication authentication) {
+    public Mono<Authentication> authenticate(Authentication authentication) {
         String token = authentication.getCredentials().toString();
         GrantedAuthority authority = new SimpleGrantedAuthority(Role.PREFIX + jwtService.role(token));
         return Mono.just(new UsernamePasswordAuthenticationToken(jwtService.user(token), token, List.of(authority)));

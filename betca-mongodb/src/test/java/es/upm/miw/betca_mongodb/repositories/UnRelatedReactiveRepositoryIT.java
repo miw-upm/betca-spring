@@ -27,7 +27,7 @@ class UnRelatedReactiveRepositoryIT {
 
     @BeforeEach
     void populate() {
-        Stream< UnRelatedDocument > documents = Stream.iterate(0, i -> i + 1).limit(5L).map(i ->
+        Stream<UnRelatedDocument> documents = Stream.iterate(0, i -> i + 1).limit(5L).map(i ->
                 UnRelatedDocument.builder().nick("nick" + i).gender(Gender.FEMALE).bornDate(LocalDateTime.now())
                         .strings(new String[]{"uno", "dos"}).noPersistent("noPersistent")
                         .logic(true).integer(666).decimal(666.666e30)

@@ -30,7 +30,7 @@ public class UnRelatedEntity {
 
     @ElementCollection(fetch = FetchType.EAGER) // @CollectionTable(name = "un_related_entity_tags")
     @Singular // builder
-    private List< String > tags;
+    private List<String> tags;
 
     @Transient
     private String noPersistent;

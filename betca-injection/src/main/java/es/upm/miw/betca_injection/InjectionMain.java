@@ -3,9 +3,6 @@ package es.upm.miw.betca_injection;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Component // @Service @Repository @Controller
 public class InjectionMain {

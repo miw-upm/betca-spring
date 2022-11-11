@@ -1,6 +1,5 @@
 package es.upm.miw.betca_rest.resources;
 
-import org.apache.logging.log4j.LogManager;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -22,7 +21,7 @@ public class BasicAuthResource {
     }
 
     @PostMapping
-    public Mono< Dto > create(@RequestBody Dto dto) {
+    public Mono<Dto> create(@RequestBody Dto dto) {
         return Mono.just(dto);
     }
 

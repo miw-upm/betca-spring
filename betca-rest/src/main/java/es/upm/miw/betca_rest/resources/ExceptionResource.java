@@ -24,7 +24,7 @@ public class ExceptionResource {
     }
 
     @PostMapping
-    public Mono< ValidatedDto > create(@Valid @RequestBody ValidatedDto dto) {
+    public Mono<ValidatedDto> create(@Valid @RequestBody ValidatedDto dto) {
         return Mono.just(dto);
     }
 }

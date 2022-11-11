@@ -23,7 +23,7 @@ public class CompositionEntity {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Singular("anyEntity")
-    private List< AnyEntity > anyEntityList;
+    private List<AnyEntity> anyEntityList;
 
     @Lob
     private AnyClass[] anyClassArray;

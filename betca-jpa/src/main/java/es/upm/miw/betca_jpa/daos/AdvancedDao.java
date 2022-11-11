@@ -7,6 +7,6 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Transactional
-public interface AdvancedDao extends JpaRepository< AdvancedEntity, Integer > {
-    Optional< AdvancedEntity > findByNick(String nick);
+public interface AdvancedDao extends JpaRepository<AdvancedEntity, Integer> {
+    Optional<AdvancedEntity> findByNick(String nick);
 }

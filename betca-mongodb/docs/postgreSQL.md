@@ -1,9 +1,8 @@
-
-   initdb -D ./data -U postgres -E UTF8
+initdb -D ./data -U postgres -E UTF8
 > pg_ctl -D ./data -l logs start
 > pg_ctl -D ./data -l logs stop
 
->psql -U postgres
+> psql -U postgres
 
 	\?                    Help
 	\list                 database list

@@ -26,6 +26,6 @@ public class AggregationDocument {
     private AnyDocument anyDocument;
 
     @DBRef
-    private List< AnyDocument > anyDocumentList;
+    private List<AnyDocument> anyDocumentList;
 
 }

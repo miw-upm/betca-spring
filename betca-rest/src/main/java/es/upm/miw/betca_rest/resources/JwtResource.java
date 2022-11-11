@@ -8,7 +8,6 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 
 
-
 @RestController
 @RequestMapping(JwtResource.JWT)
 public class JwtResource {
@@ -23,7 +22,7 @@ public class JwtResource {
 
     @PreAuthorize("hasRole('ADMIN') OR hasRole('OPERATOR')")
     @PostMapping
-    public Mono< Dto > create(@RequestBody Dto dto) {
+    public Mono<Dto> create(@RequestBody Dto dto) {
         LogManager.getLogger(this.getClass()).info("===>>> create: " + dto);
         return Mono.just(dto);
     }

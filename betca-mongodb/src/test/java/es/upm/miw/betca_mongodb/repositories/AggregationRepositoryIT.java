@@ -26,7 +26,7 @@ class AggregationRepositoryIT {
     @BeforeEach
     void seedDb() {
         AnyDocument anyDocument = AnyDocument.builder().value("any").build();
-        List< AnyDocument > anyDocumentList = Arrays.asList(
+        List<AnyDocument> anyDocumentList = Arrays.asList(
                 AnyDocument.builder().value("any1").build(),
                 AnyDocument.builder().value("any2").build(),
                 AnyDocument.builder().value("any3").build()

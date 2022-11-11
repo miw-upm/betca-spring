@@ -24,6 +24,6 @@ public class CompositionDocument {
 
     private EmbeddableDocument embeddableDocument;
 
-    private List< EmbeddableDocument > embeddableDocumentList;
+    private List<EmbeddableDocument> embeddableDocumentList;
 
 }

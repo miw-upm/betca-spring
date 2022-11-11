@@ -28,7 +28,7 @@ class AggregationDaoIT {
     @BeforeEach
     void before() {
         AnotherEntity anotherEntity = new AnotherEntity("zero");
-        List< AnotherEntity > list = Arrays.asList(
+        List<AnotherEntity> list = Arrays.asList(
                 new AnotherEntity("one"),
                 new AnotherEntity("two"));
         this.anotherDao.save(anotherEntity);

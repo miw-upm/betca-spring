@@ -14,21 +14,21 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface UnRelatedRepository extends MongoRepository< UnRelatedDocument, String > {
+public interface UnRelatedRepository extends MongoRepository<UnRelatedDocument, String> {
 
     UnRelatedDocument findByNickIgnoreCase(String nick);
 
-    List< UnRelatedDocument > findFirst3ByNickStartingWith(String prefix);
+    List<UnRelatedDocument> findFirst3ByNickStartingWith(String prefix);
 
-    List< UnRelatedDocument > findByNickOrLargeOrderByLongerDesc(String nick, String large);
+    List<UnRelatedDocument> findByNickOrLargeOrderByLongerDesc(String nick, String large);
 
-    List< UnRelatedDocument > findByIntegerGreaterThan(int integer, Pageable pageable);
+    List<UnRelatedDocument> findByIntegerGreaterThan(int integer, Pageable pageable);
 
     @Transactional
     int deleteByNick(String nick);
 
     // @Query("{'nick':?0}") // Query NOT necessary
-    Optional< UnRelatedDocument > findByNick(String nick);
+    Optional<UnRelatedDocument> findByNick(String nick);
 
     // FIELDS: _id: incluido por defecto, 1: solo los especificados, 0: todos excepto el especificado
     @Query(value = "{'nick':?0}", fields = "{'bornDate':1,'large':1}")
@@ -41,16 +41,12 @@ public interface UnRelatedRepository extends MongoRepository< UnRelatedDocument,
     UnRelatedDocument findByNickAndLarge(String nick, String large);
 
     // @Query("{nick:{$in:?0} }") // Query NOT necessary
-    List< UnRelatedDocument > findByNickIn(Collection nicks);
+    List<UnRelatedDocument> findByNickIn(Collection nicks);
 
-    //$options: 'i': Case insensitivity // allow NULL: all elements
-    @Query("?#{ [0] == null ? { $where : 'true'} : { nick : {$regex:[0], $options: 'i'} } }")
-    List< UnRelatedDocument > findByNickLikeIgnoreCaseNullSafe(String nick);
-
-    @Query("{$and:[" // allow NULL: all elements
+    @Query("{$and:[" //  //$options: 'i': Case insensitivity & allow NULL: all elements
             + "?#{ [0] == null ? {_id : {$ne:null}} : { nick : {$regex:[0], $options: 'i'} } },"
             + "?#{ [1] == null ? { $where : 'true'} : { large : {$regex:[1], $options: 'i'} } }"
             + "] }")
-    List< UnRelatedDocument > findByNickLikeAndLargeLikeNullSafe(String nick, String large);
+    List<UnRelatedDocument> findByNickLikeAndLargeLikeNullSafe(String nick, String large);
 
 }

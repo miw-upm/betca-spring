@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 public @interface PositiveBigDecimal {
     String message() default "Expected positive";
 
-    Class< ? >[] groups() default {};
+    Class<?>[] groups() default {};
 
-    Class< ? extends Payload >[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

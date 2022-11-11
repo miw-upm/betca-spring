@@ -16,6 +16,6 @@ public class DtoWithLombok {
     private String surName;
     private String email;
     @Singular // .tag().tag().tag()
-    private List< String > tags;
+    private List<String> tags;
 }
 

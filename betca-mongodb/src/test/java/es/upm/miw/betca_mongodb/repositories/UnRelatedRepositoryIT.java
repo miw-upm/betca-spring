@@ -26,7 +26,7 @@ class UnRelatedRepositoryIT {
 
     @BeforeEach
     void populate() {
-        Stream< UnRelatedDocument > documents = Stream.iterate(0, i -> i + 1).limit(5L).map(i ->
+        Stream<UnRelatedDocument> documents = Stream.iterate(0, i -> i + 1).limit(5L).map(i ->
                 UnRelatedDocument.builder().nick("nick" + i).gender(Gender.FEMALE).bornDate(LocalDateTime.now())
                         .strings(new String[]{"uno", "dos"}).large("Large...").noPersistent("noPersistent")
                         .logic(true).integer(666).decimal(666.666e30)
@@ -107,12 +107,6 @@ class UnRelatedRepositoryIT {
     @Test
     void testFindByNickIn() {
         assertEquals(2, unRelatedRepository.findByNickIn(Arrays.asList("nick1", "nick2")).size());
-    }
-
-    @Test
-    void testFindByNickLikeIgnoreCaseNullSafe() {
-        assertEquals(1, unRelatedRepository.findByNickLikeIgnoreCaseNullSafe("k1").size());
-        assertEquals(5, unRelatedRepository.findByNickLikeIgnoreCaseNullSafe(null).size());
     }
 
     @Test
