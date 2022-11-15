@@ -15,16 +15,15 @@ public class ExceptionResource {
     public static final String ID_ID = "/{id}";
 
     @GetMapping(ID_ID)
-    public Mono<ValidatedDto> read(@PathVariable int id) {
+    public ValidatedDto read(@PathVariable int id) {
         if (id < 1) {
-            return Mono.error(new NotFoundException("id:" + id));
-        } else {
-            return Mono.just(new ValidatedDto(id, "daemon", Gender.FEMALE, LocalDateTime.now()));
+            throw new NotFoundException("id:" + id);
         }
+        return new ValidatedDto(id, "daemon", Gender.FEMALE, LocalDateTime.now());
     }
 
     @PostMapping
-    public Mono<ValidatedDto> create(@Valid @RequestBody ValidatedDto dto) {
-        return Mono.just(dto);
+    public ValidatedDto create(@Valid @RequestBody ValidatedDto dto) {
+        return dto;
     }
 }
