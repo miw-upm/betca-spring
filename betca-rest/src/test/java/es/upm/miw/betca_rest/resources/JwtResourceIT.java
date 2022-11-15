@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
-import static es.upm.miw.betca_rest.resources.BasicResource.ID_ID;
+import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.ID_ID;
 import static es.upm.miw.betca_rest.resources.JwtResource.JWT;
 
 @ExtendWith(SpringExtension.class)

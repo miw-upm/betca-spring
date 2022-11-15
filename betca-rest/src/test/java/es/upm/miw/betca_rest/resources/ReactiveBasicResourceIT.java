@@ -12,13 +12,13 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
-import static es.upm.miw.betca_rest.resources.BasicResource.*;
+import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @TestPropertySource(locations = "classpath:test.properties")
-public class BasicResourceIT {
+public class ReactiveBasicResourceIT {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -26,7 +26,7 @@ public class BasicResourceIT {
     @Test
     void testReadByIdJson() {
         String json = this.webTestClient
-                .get().uri(BASIC + ID_ID, 666)
+                .get().uri(REACTIVE_BASIC + ID_ID, 666)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(String.class)
@@ -37,7 +37,7 @@ public class BasicResourceIT {
     @Test
     void testCreate() {
         this.webTestClient
-                .post().uri(BASIC)
+                .post().uri(REACTIVE_BASIC)
                 .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
@@ -54,7 +54,7 @@ public class BasicResourceIT {
     @Test
     void testReadById() {
         this.webTestClient
-                .get().uri(BASIC + ID_ID, 666)
+                .get().uri(REACTIVE_BASIC + ID_ID, 666)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)
@@ -69,7 +69,7 @@ public class BasicResourceIT {
     @Test
     void testDelete() {
         this.webTestClient
-                .delete().uri(BASIC + ID_ID, 666)
+                .delete().uri(REACTIVE_BASIC + ID_ID, 666)
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -77,7 +77,7 @@ public class BasicResourceIT {
     @Test
     void testUpdate() {
         this.webTestClient
-                .put().uri(BASIC + ID_ID, 666)
+                .put().uri(REACTIVE_BASIC + ID_ID, 666)
                 .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
@@ -96,7 +96,7 @@ public class BasicResourceIT {
         this.webTestClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(BASIC + SEARCH)
+                        .path(REACTIVE_BASIC + SEARCH)
                         .queryParam("name", "Miw")
                         .build())
                 .exchange()

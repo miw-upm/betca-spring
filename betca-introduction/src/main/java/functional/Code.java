@@ -17,10 +17,10 @@ public class Code {
             System.out.println(item);
         }
         INTEGER_LIST.stream()
-                .forEach(System.out::println);  //functional
+                .forEach(System.out::println);  //functional //item->System.out.println(item)
     }
 
-    public void predicate() {
+    public void predicate() { // only positive values
         for (int i = 0; i < INTEGER_LIST.size(); i++) { //for i
             if (INTEGER_LIST.get(i) >= 0) {
                 System.out.println(INTEGER_LIST.get(i));
