@@ -18,17 +18,17 @@ public class InjectionMain {
         this.prototypeInjectionOnlyMessageService = prototypeInjectionOnlyMessageService;
     }
 
-    public String getMessage() {
-        return this.singletonMessageService.getMessage();
+    public String createMessage() {
+        return this.singletonMessageService.crateMessage();
     }
 
-    public int getValue() {
-        return this.singletonMessageService.getValue(10);
+    public int createValue() {
+        return this.singletonMessageService.createValue(10);
     }
 
     public void debug() {
-        LogManager.getLogger(this.getClass()).info(() -> "===>>> InjectionMain::singleton: " + this.singletonMessageService.getMessage());
-        LogManager.getLogger(this.getClass()).info(() -> "===>>> InjectionMain::prototype: " + this.prototypeInjectionOnlyMessageService.getMessage());
+        LogManager.getLogger(this.getClass()).info(() -> "===>>> InjectionMain::singleton: " + this.singletonMessageService.crateMessage());
+        LogManager.getLogger(this.getClass()).info(() -> "===>>> InjectionMain::prototype: " + this.prototypeInjectionOnlyMessageService.createMessage());
     }
 
 }

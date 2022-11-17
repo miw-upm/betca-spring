@@ -2,7 +2,7 @@ package es.upm.miw.betca_injection;
 
 public class PrototypeInjectionOnlyMessageService {
 
-    public String getMessage() {
+    public String createMessage() {
         return "PrototypeInjectionOnlyMessageService::getMessage()";
     }
 }

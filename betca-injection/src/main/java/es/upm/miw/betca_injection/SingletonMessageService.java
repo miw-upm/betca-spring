@@ -10,20 +10,21 @@ import javax.annotation.PreDestroy;
 // @Scope("prototype") //Default singleton
 @Service  //@Component @Controller @Service @Repository @RestController
 public class SingletonMessageService {
+    private final String name;
+    private final int value;
 
-    private String name;
-
-    public SingletonMessageService(@Value("${miw.name}") String name) {  // resources/application.properties
+    public SingletonMessageService(@Value("${miw.name}") String name, @Value("${miw.value}") int value) {  // resources/application.properties
         this.name = name;
+        this.value = value;
         LogManager.getLogger(this.getClass()).info("===>>> create Bean: SingletonMessageService");
     }
 
-    public String getMessage() {
+    public String crateMessage() {
         return "SingletonMessageService::miw.name: " + this.name;
     }
 
-    public int getValue(int level) {
-        return level * 10;
+    public int createValue(int param) {
+        return this.value * param;
     }
 
     @PreDestroy

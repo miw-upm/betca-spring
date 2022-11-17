@@ -19,17 +19,17 @@ class InjectionMainMessageServiceMockTest {
     private InjectionMain mainInjection;
 
     @Test
-    void testGetMessage() {
-        BDDMockito.given(this.singletonMessageService.getMessage()).willReturn("ok");
+    void testCreateMessage() {
+        BDDMockito.given(this.singletonMessageService.crateMessage()).willReturn("ok");
 
-        assertEquals("ok", this.mainInjection.getMessage());
+        assertEquals("ok", this.mainInjection.createMessage());
     }
 
     @Test
-    void testGetValue() {
-        BDDMockito.given(this.singletonMessageService.getValue(anyInt()))
+    void testCreateValue() {
+        BDDMockito.given(this.singletonMessageService.createValue(anyInt()))
                 .willAnswer(arguments -> arguments.getArgument(0)); // devuelve el propio argumento
 
-        assertEquals(10, this.mainInjection.getValue());
+        assertEquals(10, this.mainInjection.createValue());
     }
 }

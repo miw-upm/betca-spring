@@ -18,4 +18,3 @@ public class DtoWithLombok {
     @Singular // .tag().tag().tag()
     private List<String> tags;
 }
-

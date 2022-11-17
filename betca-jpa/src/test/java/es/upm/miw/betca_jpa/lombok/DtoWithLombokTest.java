@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Log4j2
 class DtoWithLombokTest {
-
     private DtoWithLombok dto1;
     private DtoWithLombok dto2;
 

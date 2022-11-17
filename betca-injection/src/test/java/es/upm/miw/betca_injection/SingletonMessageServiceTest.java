@@ -15,14 +15,14 @@ class SingletonMessageServiceTest {
     private SingletonMessageService singletonMessageService;
 
     @Test
-    void testGetMessage() {
-        assertTrue(singletonMessageService.getMessage().length() > 0);
-        LogManager.getLogger(this.getClass()).info("===>>> message: " + singletonMessageService.getMessage());
+    void testCreateMessage() {
+        assertTrue(singletonMessageService.crateMessage().length() > 0);
+        LogManager.getLogger(this.getClass()).info("=== message: " + singletonMessageService.crateMessage());
     }
 
     @Test
-    void testGetValue() {
-        assertEquals(100, singletonMessageService.getValue(10));
-        LogManager.getLogger(this.getClass()).info("===>>> value: " + singletonMessageService.getValue(10));
+    void testCreateValue() {
+        assertEquals(6660, singletonMessageService.createValue(10));
+        LogManager.getLogger(this.getClass()).info("=== value: " + singletonMessageService.createValue(10));
     }
 }

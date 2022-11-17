@@ -15,6 +15,6 @@ public class InjectionConfiguration {
     @Scope("prototype")
     public PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService() {
         LogManager.getLogger(this.getClass()).info("===>>> create Bean: PrototypeInjectionOnlyMessageService");
-        return new PrototypeInjectionOnlyMessageService();
+        return new PrototypeInjectionOnlyMessageService();//complex creation
     }
 }

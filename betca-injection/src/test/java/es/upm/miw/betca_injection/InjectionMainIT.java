@@ -15,16 +15,16 @@ class InjectionMainIT {
     private InjectionMain injectionMain;
 
     @Test
-    void testGetMessage() {
-        assertTrue(this.injectionMain.getMessage().length() > 0);
-        LogManager.getLogger(this.getClass()).info("===>>> message: " + this.injectionMain.getMessage());
+    void testCreateMessage() {
+        assertTrue(this.injectionMain.createMessage().length() > 0);
+        LogManager.getLogger(this.getClass()).info("===>>> message: " + this.injectionMain.createMessage());
         this.injectionMain.debug();
     }
 
     @Test
-    void testGetValue() {
-        assertEquals(100, this.injectionMain.getValue());
-        LogManager.getLogger(this.getClass()).info("===>>> value: " + this.injectionMain.getValue());
+    void testCreateValue() {
+        assertEquals(6660, this.injectionMain.createValue());
+        LogManager.getLogger(this.getClass()).info("===>>> value: " + this.injectionMain.createValue());
         this.injectionMain.debug();
     }
 }
