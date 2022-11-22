@@ -18,7 +18,8 @@ public class UnRelatedEntity {
     private Integer id;
     @Column(unique = true, nullable = false)
     private String nick;
-    @Enumerated(EnumType.STRING) //@Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Gender gender;
     //@Temporal(TemporalType.TIMESTAMP) //Or TemporalType.DATE: only year, month & day)
     private LocalDateTime bornDate;
