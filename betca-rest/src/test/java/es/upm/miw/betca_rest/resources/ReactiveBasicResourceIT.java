@@ -10,6 +10,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.*;
@@ -38,7 +39,7 @@ public class ReactiveBasicResourceIT {
     void testCreate() {
         this.webTestClient
                 .post().uri(REACTIVE_BASIC)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)
@@ -78,7 +79,7 @@ public class ReactiveBasicResourceIT {
     void testUpdate() {
         this.webTestClient
                 .put().uri(REACTIVE_BASIC + ID_ID, 666)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)

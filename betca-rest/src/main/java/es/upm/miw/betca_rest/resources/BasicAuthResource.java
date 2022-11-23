@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -17,7 +18,7 @@ public class BasicAuthResource {
     @PreAuthorize("authenticated")
     @GetMapping(ID_ID)
     public Mono<Dto> read(@PathVariable(value = "id") int id) {
-        return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now()));
+        return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN));
     }
 
     @PostMapping

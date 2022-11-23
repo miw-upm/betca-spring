@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.ID_ID;
@@ -62,7 +63,7 @@ class JwtResourceIT {
         this.webTestClient
                 .mutate().defaultHeader("Authorization", "Bearer " + token).build()
                 .post().uri(JWT)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -73,7 +74,7 @@ class JwtResourceIT {
         this.webTestClient
                 .mutate().defaultHeader("Authorization", "Bearer " + token).build()
                 .post().uri(JWT)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isUnauthorized();
     }

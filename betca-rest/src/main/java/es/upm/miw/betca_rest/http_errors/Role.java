@@ -1,7 +1,7 @@
 package es.upm.miw.betca_rest.http_errors;
 
 public enum Role {
-    ADMIN, ROLE_ADMIN, MANAGER, OPERATOR, CUSTOMER;
+    ADMIN, MANAGER, OPERATOR, CUSTOMER;
 
     public static final String PREFIX = "ROLE_";
 
@@ -10,7 +10,7 @@ public enum Role {
     }
 
     public String withPrefix() {
-        return PREFIX + this.toString();
+        return PREFIX + this;
     }
 
 }

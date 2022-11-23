@@ -5,19 +5,20 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
 @RestController
 @RequestMapping(JwtResource.JWT)
+@PreAuthorize("hasRole('ADMIN') OR hasRole('OPERATOR') OR hasRole('CUSTOMER')")
 public class JwtResource {
     public static final String JWT = "/jwt";
     public static final String ID_ID = "/{id}";
 
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('OPERATOR') OR hasRole('CUSTOMER')")
     @GetMapping(ID_ID)
     public Mono<Dto> read(@PathVariable(value = "id") int id) {
-        return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now()));
+        return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN));
     }
 
     @PreAuthorize("hasRole('ADMIN') OR hasRole('OPERATOR')")

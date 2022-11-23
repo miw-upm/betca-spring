@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,7 +17,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ValidatedDto {
-
     @NotNull
     @Min(10)
     private Integer id;
@@ -27,5 +27,7 @@ public class ValidatedDto {
     @Past
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime bornDate;
+    @PositiveBigDecimal
+    private BigDecimal price;
 
 }

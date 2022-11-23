@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.ID_ID;
@@ -19,7 +20,7 @@ import static es.upm.miw.betca_rest.resources.ReactiveExceptionResource.REACTIVE
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @TestPropertySource(locations = "classpath:test.properties")
-public class ReactiveExceptionResourceIT {
+public class ExceptionResourceIT {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -60,7 +61,7 @@ public class ReactiveExceptionResourceIT {
     void testCreateIdError() {
         this.webTestClient
                 .post().uri(REACTIVE_EXCEPTIONS)
-                .body(Mono.just(new Dto(5, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(5, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isBadRequest();
     }
@@ -69,7 +70,7 @@ public class ReactiveExceptionResourceIT {
     void testCreateNameError() {
         this.webTestClient
                 .post().uri(REACTIVE_EXCEPTIONS)
-                .body(Mono.just(new Dto(20, " ", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(20, " ", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isBadRequest();
     }
@@ -79,7 +80,16 @@ public class ReactiveExceptionResourceIT {
         LocalDateTime tomorrow = LocalDateTime.now().plusDays(1);
         this.webTestClient
                 .post().uri(REACTIVE_EXCEPTIONS)
-                .body(Mono.just(new Dto(20, "daemon", Gender.FEMALE, tomorrow)), Dto.class)
+                .body(Mono.just(new Dto(20, "daemon", Gender.FEMALE, tomorrow,BigDecimal.TEN)), Dto.class)
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void testCreatePriceError() {
+        this.webTestClient
+                .post().uri(REACTIVE_EXCEPTIONS)
+                .body(Mono.just(new Dto(20, "daemon", Gender.FEMALE, LocalDateTime.now(), new BigDecimal("-1.0"))), Dto.class)
                 .exchange()
                 .expectStatus().isBadRequest();
     }

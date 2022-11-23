@@ -8,9 +8,12 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static es.upm.miw.betca_rest.resources.BasicResource.BASIC;
 import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.*;
@@ -39,7 +42,7 @@ public class BasicResourceIT {
     void testCreate() {
         this.webTestClient
                 .post().uri(BASIC)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)
@@ -79,7 +82,7 @@ public class BasicResourceIT {
     void testUpdate() {
         this.webTestClient
                 .put().uri(BASIC + ID_ID, 666)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)
@@ -90,6 +93,20 @@ public class BasicResourceIT {
                     assertEquals(Gender.FEMALE, dto.getGender());
                     assertNotNull(dto.getBornDate());
                 });
+    }
+
+    @Test
+    void testUpdateNames() {
+        this.webTestClient
+                .patch().uri(BASIC)
+                .body(BodyInserters.fromValue(List.of(new UpdatingDto(666, "daemon"),new UpdatingDto(999, "daemon"))))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(Dto.class)
+                .value(dtos -> assertTrue(dtos.stream()
+                                .allMatch(dto -> "daemon".equals(dto.getName()))
+                        )
+                );
     }
 
     @Test

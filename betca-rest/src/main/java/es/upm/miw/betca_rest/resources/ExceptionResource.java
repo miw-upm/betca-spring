@@ -2,9 +2,9 @@ package es.upm.miw.betca_rest.resources;
 
 import es.upm.miw.betca_rest.http_errors.NotFoundException;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @RestController
@@ -19,7 +19,7 @@ public class ExceptionResource {
         if (id < 1) {
             throw new NotFoundException("id:" + id);
         }
-        return new ValidatedDto(id, "daemon", Gender.FEMALE, LocalDateTime.now());
+        return new ValidatedDto(id, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN);
     }
 
     @PostMapping

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static es.upm.miw.betca_rest.resources.BasicAuthResource.BASIC_AUTH;
@@ -48,7 +49,7 @@ class BasicAuthResourceIT {
         this.webTestClient
                 .mutate().filter(basicAuthentication("admin", "123456")).build()
                 .post().uri(BASIC_AUTH)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -58,7 +59,7 @@ class BasicAuthResourceIT {
         this.webTestClient
                 .mutate().filter(basicAuthentication("operator", "123456")).build()
                 .post().uri(BASIC_AUTH)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -68,7 +69,7 @@ class BasicAuthResourceIT {
         this.webTestClient
                 .mutate().filter(basicAuthentication("customer", "123456")).build()
                 .post().uri(BASIC_AUTH)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now())), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isUnauthorized();
     }

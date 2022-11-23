@@ -36,12 +36,12 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .formLogin().disable()
                 .logout().disable()
-                .httpBasic()
-                .and().addFilterAt(this.JwtAuthenticationWebFilter(), SecurityWebFiltersOrder.FIRST)
+                .httpBasic().and()
+                .addFilterAt(this.jwtAuthenticationWebFilter(), SecurityWebFiltersOrder.FIRST)
                 .build();
     }
 
-    private AuthenticationWebFilter JwtAuthenticationWebFilter() {
+    private AuthenticationWebFilter jwtAuthenticationWebFilter() {
         AuthenticationWebFilter bearerAuthenticationFilter =
                 new AuthenticationWebFilter(new JwtReactiveAuthenticationManager(jwtService));
         bearerAuthenticationFilter.setServerAuthenticationConverter(serverWebExchange -> {
@@ -58,7 +58,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public ReactiveAuthenticationManager reactiveAuthenticationManager(
+    public ReactiveAuthenticationManager reactiveAuthenticationManager(                //httpBasic: Basic Auth
             CustomReactiveUserDetailsService customerReactiveUserDetailsService,
             PasswordEncoder passwordEncoder
     ) {

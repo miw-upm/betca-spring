@@ -5,7 +5,6 @@ import javax.validation.ConstraintValidatorContext;
 import java.math.BigDecimal;
 
 public class PositiveBigDecimalValidator implements ConstraintValidator<PositiveBigDecimal, BigDecimal> {
-
     @Override
     public void initialize(PositiveBigDecimal constraint) {
         // Empty, not operation

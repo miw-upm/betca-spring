@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @RestController
@@ -22,7 +23,7 @@ public class ReactiveBasicResource {
 
     @GetMapping(ID_ID)
     public Mono<Dto> read(@PathVariable(value = "id") int id) {
-        return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now()));
+        return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN));
     }
 
     @PutMapping(ID_ID)
@@ -40,9 +41,9 @@ public class ReactiveBasicResource {
     @GetMapping(SEARCH)
     public Flux<Dto> findByName(@RequestParam String name) {
         return Flux.just(
-                new Dto(1, name, Gender.MALE, LocalDateTime.now()),
-                new Dto(2, name, Gender.FEMALE, LocalDateTime.now()),
-                new Dto(3, name, Gender.MALE, LocalDateTime.now())
+                new Dto(1, name, Gender.MALE, LocalDateTime.now(), BigDecimal.TEN),
+                new Dto(2, name, Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN),
+                new Dto(3, name, Gender.MALE, LocalDateTime.now(), BigDecimal.TEN)
         );
     }
 }
