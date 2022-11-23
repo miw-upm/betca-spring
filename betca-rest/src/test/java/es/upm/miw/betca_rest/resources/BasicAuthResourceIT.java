@@ -67,7 +67,7 @@ class BasicAuthResourceIT {
     @Test
     void testCreateUnauthorizedException() {
         this.webTestClient
-                .mutate().filter(basicAuthentication("1", "123456")).build()
+                .mutate().filter(basicAuthentication("4", "123456")).build()
                 .post().uri(BASIC_AUTH)
                 .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
