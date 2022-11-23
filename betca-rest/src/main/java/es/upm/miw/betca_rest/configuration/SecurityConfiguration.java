@@ -36,35 +36,35 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .formLogin().disable()
                 .logout().disable()
-                .httpBasic().and()
+                .httpBasic().and() // Basic Auth
                 .addFilterAt(this.jwtAuthenticationWebFilter(), SecurityWebFiltersOrder.FIRST)
                 .build();
     }
 
-    private AuthenticationWebFilter jwtAuthenticationWebFilter() {
+    private AuthenticationWebFilter jwtAuthenticationWebFilter() { // Bearer Auth
         AuthenticationWebFilter bearerAuthenticationFilter =
                 new AuthenticationWebFilter(new JwtReactiveAuthenticationManager(jwtService));
         bearerAuthenticationFilter.setServerAuthenticationConverter(serverWebExchange -> {
-            String token = jwtService.extractBearerToken( // token is not verified
-                    serverWebExchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION));
+            String token = jwtService.extractBearerToken( // x.x.x is not verified
+                    serverWebExchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION)); // "Bearer x.x.x"
             return Mono.just(new UsernamePasswordAuthenticationToken(token, token)); // it is not authenticated
         });
         return bearerAuthenticationFilter;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() { // Basic Auth
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public ReactiveAuthenticationManager reactiveAuthenticationManager(                //httpBasic: Basic Auth
-            CustomReactiveUserDetailsService customerReactiveUserDetailsService,
-            PasswordEncoder passwordEncoder
+    public ReactiveAuthenticationManager reactiveAuthenticationManager(                // Basic Auth
+                                                                                       CustomReactiveUserDetailsService customerReactiveUserDetailsService,
+                                                                                       PasswordEncoder passwordEncoder
     ) {
         UserDetailsRepositoryReactiveAuthenticationManager manager =
-                new UserDetailsRepositoryReactiveAuthenticationManager(customerReactiveUserDetailsService);
-        manager.setPasswordEncoder(passwordEncoder);
+                new UserDetailsRepositoryReactiveAuthenticationManager(customerReactiveUserDetailsService);  // Users
+        manager.setPasswordEncoder(passwordEncoder);  // Encode
         return manager;
     }
 

@@ -12,7 +12,7 @@ class SingletonMessageServiceWithoutInjectionTest {
 
     @BeforeEach
     void before() {
-        this.singletonMessageService = new SingletonMessageService("test",1);
+        this.singletonMessageService = new SingletonMessageService("test", 1);
     }
 
     @Test
@@ -20,6 +20,7 @@ class SingletonMessageServiceWithoutInjectionTest {
         assertTrue(this.singletonMessageService.crateMessage().length() > 0);
         LogManager.getLogger(this.getClass()).info("--- NOTE, without injection => message: " + this.singletonMessageService.crateMessage());
     }
+
     @Test
     void testCreateValue() {
         assertEquals(10, singletonMessageService.createValue(10));

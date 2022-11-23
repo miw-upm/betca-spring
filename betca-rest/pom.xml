@@ -14,7 +14,7 @@
         <!-- various -->
         <jwt.version>3.4.1</jwt.version>
         <itextpdf.version>7.0.2</itextpdf.version>
-        <openapi.version>1.4.8</openapi.version>
+        <openapi.version>1.6.13</openapi.version>
     </properties>
 
     <dependencies>

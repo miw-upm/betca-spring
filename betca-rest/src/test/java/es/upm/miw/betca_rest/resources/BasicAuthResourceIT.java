@@ -29,7 +29,7 @@ class BasicAuthResourceIT {
     @Test
     void testReadById() {
         this.webTestClient
-                .mutate().filter(basicAuthentication("customer", "123456")).build()
+                .mutate().filter(basicAuthentication("1", "123456")).build()
                 .get().uri(BASIC_AUTH + ID_ID, 666)
                 .exchange()
                 .expectStatus().isOk();
@@ -38,7 +38,7 @@ class BasicAuthResourceIT {
     @Test
     void testReadByIdUnauthorizedException() {
         this.webTestClient
-                .mutate().filter(basicAuthentication("customer", "kk")).build()
+                .mutate().filter(basicAuthentication("1", "kk")).build()
                 .get().uri(BASIC_AUTH + ID_ID, 666)
                 .exchange()
                 .expectStatus().isUnauthorized();
@@ -47,9 +47,9 @@ class BasicAuthResourceIT {
     @Test
     void testCreateWithAdmin() {
         this.webTestClient
-                .mutate().filter(basicAuthentication("admin", "123456")).build()
+                .mutate().filter(basicAuthentication("3", "123456")).build()
                 .post().uri(BASIC_AUTH)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk();
     }
@@ -57,7 +57,7 @@ class BasicAuthResourceIT {
     @Test
     void testCreateWithOperator() {
         this.webTestClient
-                .mutate().filter(basicAuthentication("operator", "123456")).build()
+                .mutate().filter(basicAuthentication("2", "123456")).build()
                 .post().uri(BASIC_AUTH)
                 .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
@@ -67,9 +67,9 @@ class BasicAuthResourceIT {
     @Test
     void testCreateUnauthorizedException() {
         this.webTestClient
-                .mutate().filter(basicAuthentication("customer", "123456")).build()
+                .mutate().filter(basicAuthentication("1", "123456")).build()
                 .post().uri(BASIC_AUTH)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isUnauthorized();
     }

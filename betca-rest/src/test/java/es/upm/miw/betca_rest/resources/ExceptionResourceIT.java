@@ -70,7 +70,7 @@ public class ExceptionResourceIT {
     void testCreateNameError() {
         this.webTestClient
                 .post().uri(REACTIVE_EXCEPTIONS)
-                .body(Mono.just(new Dto(20, " ", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
+                .body(Mono.just(new Dto(20, " ", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isBadRequest();
     }
@@ -80,7 +80,7 @@ public class ExceptionResourceIT {
         LocalDateTime tomorrow = LocalDateTime.now().plusDays(1);
         this.webTestClient
                 .post().uri(REACTIVE_EXCEPTIONS)
-                .body(Mono.just(new Dto(20, "daemon", Gender.FEMALE, tomorrow,BigDecimal.TEN)), Dto.class)
+                .body(Mono.just(new Dto(20, "daemon", Gender.FEMALE, tomorrow, BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isBadRequest();
     }

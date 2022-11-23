@@ -15,6 +15,7 @@ public class AnyEntity {
     @GeneratedValue
     private Integer id;
     private String value;
+
     public AnyEntity(String value) {
         this.value = value;
     }

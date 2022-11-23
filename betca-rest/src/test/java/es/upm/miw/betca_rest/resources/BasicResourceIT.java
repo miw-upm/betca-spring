@@ -16,7 +16,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static es.upm.miw.betca_rest.resources.BasicResource.BASIC;
-import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.*;
+import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.ID_ID;
+import static es.upm.miw.betca_rest.resources.ReactiveBasicResource.SEARCH;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -42,7 +43,7 @@ public class BasicResourceIT {
     void testCreate() {
         this.webTestClient
                 .post().uri(BASIC)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)
@@ -99,7 +100,7 @@ public class BasicResourceIT {
     void testUpdateNames() {
         this.webTestClient
                 .patch().uri(BASIC)
-                .body(BodyInserters.fromValue(List.of(new UpdatingDto(666, "daemon"),new UpdatingDto(999, "daemon"))))
+                .body(BodyInserters.fromValue(List.of(new UpdatingDto(666, "daemon"), new UpdatingDto(999, "daemon"))))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(Dto.class)

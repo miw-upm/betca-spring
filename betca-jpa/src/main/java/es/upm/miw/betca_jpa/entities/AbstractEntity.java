@@ -7,6 +7,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractEntity extends AbstractRootEntity {
     private String description;
+
     public AbstractEntity() {
     }
 

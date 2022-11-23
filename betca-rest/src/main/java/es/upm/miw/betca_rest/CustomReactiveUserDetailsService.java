@@ -19,20 +19,20 @@ public class CustomReactiveUserDetailsService implements ReactiveUserDetailsServ
     // @Autowired private UserRepository userRepository;
 
     @Override
-    public Mono<UserDetails> findByUsername(String username) {
+    public Mono<UserDetails> findByUsername(String mobile) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if ("customer".equals(username)) {  // Se accede a UserDao
+        if ("1".equals(mobile)) {  // userRepository.findByMobile(mobile)
             authorities.add(new SimpleGrantedAuthority(Role.CUSTOMER.withPrefix()));
-        } else if ("operator".equals(username)) {
+        } else if ("2".equals(mobile)) {
             authorities.add(new SimpleGrantedAuthority(Role.OPERATOR.withPrefix()));
-        } else if ("admin".equals(username)) {
+        } else if ("3".equals(mobile)) {
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.withPrefix()));
         } else {
-            return Mono.error(new UsernameNotFoundException("Username not found"));
+            return Mono.error(new UsernameNotFoundException("Mobile not found: '" + mobile + "'"));
         }
         return Mono.just(org.springframework.security.core.userdetails.User.builder()
-                .username(username)
-                .password(new BCryptPasswordEncoder().encode("123456"))
+                .username(mobile)
+                .password(new BCryptPasswordEncoder().encode("123456")) // DataBase password is encoded
                 .authorities(authorities)
                 .build());
     }

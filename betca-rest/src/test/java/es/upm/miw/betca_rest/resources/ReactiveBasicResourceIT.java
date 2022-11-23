@@ -79,7 +79,7 @@ public class ReactiveBasicResourceIT {
     void testUpdate() {
         this.webTestClient
                 .put().uri(REACTIVE_BASIC + ID_ID, 666)
-                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(),BigDecimal.TEN)), Dto.class)
+                .body(Mono.just(new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN)), Dto.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Dto.class)

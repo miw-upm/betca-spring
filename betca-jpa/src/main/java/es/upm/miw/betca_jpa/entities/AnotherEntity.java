@@ -15,6 +15,7 @@ public class AnotherEntity {
     @GeneratedValue
     private Integer id;
     private String value;
+
     public AnotherEntity(String value) {
         this.value = value;
     }
