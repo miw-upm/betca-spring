@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,8 +79,9 @@ class UnRelatedDaoIT {
 
     @Test
     void testFindIdByIdBetween() {
-        int id = unRelatedDao.findByNickIgnoreCase("nick1").getId();
-        assertEquals(2, unRelatedDao.findIdByIdBetween(id - 1, id + 2).size());
+        Optional<UnRelatedEntity> entity = unRelatedDao.findByNickIgnoreCase("nick1");
+        assertTrue(entity.isPresent());
+        assertEquals(2, unRelatedDao.findIdByIdBetween(entity.get().getId() - 1, entity.get().getId() + 2).size());
     }
 
 

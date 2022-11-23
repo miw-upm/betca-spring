@@ -3,6 +3,7 @@ package es.upm.miw.betca_jpa.daos;
 import es.upm.miw.betca_jpa.TestConfig;
 import es.upm.miw.betca_jpa.entities.AggregationEntity;
 import es.upm.miw.betca_jpa.entities.AnotherEntity;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestConfig
@@ -43,6 +45,13 @@ class AggregationDaoIT {
         assertTrue(aggregationDao.findById(aggregationEntity.getId()).isPresent());
         Assertions.assertEquals(2,
                 aggregationDao.findById(aggregationEntity.getId()).get().getAnotherEntityList().size());
+    }
+
+    @Test
+    void testFindNickByAnotherEntityValue(){
+        assertFalse(aggregationDao.findNickByAnotherEntityValue("zero").isEmpty());
+        assertTrue(aggregationDao.findNickByAnotherEntityValue("kk").isEmpty());
+        LogManager.getLogger(this.getClass()).debug("===>>> message: " + aggregationDao.findNickByAnotherEntityValue("zero"));
     }
 
     @AfterEach

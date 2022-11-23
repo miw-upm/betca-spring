@@ -9,10 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface UnRelatedDao extends JpaRepository<UnRelatedEntity, Integer> {
     // Consulta: por Nombre de Método
-    UnRelatedEntity findByNickIgnoreCase(String nick);
+    Optional<UnRelatedEntity> findByNickIgnoreCase(String nick);
     List<UnRelatedEntity> findFirst3ByNickStartingWith(String prefix);
     List<UnRelatedEntity> findByIdGreaterThan(int id, Pageable pageable);
     List<UnRelatedEntity> findByNickIn(Collection<String> values);
