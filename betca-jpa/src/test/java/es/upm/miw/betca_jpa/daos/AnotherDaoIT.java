@@ -86,11 +86,13 @@ class AnotherDaoIT {
                 .anotherEntityList(Arrays.asList(anothersB)).build();
         this.aggregationDao.save(aggregationA);
         this.aggregationDao.save(aggregationB);
+
         long time1 = System.currentTimeMillis();
         List<String> values1 = anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListValue("b-666");
         long timeA = System.currentTimeMillis() - time1;
         LogManager.getLogger(this.getClass()).debug("===>>> message: (" + timeA + ")" + values1);
         long time2 = System.currentTimeMillis();
+
         List<String> x = aggregationDao.findAll().stream()
                 .filter(aggregationEntity -> aggregationEntity.getAnotherEntityList().stream()
                         .anyMatch(anotherEntity -> "b-666".equals(anotherEntity.getValue())))

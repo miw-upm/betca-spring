@@ -8,6 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -48,7 +50,12 @@ public class JwtResource {
 
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping(ID_ID)
-    public Mono<Dto> read(@PathVariable(value = "id") int id) {
+    public Mono<Dto> read(@PathVariable int id) {
+        System.out.println(">>>>>>>>>>>>>>>");
+        ReactiveSecurityContextHolder.getContext()
+                .map(SecurityContext::getAuthentication)
+                .doOnNext(auth -> System.out.println(">>>>>>>>>>>>>>>"+String.valueOf(auth)))
+                .then();
         return Mono.just(new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN));
     }
 

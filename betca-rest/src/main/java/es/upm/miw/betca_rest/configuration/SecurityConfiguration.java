@@ -58,9 +58,9 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public ReactiveAuthenticationManager reactiveAuthenticationManager(                // Basic Auth
-                                                                                       CustomReactiveUserDetailsService customerReactiveUserDetailsService,
-                                                                                       PasswordEncoder passwordEncoder
+    public ReactiveAuthenticationManager reactiveAuthenticationManager(
+            CustomReactiveUserDetailsService customerReactiveUserDetailsService,
+            PasswordEncoder passwordEncoder
     ) {
         UserDetailsRepositoryReactiveAuthenticationManager manager =
                 new UserDetailsRepositoryReactiveAuthenticationManager(customerReactiveUserDetailsService);  // Users
