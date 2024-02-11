@@ -12,5 +12,5 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class EmbeddableEntity {
     private Integer number;
-    private String value;
+    private String name;
 }

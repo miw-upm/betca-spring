@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AnotherDao extends JpaRepository<AnotherEntity, Integer> {
-    @Query("SELECT anotherList.value FROM AggregationEntity agg JOIN agg.anotherEntityList anotherList")
+    @Query("SELECT anotherList.name FROM AggregationEntity agg JOIN agg.anotherEntityList anotherList")
     List<String> findValueByAnyAggregationEntity();
 
-    @Query("SELECT another.value FROM AggregationEntity agg " +
+    @Query("SELECT another.name FROM AggregationEntity agg " +
             "JOIN agg.anotherEntity another " +
-            "JOIN agg.anotherEntityList anotherList WHERE anotherList.value = ?1")
-    List<String> findValueByAggregationEntityAnyMatchAnotherEntityListValue(String value);
+            "JOIN agg.anotherEntityList anotherList WHERE anotherList.name = ?1")
+    List<String> findValueByAggregationEntityAnyMatchAnotherEntityListName(String name);
 }

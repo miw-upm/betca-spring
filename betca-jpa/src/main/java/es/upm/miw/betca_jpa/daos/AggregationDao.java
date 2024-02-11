@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AggregationDao extends JpaRepository<AggregationEntity, Integer> {
-    @Query("SELECT agg.nick FROM AggregationEntity agg WHERE agg.anotherEntity.value = ?1")
-    List<String> findNickByAnotherEntityValue(String value);
+    @Query("SELECT agg.nick FROM AggregationEntity agg WHERE agg.anotherEntity.name = ?1")
+    List<String> findNickByAnotherEntityName(String name);
 }

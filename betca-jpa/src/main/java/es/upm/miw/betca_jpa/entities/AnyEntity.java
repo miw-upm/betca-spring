@@ -15,9 +15,9 @@ public class AnyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String value;
+    private String name;
 
-    public AnyEntity(String value) {
-        this.value = value;
+    public AnyEntity(String name) {
+        this.name = name;
     }
 }

@@ -21,4 +21,5 @@ public class CompositionEntity {
     @JoinColumn(name = "anyEntity_id", nullable = false)
     @Singular("anyEntity")
     private List<AnyEntity> anyEntityList;
+
 }

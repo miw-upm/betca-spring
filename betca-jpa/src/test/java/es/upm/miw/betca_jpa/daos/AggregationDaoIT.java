@@ -49,9 +49,9 @@ class AggregationDaoIT {
 
     @Test
     void testFindNickByAnotherEntityValue() {
-        assertFalse(aggregationDao.findNickByAnotherEntityValue("zero").isEmpty());
-        assertTrue(aggregationDao.findNickByAnotherEntityValue("kk").isEmpty());
-        LogManager.getLogger(this.getClass()).debug("===>>> message: " + aggregationDao.findNickByAnotherEntityValue("zero"));
+        assertFalse(aggregationDao.findNickByAnotherEntityName("zero").isEmpty());
+        assertTrue(aggregationDao.findNickByAnotherEntityName("kk").isEmpty());
+        LogManager.getLogger(this.getClass()).debug("===>>> message: " + aggregationDao.findNickByAnotherEntityName("zero"));
     }
 
     @AfterEach

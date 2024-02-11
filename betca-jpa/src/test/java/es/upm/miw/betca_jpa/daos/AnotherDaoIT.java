@@ -59,8 +59,8 @@ class AnotherDaoIT {
 
     @Test
     void testFindValueByAggregationEntityAnotherEntityListValue() {
-        assertFalse(anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListValue("b-two").isEmpty());
-        LogManager.getLogger(this.getClass()).debug("===>>> message: " + anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListValue("b-two"));
+        assertFalse(anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListName("b-two").isEmpty());
+        LogManager.getLogger(this.getClass()).debug("===>>> message: " + anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListName("b-two"));
     }
 
     @Test
@@ -88,16 +88,16 @@ class AnotherDaoIT {
         this.aggregationDao.save(aggregationB);
 
         long time1 = System.currentTimeMillis();
-        List<String> values1 = anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListValue("b-666");
+        List<String> values1 = anotherDao.findValueByAggregationEntityAnyMatchAnotherEntityListName("b-666");
         long timeA = System.currentTimeMillis() - time1;
         LogManager.getLogger(this.getClass()).debug("===>>> message: (" + timeA + ")" + values1);
         long time2 = System.currentTimeMillis();
 
         List<String> x = aggregationDao.findAll().stream()
                 .filter(aggregationEntity -> aggregationEntity.getAnotherEntityList().stream()
-                        .anyMatch(anotherEntity -> "b-666".equals(anotherEntity.getValue())))
+                        .anyMatch(anotherEntity -> "b-666".equals(anotherEntity.getName())))
                 .map(AggregationEntity::getAnotherEntity)
-                .map(AnotherEntity::getValue)
+                .map(AnotherEntity::getName)
                 .collect(Collectors.toList());
         long timeB = System.currentTimeMillis() - time1;
         LogManager.getLogger(this.getClass()).debug("===>>> message: (" + timeB + ")" + values1);

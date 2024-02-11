@@ -40,7 +40,7 @@ class CompositionDaoIT {
         assertTrue(this.compositionDao.findById(entity.getId()).isPresent());
         CompositionEntity entity2 = this.compositionDao.findById(entity.getId()).get();
         assertEquals("Nick", entity2.getNick());
-        assertEquals("daemon", entity2.getEmbeddableEntity().getValue());
+        assertEquals("daemon", entity2.getEmbeddableEntity().getName());
         assertEquals(2, entity2.getAnyEntityList().size());
 
     }

@@ -12,5 +12,5 @@ import java.io.Serializable;
 public class AnyClass implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer number;
-    private String value;
+    private String name;
 }

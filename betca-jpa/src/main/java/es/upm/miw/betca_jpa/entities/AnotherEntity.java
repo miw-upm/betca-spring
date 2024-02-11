@@ -14,9 +14,9 @@ public class AnotherEntity {
     @Id
     @GeneratedValue
     private Integer id;
-    private String value;
+    private String name;
 
-    public AnotherEntity(String value) {
-        this.value = value;
+    public AnotherEntity(String name) {
+        this.name = name;
     }
 }
