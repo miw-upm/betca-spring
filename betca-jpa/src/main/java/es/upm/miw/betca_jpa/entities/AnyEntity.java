@@ -1,19 +1,20 @@
 package es.upm.miw.betca_jpa.entities;
 
+import jakarta.persistence.GenerationType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(name = "any_entity")
 public class AnyEntity {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String value;
 
     public AnyEntity(String value) {

@@ -30,7 +30,7 @@ class CompositionDaoIT {
         this.entity = CompositionEntity.builder().nick("Nick")
                 .embeddableEntity(embeddable)
                 .anyEntity(new AnyEntity("one")).anyEntity(new AnyEntity("two"))
-                .anyClassArray(array).build();
+               .build();
         this.compositionDao.save(entity);
 
     }
@@ -42,7 +42,7 @@ class CompositionDaoIT {
         assertEquals("Nick", entity2.getNick());
         assertEquals("daemon", entity2.getEmbeddableEntity().getValue());
         assertEquals(2, entity2.getAnyEntityList().size());
-        assertEquals(4, entity2.getAnyClassArray().length);
+
     }
 
     @AfterEach

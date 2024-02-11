@@ -1,6 +1,6 @@
 package es.upm.miw.betca_jpa.entities;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class ConcreteEntity extends AbstractEntity {

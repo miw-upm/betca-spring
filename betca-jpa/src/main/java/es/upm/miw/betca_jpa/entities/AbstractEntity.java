@@ -1,6 +1,6 @@
 package es.upm.miw.betca_jpa.entities;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 //@Entity: se mapea en tabla independiente
 //Se indica que no se mapea en tabla, sino que se realiza en la tabla de la clases hija

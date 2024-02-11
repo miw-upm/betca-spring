@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 // @Service("singletonMessageService") Default
 // @Scope("prototype") //Default singleton
