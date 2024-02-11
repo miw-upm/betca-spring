@@ -1,6 +1,9 @@
 package es.upm.miw.betca_jpa.entities;
 
 import jakarta.persistence.Entity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 public class OtherConcreteEntity extends AbstractEntity {

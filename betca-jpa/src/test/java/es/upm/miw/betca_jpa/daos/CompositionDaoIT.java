@@ -21,7 +21,7 @@ class CompositionDaoIT {
 
     private CompositionEntity entity;
 
-    private AnyClass[] array = {new AnyClass(0, "zero"), new AnyClass(1, "one"),
+    private final AnyClass[] array = {new AnyClass(0, "zero"), new AnyClass(1, "one"),
             new AnyClass(2, "two"), new AnyClass(3, "three")};
 
     @BeforeEach
@@ -30,7 +30,7 @@ class CompositionDaoIT {
         this.entity = CompositionEntity.builder().nick("Nick")
                 .embeddableEntity(embeddable)
                 .anyEntity(new AnyEntity("one")).anyEntity(new AnyEntity("two"))
-               .build();
+                .build();
         this.compositionDao.save(entity);
 
     }

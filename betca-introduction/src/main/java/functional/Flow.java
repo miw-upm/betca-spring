@@ -2,17 +2,15 @@ package functional;
 
 import org.apache.logging.log4j.LogManager;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Flow {
 
     public Stream<String> streamFromList() {
-        return Arrays.asList("0", "1", "2").stream();
+        return Stream.of("0", "1", "2");
     }
 
     public IntStream streamFromRange() {
@@ -36,7 +34,7 @@ public class Flow {
     }
 
     public List<Integer> toList(Stream<Integer> stream) {
-        return stream.collect(Collectors.toList());
+        return stream.toList();
     }
 
     public Integer[] toArray(Stream<Integer> stream) {
@@ -59,8 +57,8 @@ public class Flow {
         return stream.distinct();
     }
 
-    public Stream<String> debug(Stream<String> stream) {
-        return stream.peek(LogManager.getLogger(this.getClass())::debug);
+    public void debug(Stream<String> stream) {
+        stream.forEach(LogManager.getLogger(this.getClass())::debug);
     }
 
     public Stream<String> mapToString(Stream<Integer> stream) {

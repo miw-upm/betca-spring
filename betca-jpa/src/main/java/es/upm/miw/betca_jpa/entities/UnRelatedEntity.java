@@ -1,8 +1,8 @@
 package es.upm.miw.betca_jpa.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 

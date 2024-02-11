@@ -1,9 +1,8 @@
 package es.upm.miw.betca_jpa.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 
 @Data
 @NoArgsConstructor

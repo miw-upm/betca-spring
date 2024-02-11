@@ -1,8 +1,8 @@
 package es.upm.miw.betca_jpa.entities;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
 import java.util.List;
 
 @Builder
@@ -12,7 +12,7 @@ import java.util.List;
 @Entity(name = "composition_entity")
 public class CompositionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     private String nick;
     @Embedded
@@ -21,5 +21,4 @@ public class CompositionEntity {
     @JoinColumn(name = "anyEntity_id", nullable = false)
     @Singular("anyEntity")
     private List<AnyEntity> anyEntityList;
-
 }
