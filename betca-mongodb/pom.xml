@@ -16,6 +16,10 @@
     <name>${project.groupId}.${project.artifactId}</name>
     <description>Demo project for Spring Boot</description>
 
+    <properties>
+        <de.flapdoodle.embed.mongo.spring3x.version>4.12.6</de.flapdoodle.embed.mongo.spring3x.version>
+    </properties>
+
     <dependencies>
         <!-- MongoDB -->
         <dependency>
@@ -39,8 +43,8 @@
         <!-- Mongodb embedded: Test -->
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
-            <artifactId>de.flapdoodle.embed.mongo.spring30x</artifactId>
-            <version>4.9.3</version>
+            <artifactId>de.flapdoodle.embed.mongo.spring3x</artifactId>
+            <version>${de.flapdoodle.embed.mongo.spring3x.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

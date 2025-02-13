@@ -21,17 +21,17 @@ class DtoWithLombokTest {
 
     @Test
     void testGetters() {
-        log.info("===>>> getter:" + this.dto1.getName());
+        log.info("===>>> getter:{}", this.dto1.getName());
     }
 
     @Test
     void testToString() {
-        log.info("===>>> toString:" + this.dto1.toString());
+        log.info("===>>> toString:{}", this.dto1.toString());
     }
 
     @Test
     void testHashCode() {
-        log.info("===>>> hashCode:" + this.dto1.hashCode());
+        log.info("===>>> hashCode:{}", this.dto1.hashCode());
     }
 
     @Test
@@ -42,6 +42,6 @@ class DtoWithLombokTest {
     @Test
     void testCollections() {
         DtoWithLombok dto3 = DtoWithLombok.builder().id("1").tag("tag1").tag("tag2").build();
-        log.info("dto3: " + dto3.toString());
+        log.info("dto3: {}", dto3.toString());
     }
 }
