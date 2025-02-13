@@ -1,10 +1,9 @@
 package es.upm.miw.betca_injection;
 
+import jakarta.annotation.PreDestroy;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import jakarta.annotation.PreDestroy;
 
 // @Service("singletonMessageService") Default
 // @Scope("prototype") //Default singleton

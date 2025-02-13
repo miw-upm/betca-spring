@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component // @Service @Repository @Controller
 public class InjectionMain {
 
-    private SingletonMessageService singletonMessageService;
+    private final SingletonMessageService singletonMessageService;
 
-    private PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService;
+    private final PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService;
 
     @Autowired
     public InjectionMain(SingletonMessageService singletonMessageService,
