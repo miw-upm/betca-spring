@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class DecimalCollectionWithStream {
-    private List<Double> collection; // Error: Stream<Double>, un solo uso
+    private final List<Double> collection; // Error: Stream<Double>, un solo uso
 
     public DecimalCollectionWithStream() {
         this.collection = new ArrayList<>();

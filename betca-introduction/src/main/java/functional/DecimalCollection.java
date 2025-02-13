@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DecimalCollection {
-    private List<Double> collection;
+    private final List<Double> collection;
 
     public DecimalCollection() {
         this.collection = new ArrayList<>();

@@ -2,6 +2,7 @@ package functional;
 
 import org.apache.logging.log4j.LogManager;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Searches {
@@ -17,7 +18,7 @@ public class Searches {
         return new UsersDatabase().findAll()
                 .filter(user -> userFamilyName.equals(user.getFamilyName()))
                 .flatMap(user -> user.getFractions().stream()
-                        .filter(i -> null != i)
+                        .filter(Objects::nonNull)
                 )
                 .map(Fraction::getNumerator);
     }
