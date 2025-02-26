@@ -1,13 +1,13 @@
-package es.upm.miw.betca_injection;
+package es.upm.miw.betca.injection;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-// @PropertySource("classpath:miw.properties")
-// @PropertySource("file:///C:/JBB/miw.properties")
-// @PropertySource("http://server/application.properties")
+// @PropertySource("classpath:miw.yml")
+// @PropertySource("file:///C:/JBB/miw.yml")
+// @PropertySource("http://server/application.yml")
 @Configuration
 public class InjectionConfiguration {
 

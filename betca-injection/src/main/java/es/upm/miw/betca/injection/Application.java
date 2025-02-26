@@ -1,9 +1,9 @@
-package es.upm.miw.betca_injection;
+package es.upm.miw.betca.injection;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication  // mvn spring-boot:run
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {

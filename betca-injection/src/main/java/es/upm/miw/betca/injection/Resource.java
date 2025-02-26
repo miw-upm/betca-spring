@@ -1,19 +1,17 @@
-package es.upm.miw.betca_injection;
+package es.upm.miw.betca.injection;
 
 import org.apache.logging.log4j.LogManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component // @Service @Repository @Controller
-public class InjectionMain {
+public class Resource {
 
-    private final SingletonMessageService singletonMessageService;
+    private final MessageService singletonMessageService;
 
     private final PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService;
 
-    @Autowired
-    public InjectionMain(SingletonMessageService singletonMessageService,
-                         PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService) {
+    public Resource(MessageService singletonMessageService,
+                    PrototypeInjectionOnlyMessageService prototypeInjectionOnlyMessageService) {
         this.singletonMessageService = singletonMessageService;
         this.prototypeInjectionOnlyMessageService = prototypeInjectionOnlyMessageService;
     }
@@ -23,7 +21,7 @@ public class InjectionMain {
     }
 
     public int createValue() {
-        return this.singletonMessageService.createValue(10);
+        return this.singletonMessageService.runValue(10);
     }
 
     public void debug() {
