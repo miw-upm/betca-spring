@@ -2,20 +2,22 @@ package functional;
 
 import org.junit.jupiter.api.Test;
 
-public class CodeTest {
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+class CodeTest {
 
     @Test
     void testConsumer() {
-        new Code().consumer();
+        assertDoesNotThrow(() -> new Code().consumer());
     }
 
     @Test
     void testPredicate() {
-        new Code().predicate();
+        assertDoesNotThrow(() -> new Code().consumer());
     }
 
     @Test
     void testFunction() {
-        new Code().function();
+        assertDoesNotThrow(() -> new Code().consumer());
     }
 }

@@ -29,7 +29,7 @@ public class MessageService {
     }
 
     public int runValue(int param) {
-        return this.value*param;
+        return this.value * param;
     }
 
     @PreDestroy

@@ -1,0 +1,4 @@
+# logging
+logging:
+  level:
+    es.upm.miw: DEBUG

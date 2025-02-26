@@ -75,7 +75,7 @@ class FlowTest {
 
     @Test
     void testDebug() {
-        new Flow().debug(Stream.of("0", "1"));
+        assertDoesNotThrow(() -> new Flow().debug(Stream.of("0", "1")));
     }
 
     @Test

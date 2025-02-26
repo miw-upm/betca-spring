@@ -1,6 +1,7 @@
 package es.upm.miw.betca_jpa.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,4 @@ public abstract class AbstractRootEntity {
     public AbstractRootEntity(String nick) {
         this.nick = nick;
     }
-
-
 }
