@@ -15,10 +15,8 @@
         <de.flapdoodle.embed.mongo.spring3x.version>4.12.6</de.flapdoodle.embed.mongo.spring3x.version>
         <!-- jwt -->
         <jwt.version>4.4.0</jwt.version>
-        <!-- pdf -->
-        <itextpdf.version>7.0.2</itextpdf.version>
         <!-- OpenAPI -->
-        <springdoc-openapi-starter-webflux-ui.version>2.8.4</springdoc-openapi-starter-webflux-ui.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.8.4</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
 
     <dependencies>
@@ -26,10 +24,9 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- Web Asynchronous -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,13 +37,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
-        </dependency>
         <!-- Actuator -->
         <!-- http://localhost:8080/actuator/info   -->
         <!-- http://localhost:8080/actuator/health -->
+        <!-- OpenAPI http://localhost:8081/v3/api-docs.yaml (yaml)  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -56,39 +50,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        <!-- email-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
         <!-- OpenAPI http://localhost:8080/swagger-ui.html -->
         <!-- OpenAPI http://localhost:8080/v3/api-docs -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-            <version>${springdoc-openapi-starter-webflux-ui.version}</version>
+            <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
         </dependency>
         <!-- JWT -->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${jwt.version}</version>
-        </dependency>
-        <!-- IText PDF -->
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>kernel</artifactId>
-            <version>${itextpdf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>layout</artifactId>
-            <version>${itextpdf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>barcodes</artifactId>
-            <version>${itextpdf.version}</version>
         </dependency>
         <!-- ================ TEST ================== -->
         <dependency>
@@ -101,12 +74,6 @@
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo.spring3x</artifactId>
             <version>${de.flapdoodle.embed.mongo.spring3x.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Asynchronous Programming Test-->
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

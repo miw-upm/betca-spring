@@ -34,7 +34,7 @@ class UnRelatedDaoIT {
     @Test
     void testCount() {
         assertEquals(4, unRelatedDao.count());
-        LogManager.getLogger(this.getClass()).debug("===>>> message: " + unRelatedDao.findAll());
+        LogManager.getLogger(this.getClass()).debug(()->"===>>> message: " + unRelatedDao.findAll());
     }
 
     @Test
@@ -89,6 +89,17 @@ class UnRelatedDaoIT {
     void testFindByNick() {  // SQL
         Assertions.assertEquals("nick1", unRelatedDao.findByNick("nick1").getNick());
     }
+
+    @Test
+    void testFindByNickNullSafe() {  // SQL
+        Assertions.assertEquals("nick1", unRelatedDao.findByNickNullSave("nick1").getFirst().getNick());
+    }
+
+    @Test
+    void testFindByNickNullSafeNullValue() {  // SQL
+        assertFalse(unRelatedDao.findByNickNullSave(null).isEmpty());
+    }
+
 
     @Test
     void testDeleteByNick() {  // Delete

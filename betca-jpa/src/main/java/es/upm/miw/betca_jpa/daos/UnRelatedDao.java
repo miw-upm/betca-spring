@@ -34,6 +34,10 @@ public interface UnRelatedDao extends JpaRepository<UnRelatedEntity, Integer> {
     @Query(value = "SELECT * FROM un_related_entity WHERE NICK = ?1", nativeQuery = true)
     UnRelatedEntity findByNick(String nick);
 
+    @Query("select u from UnRelatedEntity u where " +
+            "(coalesce(?1, '') = '' or u.nick like concat('%',?1,'%')) ")
+    List<UnRelatedEntity> findByNickNullSave(String nick);
+
     @Transactional
     int deleteByNick(String nick);
 

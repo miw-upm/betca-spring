@@ -32,7 +32,7 @@ class UnRelatedRepositoryIT {
                         .logic(true).integer(666).decimal(666.666e30)
                         .longer(LocalDateTime.now().toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli()).build()
         );
-        this.unRelatedRepository.saveAll(documents.collect(Collectors.toList()));
+        this.unRelatedRepository.saveAll(documents.toList());
     }
 
     @Test

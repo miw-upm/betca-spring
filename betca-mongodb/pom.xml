@@ -30,16 +30,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- reactive MongoDB -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
-        </dependency>
         <!-- ================ TEST ================== -->
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
-        </dependency>
         <!-- Mongodb embedded: Test -->
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
