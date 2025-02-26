@@ -18,7 +18,7 @@ public class BasicResource {
 
     @PostMapping
     public Dto create(@RequestBody Dto dto) {
-        LogManager.getLogger(this.getClass()).info(()->"===>>> create: " + dto);
+        LogManager.getLogger(this.getClass()).info(() -> "===>>> create: " + dto);
         return dto;
     }
 
@@ -29,13 +29,13 @@ public class BasicResource {
 
     @PutMapping(ID_ID)
     public Dto update(@PathVariable(value = "id") int id, @RequestBody Dto dto) {
-        LogManager.getLogger(this.getClass()).info(()->"===>>> update: " + id + ", " + dto);
+        LogManager.getLogger(this.getClass()).info(() -> "===>>> update: " + id + ", " + dto);
         return dto;
     }
 
     @PutMapping(ID_ID + NAME)
     public Dto updateName(@PathVariable(value = "id") int id, @RequestBody Dto dto) {
-        LogManager.getLogger(this.getClass()).info(()->"===>>> update: " + id + ", " + dto.getName());
+        LogManager.getLogger(this.getClass()).info(() -> "===>>> update: " + id + ", " + dto.getName());
         return new Dto(id, dto.getName(), Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN);
     }
 
@@ -47,7 +47,7 @@ public class BasicResource {
 
     @DeleteMapping(ID_ID)
     public void delete(@PathVariable(value = "id") int id) {
-        LogManager.getLogger(this.getClass()).info(()->"===>>> delete: " + id);
+        LogManager.getLogger(this.getClass()).info(() -> "===>>> delete: " + id);
     }
 
     @GetMapping(SEARCH)

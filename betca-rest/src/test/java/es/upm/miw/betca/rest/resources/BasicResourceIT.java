@@ -41,13 +41,13 @@ class BasicResourceIT {
         String url = baseUrl() + ID_ID.replace("{id}", "666");
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        LogManager.getLogger(this.getClass()).debug(()->"BETCA-spring: /basic/666... Response: " + response.getBody());
+        LogManager.getLogger(this.getClass()).debug(() -> "BETCA-spring: /basic/666... Response: " + response.getBody());
     }
 
     @Test
     void testCreate() {
         Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN);
-        ResponseEntity<Dto> response = restTemplate.postForEntity( baseUrl(), dto, Dto.class);
+        ResponseEntity<Dto> response = restTemplate.postForEntity(baseUrl(), dto, Dto.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertNotNull(response.getBody());
         assertEquals(666, response.getBody().getId());
@@ -90,7 +90,7 @@ class BasicResourceIT {
     @Test
     void testUpdateNames() {
         List<UpdatingDto> updatingDtos = List.of(new UpdatingDto(666, "daemon"), new UpdatingDto(999, "daemon"));
-        ResponseEntity<Dto[]> response = restTemplate.exchange( baseUrl(), HttpMethod.PATCH, new HttpEntity<>(updatingDtos), Dto[].class);
+        ResponseEntity<Dto[]> response = restTemplate.exchange(baseUrl(), HttpMethod.PATCH, new HttpEntity<>(updatingDtos), Dto[].class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertTrue(Stream.of(Objects.requireNonNull(response.getBody())).allMatch(dto -> "daemon".equals(dto.getName())));
     }

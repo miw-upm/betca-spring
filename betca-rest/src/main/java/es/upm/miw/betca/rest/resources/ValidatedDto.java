@@ -2,12 +2,12 @@ package es.upm.miw.betca.rest.resources;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

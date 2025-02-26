@@ -71,7 +71,7 @@ class BasicAuthResourceIT {
         Dto dto = new Dto(666, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN);
         HttpEntity<Dto> request = new HttpEntity<>(dto, headers);
 
-        ResponseEntity<Void> response = restTemplate.exchange( baseUrl(), HttpMethod.POST, request, Void.class);
+        ResponseEntity<Void> response = restTemplate.exchange(baseUrl(), HttpMethod.POST, request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 

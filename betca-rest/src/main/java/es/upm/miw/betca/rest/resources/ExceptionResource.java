@@ -1,9 +1,9 @@
 package es.upm.miw.betca.rest.resources;
 
 import es.upm.miw.betca.rest.exceptionhandler.NotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
