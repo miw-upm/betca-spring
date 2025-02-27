@@ -40,14 +40,13 @@ public class JwtResource {
             case "1" -> new TokenDto(this.jwtService.createToken(mobile, "customer", Role.CUSTOMER.name()));
             case "2" -> new TokenDto(this.jwtService.createToken(mobile, "operator", Role.OPERATOR.name()));
             case "3" -> new TokenDto(this.jwtService.createToken(mobile, "admin", Role.ADMIN.name()));
-            default -> throw new ForbiddenException("Mobile not found");
+            default -> null;
         };
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping(ID_ID)
     public Dto read(@PathVariable int id, @AuthenticationPrincipal User activeUser) {
-       System.out.println(">>>>>>>>>>>>>>>" + activeUser);
         return new Dto(id, "daemon", Gender.FEMALE, LocalDateTime.now(), BigDecimal.TEN);
     }
 

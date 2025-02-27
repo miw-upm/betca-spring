@@ -1,5 +1,8 @@
-package es.upm.miw.betca.rest.resources;
+package es.upm.miw.betca.rest.functionaltest;
 
+import es.upm.miw.betca.rest.resources.Dto;
+import es.upm.miw.betca.rest.resources.Gender;
+import es.upm.miw.betca.rest.resources.UpdatingDto;
 import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-class BasicResourceIT {
+class BasicResourceFunctionalTest {
 
     @LocalServerPort
     private int port;

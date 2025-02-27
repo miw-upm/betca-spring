@@ -1,11 +1,15 @@
-package es.upm.miw.betca.rest.resources;
+package es.upm.miw.betca.rest.functionaltest;
 
+import es.upm.miw.betca.rest.resources.Dto;
+import es.upm.miw.betca.rest.resources.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
@@ -17,7 +21,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-class BasicAuthResourceIT {
+class BasicAuthResourceFunctionalTest {
 
     @LocalServerPort
     private int port;
