@@ -62,6 +62,7 @@
         <module>betca-jpa</module>
         <module>betca-mongodb</module>
         <module>betca-rest</module>
+        <module>betca-api</module>
     </modules>
 
     <dependencies>

@@ -1,0 +1,9 @@
+# Database Postgresql external
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/betca
+    username: postgres
+    password: postgres
